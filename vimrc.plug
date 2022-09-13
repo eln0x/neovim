@@ -18,6 +18,24 @@ Plug 'preservim/nerdtree'                       " File explorer
 Plug 'preservim/tagbar'                         " Tags browser
 Plug 'ludovicchabant/vim-gutentags'             " Tags management
 
+" ncm2
+Plug 'roxma/vim-hug-neovim-rpc'                 " Compatibility layer
+Plug 'ncm2/ncm2'                                " Completion framework
+Plug 'roxma/nvim-yarp'                          " Remote plugin framework
+Plug 'ncm2/ncm2-bufword'                        " Word completion
+Plug 'ncm2/ncm2-path'                           " Path completion
+Plug 'ncm2/ncm2-tagprefix'                      " Tags completion
+Plug 'ncm2/ncm2-ultisnips'                      " Snippet completion
+Plug 'ncm2/ncm2-jedi', { 'for': 'python' }      " Python completion
+Plug 'ncm2/ncm2-go', { 'for': 'go' }            " Golang completion
+Plug 'ncm2/ncm2-pyclang',                       " C/C++ completion
+
+" autcompletion / linter
+Plug 'w0rp/ale'                                 " Lint
+Plug 'SirVer/ultisnips'                         " Snippets engine
+Plug 'honza/vim-snippets'                       " Snippets files
+Plug 'davidhalter/jedi-vim', {'for': 'python'}  " Python autocompletion
+
 " utils
 Plug 'Raimondi/delimitMate'                     " Autoclose quotes, bracket etc...
 Plug 'roxma/vim-paste-easy'                     " Automatic paste mode
