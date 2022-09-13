@@ -5,4 +5,9 @@
 
 call plug#begin()
 
+" airline
+Plug 'vim-airline/vim-airline'                  " Status bar
+Plug 'enricobacis/vim-airline-clock'            " Airline clock
+Plug 'ryanoasis/vim-devicons'                   " Developer Icons
+
 call plug#end()
