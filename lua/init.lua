@@ -9,6 +9,7 @@ require 'user.autocmds'
 require 'user.keymaps'
 
 -- plugins
+require 'plug.alpha'
 require 'plug.nvtree'
 require 'plug.telescope'
 require 'plug.treesitter'

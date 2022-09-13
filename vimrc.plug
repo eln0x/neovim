@@ -11,6 +11,8 @@ Plug 'enricobacis/vim-airline-clock'            " Airline clock
 Plug 'ryanoasis/vim-devicons'                   " Developer Icons
 
 " dashboard
+Plug 'goolord/alpha-nvim'                       " Startup screen
+Plug 'BlakeJC94/alpha-nvim-fortune'             " Fortune plugin for alpha
 Plug 'kyazdani42/nvim-web-devicons'             " File icons
 Plug 'kyazdani42/nvim-tree.lua'                 " File explorer
 
