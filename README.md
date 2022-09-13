@@ -30,8 +30,7 @@ sh -c 'curl -fLo ~/.local/share/nvim/site/autoload/plug.vim \
 
 Step 4: Load configuration
 ```
-git branch -a
-git checkout <branch>
+git checkout lua
 nvim +PlugInstall +qall
 ```
 
