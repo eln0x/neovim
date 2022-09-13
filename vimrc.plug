@@ -10,6 +10,10 @@ Plug 'vim-airline/vim-airline'                  " Status bar
 Plug 'enricobacis/vim-airline-clock'            " Airline clock
 Plug 'ryanoasis/vim-devicons'                   " Developer Icons
 
+" tags
+Plug 'preservim/tagbar'                         " Tags browser
+Plug 'ludovicchabant/vim-gutentags'             " Tags management
+
 " utils
 Plug 'Raimondi/delimitMate'                     " Autoclose quotes, bracket etc...
 Plug 'roxma/vim-paste-easy'                     " Automatic paste mode
