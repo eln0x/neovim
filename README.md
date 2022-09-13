@@ -8,6 +8,7 @@
 ### Requirements
 
 - Neovim (version >= 0.7.0), run `nvim -v` to check neovim version.
+- Exuberant Ctags and/or Universal Ctags.
 
 ### Installation
 
