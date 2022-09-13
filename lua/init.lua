@@ -10,3 +10,5 @@ require 'user.keymaps'
 
 -- plugins
 require 'plug.nvtree'
+require 'plug.telescope'
+require 'plug.treesitter'

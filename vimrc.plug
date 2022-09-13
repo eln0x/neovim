@@ -18,6 +18,12 @@ Plug 'kyazdani42/nvim-tree.lua'                 " File explorer
 Plug 'preservim/tagbar'                         " Tags browser
 Plug 'ludovicchabant/vim-gutentags'             " Tags management
 
+" telescope
+Plug 'nvim-lua/plenary.nvim'                    " Lua functions
+Plug 'nvim-telescope/telescope.nvim'            " Fuzzy finder
+Plug 'cljoly/telescope-repo.nvim'               " Repos jumper
+Plug 'nvim-treesitter/nvim-treesitter'          " Syntax highlightings
+
 " utils
 Plug 'Raimondi/delimitMate'                     " Autoclose quotes, bracket etc...
 Plug 'roxma/vim-paste-easy'                     " Automatic paste mode
