@@ -6,3 +6,4 @@
 require 'user.colors'
 require 'user.options'
 require 'user.autocmds'
+require 'user.keymaps'

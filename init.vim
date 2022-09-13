@@ -36,6 +36,3 @@ endif
 if filereadable(expand("~/.config/nvim/lua/init.lua"))
     lua require('init')
 endif
-
-" mappings
-let mapleader = " "                     " Leader key set to <space bar>
