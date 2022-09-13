@@ -72,6 +72,31 @@ set list                                " Enable list mode
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
 set wildignore+=*.pyc,*.o,*.obj,*.svn,*.swp,*.class,*.hg,*.DS_Store,*.min.*,*.pdf,*.jpg,*.png,*.gif
 
+" jump to the last position
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" file indent by type
+autocmd FileType c,cpp,cxx,h set cindent
+autocmd FileType make setlocal noexpandtab
+
+" file type definition
+autocmd BufNewFile,BufRead *.lib set filetype=sh
+autocmd BufNewFile,BufRead *.source set filetype=sh
+autocmd BufNewFile,BufRead *.pp set filetype=puppet
+autocmd BufNewFile,BufRead *.inc set filetype=perl
+autocmd BufRead,BufNewFile *.tex set filetype=tex
+autocmd BufRead,BufNewFile *.cls set filetype=tex
+
+" trim whitespace
+autocmd BufWritePre * :%s/\s\+$//e
+
+" save folds when closing file
+augroup remember_folds
+  autocmd!
+  au BufWinLeave ?* mkview 1
+  au BufWinEnter ?* silent! loadview 1
+augroup END
+
 " plugins
 if filereadable(expand("~/.config/nvim/vimrc.plug"))
     source ~/.config/nvim/vimrc.plug
