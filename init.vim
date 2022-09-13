@@ -9,6 +9,11 @@ if !has('python3')
     echohl None
 endif
 
+" colorscheme
+colorscheme jellybeans                  " Preferred color scheme
+set termguicolors                       " Set term gui colors
+set background=dark                     " Select dark background
+
 " common
 filetype off                            " Force plug-ins to load correctly.
 filetype plugin indent on               " For plug-ins to load correctly.
