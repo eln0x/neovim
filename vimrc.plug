@@ -26,4 +26,9 @@ Plug 'Yggdroot/indentLine'                      " Show indentation when no tab
 Plug 'yuttie/comfortable-motion.vim'            " Vim Scroller
 Plug 'mhinz/vim-rfc'                            " Download RFC
 
+" git
+Plug 'mhinz/vim-signify'                        " Show modified lines for VCS files
+Plug 'tpope/vim-fugitive'                       " Github Wrapper
+Plug 'rhysd/git-messenger.vim'                  " Show git hidden messages
+
 call plug#end()
