@@ -35,4 +35,18 @@ Plug 'mhinz/vim-signify'                        " Show modified lines for VCS fi
 Plug 'tpope/vim-fugitive'                       " Github Wrapper
 Plug 'rhysd/git-messenger.vim'                  " Show git hidden messages
 
+" syntax
+Plug 'rodjek/vim-puppet'
+Plug 'chr4/nginx.vim'
+Plug 'ctiml/haproxy-syntax-vim'
+Plug 'vim-scripts/python_match.vim', { 'for': 'python' }
+Plug 'vim-python/python-syntax', { 'for': 'python' }
+Plug 'vim-perl/vim-perl', { 'for': 'perl' }
+Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'saltstack/salt-vim'
+Plug 'stephpy/vim-yaml'
+Plug 'glench/vim-jinja2-syntax'
+Plug 'elzr/vim-json'
+Plug 'lervag/vimtex'
+
 call plug#end()
