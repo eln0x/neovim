@@ -109,3 +109,6 @@ endif
 
 " mappings
 let mapleader = " "                     " Leader key set to <space bar>
+map <F1>         :NERDTreeToggle<CR>
+nmap <F2>        :TagbarToggle<CR>
+nmap <F3>        :Startify<CR>

@@ -10,6 +10,10 @@ Plug 'vim-airline/vim-airline'                  " Status bar
 Plug 'enricobacis/vim-airline-clock'            " Airline clock
 Plug 'ryanoasis/vim-devicons'                   " Developer Icons
 
+" dashboard
+Plug 'mhinz/vim-startify'                       " Fancy Start Screen
+Plug 'preservim/nerdtree'                       " File explorer
+
 " tags
 Plug 'preservim/tagbar'                         " Tags browser
 Plug 'ludovicchabant/vim-gutentags'             " Tags management
