@@ -10,4 +10,16 @@ Plug 'vim-airline/vim-airline'                  " Status bar
 Plug 'enricobacis/vim-airline-clock'            " Airline clock
 Plug 'ryanoasis/vim-devicons'                   " Developer Icons
 
+" utils
+Plug 'Raimondi/delimitMate'                     " Autoclose quotes, bracket etc...
+Plug 'roxma/vim-paste-easy'                     " Automatic paste mode
+Plug 'terryma/vim-multiple-cursors'             " Multiple cursors
+Plug 'tpope/vim-commentary'                     " For Commenting gcc & gc
+Plug 'tpope/vim-surround'                       " Surrounding ysw)
+Plug 'tpope/vim-eunuch'                         " Common shell commands
+Plug 'troydm/zoomwintab.vim'                    " Simple tab zoomer
+Plug 'Yggdroot/indentLine'                      " Show indentation when no tab
+Plug 'yuttie/comfortable-motion.vim'            " Vim Scroller
+Plug 'mhinz/vim-rfc'                            " Download RFC
+
 call plug#end()
