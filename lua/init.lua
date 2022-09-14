@@ -13,3 +13,6 @@ require 'plug.alpha'
 require 'plug.nvtree'
 require 'plug.telescope'
 require 'plug.treesitter'
+
+-- lsp
+require 'lsp.config'

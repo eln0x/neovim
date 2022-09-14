@@ -26,6 +26,12 @@ Plug 'nvim-telescope/telescope.nvim'            " Fuzzy finder
 Plug 'cljoly/telescope-repo.nvim'               " Repos jumper
 Plug 'nvim-treesitter/nvim-treesitter'          " Syntax highlightings
 
+" lsp
+Plug 'williamboman/mason.nvim'                  " Manage external editors
+Plug 'williamboman/mason-lspconfig.nvim'        " Bridge mason with lspconfig
+Plug 'neovim/nvim-lspconfig'                    " Lsp configuration
+Plug 'onsails/lspkind-nvim'                     " Add pictograms to builtin lsp
+
 " utils
 Plug 'Raimondi/delimitMate'                     " Autoclose quotes, bracket etc...
 Plug 'roxma/vim-paste-easy'                     " Automatic paste mode
