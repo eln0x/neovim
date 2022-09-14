@@ -39,8 +39,15 @@ Plug 'hrsh7th/cmp-buffer'                       " Buffer words
 Plug 'hrsh7th/cmp-path'                         " Filesystem path
 Plug 'hrsh7th/cmp-cmdline'                      " Nvim's commandline
 Plug 'hrsh7th/cmp-calc'                         " Math calculation
-Plug 'hrsh7th/cmp-vsnip'                        " Vim snips
-Plug 'hrsh7th/vim-vsnip'
+
+" snippets
+Plug 'rafamadriz/friendly-snippets'             " Snippets collection
+Plug 'hrsh7th/vim-vsnip'                        " Vsnip users
+Plug 'hrsh7th/cmp-vsnip'                        " Vsnip completion
+"Plug 'L3MON4D3/LuaSnip'                         " Luasnip users
+"Plug 'saadparwaiz1/cmp_luasnip'                 " Luasnip completion
+"Plug 'SirVer/ultisnips'                         " Ultisnips users
+"Plug 'quangnguyen30192/cmp-nvim-ultisnips'      " Ultisnips completion
 
 " utils
 Plug 'Raimondi/delimitMate'                     " Autoclose quotes, bracket etc...
