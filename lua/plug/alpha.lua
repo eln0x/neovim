@@ -184,9 +184,8 @@ local section_buttons = {
         dashboard.button("f", "  Find file", ":Telescope find_files<CR>"),
         dashboard.button("p", "  Find project", ":Telescope repo list<CR>"),
         dashboard.button("w", "  Find word", ":Telescope live_grep<CR>"),
-        dashboard.button("g", "  Find modified file", ":lua require('telescope.builtin').git_status()<CR>"),
-        dashboard.button("c", "  Edit config", ":e ~/.config/nvim/init.vim<CR>"),
-        dashboard.button("s", "  Edit plugins", ":e ~/.config/nvim/vimrc.plug<CR>"),
+        dashboard.button("m", "  Find modified file", ":lua require('telescope.builtin').git_status()<CR>"),
+        dashboard.button("c", "  Nvim configuration", ":e ~/.config/nvim/init.vim<CR>"),
         dashboard.button("u", "  Sync plugins", ":PlugUpdate<CR>"),
         dashboard.button("h", "  Check health", ":checkhealth<CR>"),
         dashboard.button("q", "  Quit", "<Cmd>qa<CR>")
