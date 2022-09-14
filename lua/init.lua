@@ -15,4 +15,5 @@ require 'plug.telescope'
 require 'plug.treesitter'
 
 -- lsp
+require 'lsp.cmp'
 require 'lsp.config'
