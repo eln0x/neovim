@@ -2,8 +2,13 @@
 
 ## Contents
 
+- [Screenshot](#screenshot)
 - [Requirements](#requirements)
 - [Installation](#installation)
+
+### Screenshot
+
+![Neovim](neovim.png "Neovim IDE")
 
 ### Requirements
 
