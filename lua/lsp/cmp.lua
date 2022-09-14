@@ -13,6 +13,10 @@ if not lspkind_ok then
     return
 end
 
+vim.opt.completeopt = "menuone,noselect"
+
+local select_opts = {behavior = cmp.SelectBehavior.Select}
+
 cmp.setup({
     snippet = {
         expand = function(args)
@@ -20,15 +24,39 @@ cmp.setup({
         end,
     },
     window = {
-        -- completion = cmp.config.window.bordered(),
-        -- documentation = cmp.config.window.bordered(),
+        completion = {
+            winhighlight = "Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None",
+            border = "rounded",
+        },
+        documentation = {
+            winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None',
+            border = "rounded",
+        },
     },
     mapping = cmp.mapping.preset.insert({
+        ['<Up>'] = cmp.mapping.select_prev_item(select_opts),
+        ['<Down>'] = cmp.mapping.select_next_item(select_opts),
+        ["<C-p>"] = cmp.mapping.select_prev_item(select_opts),
+        ["<C-n>"] = cmp.mapping.select_next_item(select_opts),
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        ['<Tab>'] = function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            else
+                fallback()
+            end
+        end,
+        ['<S-Tab>'] = function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            else
+                fallback()
+            end
+        end,
     }),
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
@@ -40,6 +68,20 @@ cmp.setup({
         format = lspkind.cmp_format({
             mode = 'symbol_text',
             maxwidth = 50,
+            menu = ({
+                buffer = "[Buffer]",
+                path = "[Path]",
+                look = "[Look]",
+                nvim_lsp = "[LSP]",
+                nvim_lua = "[Lua]",
+                vsnip = "[VSnip]",
+                latex_symbols = "[Latex]",
+            }),
+            before = function(_, vim_item)
+                vim_item.abbr = ' ' .. vim_item.abbr
+                vim_item.menu = (vim_item.menu or '') .. ' '
+                return vim_item
+            end
         })
     }
 })
@@ -53,7 +95,7 @@ cmp.setup.filetype('gitcommit', {
     })
 })
 
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+-- Use buffer source for `/`
 cmp.setup.cmdline('/', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
@@ -61,7 +103,7 @@ cmp.setup.cmdline('/', {
     }
 })
 
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+-- Use cmdline & path source for ':'
 cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
@@ -70,3 +112,4 @@ cmp.setup.cmdline(':', {
         { name = 'cmdline' }
     })
 })
+
