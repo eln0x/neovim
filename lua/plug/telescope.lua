@@ -18,7 +18,7 @@ telescope.setup({
         path_display = { "smart" },
         file_ignore_patterns = { ".git/", "node_modules" },
         borderchars = {
-            prompt = {"━", "┃", "━", "┃", "┏", "┓", "┛", "┗"},
+            prompt = {"─", "│", "─", "│", "┌", "┐", "┘", "└"},
             preview = {"─", "│", "─", "│", "┌", "┐", "┘", "└"},
             results = {"─", "│", "─", "│", "┌", "┐", "┘", "└"},
         },
@@ -53,18 +53,3 @@ telescope.setup({
 
 -- load extensions
 require("telescope").load_extension "repo"
-
--- customize ui
-vim.cmd([[
-    hi TelescopePromptBorder guifg=#f2594b guibg=#282828
-    hi TelescopePromptNormal  guifg=#f2594b guibg=#282828
-    hi TelescopePromptTitle  guifg=#f2594b guibg=#282828
-    hi TelescopePromptPrefix  guifg=#f2594b guibg=#282828
-    hi TelescopePromptCounter  guifg=#f2594b guibg=#282828
-    hi TelescopePreviewTitle  guifg=#8bba7f guibg=#282828
-    hi TelescopePreviewBorder guifg=#8bba7f guibg=#282828
-    hi TelescopeResultsTitle  guifg=#8bba7f guibg=#282828
-    hi TelescopeResultsBorder guifg=#8bba7f guibg=#282828
-    hi TelescopeMatching guifg=#e9b143 guibg=#282828
-    hi TelescopeSelection guifg=#ffffff guibg=#32302f
-]])
