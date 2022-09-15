@@ -71,4 +71,10 @@ Plug 'mhinz/vim-signify'                        " Show modified lines for VCS fi
 Plug 'tpope/vim-fugitive'                       " Github Wrapper
 Plug 'rhysd/git-messenger.vim'                  " Show git hidden messages
 
+" syntax
+Plug 'Joorem/vim-haproxy'                       " HAProxy syntax
+Plug 'chr4/nginx.vim'                           " Nginx syntax
+Plug 'saltstack/salt-vim'                       " Saltstack syntax
+Plug 'glench/vim-jinja2-syntax'                 " Jinja2 syntax
+
 call plug#end()
