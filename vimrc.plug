@@ -10,6 +10,10 @@ Plug 'vim-airline/vim-airline'                  " Status bar
 Plug 'enricobacis/vim-airline-clock'            " Airline clock
 Plug 'ryanoasis/vim-devicons'                   " Developer Icons
 
+" colorscheme
+Plug 'folke/tokyonight.nvim'                    " Tokyo theme
+Plug 'lunarvim/darkplus.nvim'                   " Lunar theme
+
 " dashboard
 Plug 'goolord/alpha-nvim'                       " Startup screen
 Plug 'BlakeJC94/alpha-nvim-fortune'             " Fortune plugin for alpha
