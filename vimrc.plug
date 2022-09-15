@@ -23,7 +23,7 @@ Plug 'ludovicchabant/vim-gutentags'             " Tags management
 " telescope
 Plug 'nvim-lua/plenary.nvim'                    " Lua functions
 Plug 'nvim-telescope/telescope.nvim'            " Fuzzy finder
-Plug 'cljoly/telescope-repo.nvim'               " Repos jumper
+Plug 'ahmedkhalf/project.nvim'                  " Project jumper
 Plug 'nvim-treesitter/nvim-treesitter'          " Syntax highlightings
 
 " lsp

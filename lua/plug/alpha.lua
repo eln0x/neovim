@@ -49,7 +49,7 @@ local function file_button(fn, sc, short_fn)
     end
     ico_txt = ico .. "  "
 
-    local file_button_el = dashboard.button(sc, ico_txt .. short_fn, "<cmd>e " .. fn .. " <CR>")
+    local file_button_el = dashboard.button(sc, ico_txt .. short_fn, "<cmd>e " .. fn .. " <cr>")
     local fn_start = short_fn:match(".*/")
     if fn_start ~= nil then
         table.insert(fb_hl, { "Type", #ico_txt - 2, #fn_start + #ico_txt - 2 })
@@ -179,16 +179,16 @@ local section_buttons = {
     val = {
         { type = "text", val = "Quick links", opts = { hl = "Constant", position = "center" } },
         { type = "padding", val = 1 },
-        dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
-        dashboard.button("o", "ﭯ  Recently opened files", ":Telescope oldfiles<CR>"),
-        dashboard.button("f", "  Find file", ":Telescope find_files<CR>"),
-        dashboard.button("p", "  Find project", ":Telescope repo list<CR>"),
-        dashboard.button("w", "  Find word", ":Telescope live_grep<CR>"),
-        dashboard.button("m", "  Find modified file", ":lua require('telescope.builtin').git_status()<CR>"),
-        dashboard.button("c", "  Nvim configuration", ":e ~/.config/nvim/init.vim<CR>"),
-        dashboard.button("u", "  Sync plugins", ":PlugUpdate<CR>"),
-        dashboard.button("h", "  Check health", ":checkhealth<CR>"),
-        dashboard.button("q", "  Quit", "<Cmd>qa<CR>")
+        dashboard.button("e", "  New file", ":ene <BAR> startinsert <cr>"),
+        dashboard.button("o", "ﭯ  Recently opened files", ":Telescope oldfiles<cr>"),
+        dashboard.button("f", "  Find file", ":Telescope find_files<cr>"),
+        dashboard.button("p", "  Find project", ":Telescope projects<cr>"),
+        dashboard.button("w", "  Find word", ":Telescope live_grep<cr>"),
+        dashboard.button("m", "  Find modified file", ":Telescope git_status<cr>"),
+        dashboard.button("c", "  Nvim configuration", ":e ~/.config/nvim/init.vim<cr>"),
+        dashboard.button("u", "  Sync plugins", ":PlugUpdate<cr>"),
+        dashboard.button("h", "  Check health", ":checkhealth<cr>"),
+        dashboard.button("q", "  Quit", "<Cmd>qa<cr>")
     },
     position = "center",
 }

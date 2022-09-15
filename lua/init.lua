@@ -12,6 +12,7 @@ require 'user.keymaps'
 require 'plug.alpha'
 require 'plug.nvtree'
 require 'plug.telescope'
+require 'plug.project'
 require 'plug.treesitter'
 
 -- lsp

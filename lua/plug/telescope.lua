@@ -50,6 +50,3 @@ telescope.setup({
         },
     },
 })
-
--- load extensions
-require("telescope").load_extension "repo"

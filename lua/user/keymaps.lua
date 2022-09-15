@@ -53,7 +53,7 @@ keymap("n", "<F3>", "<cmd>Alpha<cr>", opts)
 -- Telescope
 keymap("n", "<leader>f", "<cmd>Telescope find_files<cr>", opts)
 keymap("n", "<leader>w", "<cmd>Telescope live_grep<cr>", opts)
-keymap("n", "<leader>p", "<cmd>Telescope repo list<cr>", opts)
+keymap("n", "<leader>p", "<cmd>Telescope projects<cr>", opts)
 keymap("n", "<leader>b", "<cmd>Telescope buffers<cr>", opts)
 keymap("n", "<leader>m", "<cmd>Telescope git_status<cr>", opts)
 keymap("n", "<leader>c", "<cmd>Telescope colorscheme<cr>", opts)
