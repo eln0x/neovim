@@ -49,6 +49,8 @@ keymap("n", "<S-q>", "<cmd>bdelete!<CR>", opts)
 keymap("n", "<F1>", "<cmd>NvimTreeToggle<cr>", opts)
 keymap("n", "<F2>", "<cmd>TagbarToggle<cr>", opts)
 keymap("n", "<F3>", "<cmd>Alpha<cr>", opts)
+keymap("n", "<leader>tt", "<cmd>ToggleTerm dir=%:p:h<cr>", opts)
+keymap("n", "<leader>tg", "<cmd>lua LazyGitToggle()<CR>", opts)
 
 -- Telescope
 keymap("n", "<leader>f", "<cmd>Telescope find_files<cr>", opts)

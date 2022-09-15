@@ -14,6 +14,7 @@ require 'plug.nvtree'
 require 'plug.telescope'
 require 'plug.project'
 require 'plug.treesitter'
+require 'plug.toggleterm'
 
 -- lsp
 require 'lsp.cmp'

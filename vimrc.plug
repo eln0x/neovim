@@ -54,6 +54,7 @@ Plug 'hrsh7th/cmp-vsnip'                        " Vsnip completion
 "Plug 'quangnguyen30192/cmp-nvim-ultisnips'      " Ultisnips completion
 
 " utils
+Plug 'akinsho/toggleterm.nvim'                  " Toggle terminal
 Plug 'Raimondi/delimitMate'                     " Autoclose quotes, bracket etc...
 Plug 'roxma/vim-paste-easy'                     " Automatic paste mode
 Plug 'terryma/vim-multiple-cursors'             " Multiple cursors
