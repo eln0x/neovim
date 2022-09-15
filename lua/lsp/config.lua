@@ -34,7 +34,6 @@ local LSP_DEFAULTS = {
         vim.keymap.set('n', 'K', vim.lsp.buf.signature_help, bufopts)
         vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, bufopts)
         vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, bufopts)
-        vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<cr>", bufopts)
     end
 }
 lspconfig.util.default_config = vim.tbl_deep_extend(
