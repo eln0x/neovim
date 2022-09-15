@@ -2,13 +2,19 @@
 
 ## Contents
 
+- [Screenshot](#screenshot)
 - [Requirements](#requirements)
 - [Installation](#installation)
+
+### Screenshot
+
+![Neovim](neovim.png "Neovim IDE")
 
 ### Requirements
 
 - Neovim (version >= 0.7.0), run `nvim -v` to check neovim version.
 - Exuberant Ctags and/or Universal Ctags.
+- Ripgrep & Fd-find
 
 ### Installation
 
@@ -31,8 +37,8 @@ sh -c 'curl -fLo ~/.local/share/nvim/site/autoload/plug.vim \
 
 Step 4: Load configuration
 ```
-git checkout lua
-nvim +PlugInstall +qall
+git checkout alpha
+nvim +PlugClean +PlugInstall +qall
 ```
 
 Step 5: Enjoy ;)

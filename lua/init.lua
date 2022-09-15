@@ -7,3 +7,15 @@ require 'user.colors'
 require 'user.options'
 require 'user.autocmds'
 require 'user.keymaps'
+
+-- plugins
+require 'plug.alpha'
+require 'plug.nvtree'
+require 'plug.telescope'
+require 'plug.project'
+require 'plug.treesitter'
+require 'plug.toggleterm'
+
+-- lsp
+require 'lsp.cmp'
+require 'lsp.config'
