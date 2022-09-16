@@ -115,7 +115,7 @@ packer.startup(function(use)
     use 'tpope/vim-surround'                          -- Surrounding ysw)
     use 'tpope/vim-eunuch'                            -- Common shell commands
     use 'troydm/zoomwintab.vim'                       -- Simple tab zoomer
-    use 'Yggdroot/indentLine'                         -- Show indentation when no tab
+    use 'lukas-reineke/indent-blankline.nvim'         -- Show indentation when no tab
     use 'yuttie/comfortable-motion.vim'               -- Vim Scroller
     use 'mhinz/vim-rfc'                               -- Download RFC
 

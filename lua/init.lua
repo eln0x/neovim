@@ -19,6 +19,7 @@ require 'plug.project'
 require 'plug.treesitter'
 require 'plug.toggleterm'
 require 'plug.impatient'
+require 'plug.indentline'
 
 -- lsp
 require 'lsp.cmp'
