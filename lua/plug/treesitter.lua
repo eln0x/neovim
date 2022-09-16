@@ -30,15 +30,8 @@ configs.setup({
         "vim",
         "yaml",
     },
-    sync_install = true,
+    sync_install = false,
     auto_install = true,
-    highlight = {
-        enable = true,
-        disable = {},
-    },
-    indent = {
-        enable = false,
-        disable = {},
-    },
-    ignore_install = {},
+    highlight = { enable = true, disable = {} },
+    indent = { enable = true, disable = {} },
 })
