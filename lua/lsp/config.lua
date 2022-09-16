@@ -8,50 +8,14 @@ if not lspconfig_ok then
     return
 end
 
+-- define capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-local ok, cmp = pcall(require, 'cmp_nvim_lsp')
-if ok then
+local cmp_ok, cmp = pcall(require, 'cmp_nvim_lsp')
+if cmp_ok then
     capabilities = cmp.update_capabilities(capabilities)
 end
 
-local LSP_DEFAULTS = {
-    flags = {
-        debounce_text_changes = 150,
-    },
-    capabilities = capabilities,
-    on_attach = function(client, bufnr)
-        -- Enable completion triggered by <c-x><c-o>
-        vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-        -- Keymaps bindings
-        local bufopts = { noremap = true, silent = true, buffer = bufnr }
-        vim.keymap.set("n", "?", vim.lsp.buf.hover, bufopts)
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-        vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-        vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, bufopts)
-        vim.keymap.set('n', 'K', vim.lsp.buf.signature_help, bufopts)
-        vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, bufopts)
-        vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, bufopts)
-    end
-}
-lspconfig.util.default_config = vim.tbl_deep_extend(
-    'force',
-    lspconfig.util.default_config,
-    LSP_DEFAULTS
-)
-
---
--- Mason tools configuration
---
--- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
-
-local install_ok, install = pcall(require, "mason-tool-installer")
-if not install_ok then
-    return
-end
-
+-- define wanted servers
 local SERVERS = {
         "ansible-language-server",
         "bash-language-server",
@@ -72,11 +36,101 @@ local SERVERS = {
         "yaml-language-server",
 }
 
-install.setup {
-  ensure_installed = SERVERS,
-  auto_update = false,
-  run_on_start = true,
+-- define lsp defaults
+local LSP_DEFAULTS = {
+    flags = {
+        debounce_text_changes = 150,
+    },
+    capabilities = capabilities,
+    on_attach = function(client, bufnr)
+        -- Enable completion triggered by <c-x><c-o>
+        vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+        -- Info keymaps
+        local bufopts = { noremap = true, silent = true, buffer = bufnr }
+        vim.keymap.set("n", "?", vim.lsp.buf.hover, bufopts)
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+        vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+        vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, bufopts)
+        vim.keymap.set('n', 'K', vim.lsp.buf.signature_help, bufopts)
+
+        -- Action keymaps
+        vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, bufopts)
+        vim.keymap.set('x', 'ga', vim.lsp.buf.code_action, bufopts)
+        vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, bufopts)
+
+        -- Diagnostics keymaps
+        vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, bufopts)
+        vim.keymap.set('n', '<space>,', vim.diagnostic.goto_prev, bufopts)
+        vim.keymap.set('n', '<space>.', vim.diagnostic.goto_next, bufopts)
+        vim.keymap.set('n', '<space>L', vim.diagnostic.setloclist, bufopts)
+    end
 }
+
+-- Merge lsp defaults with global configuration
+lspconfig.util.default_config = vim.tbl_deep_extend(
+    'force',
+    lspconfig.util.default_config,
+    LSP_DEFAULTS
+)
+
+-- Hover customization
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+  vim.lsp.handlers.hover,
+  {border = 'rounded'}
+)
+
+-- Signature help customization
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
+  vim.lsp.handlers.signature_help,
+  {border = 'rounded'}
+)
+
+-- Diagnostic customization
+local sign = function(opts)
+    vim.fn.sign_define(
+        opts.name, { texthl = opts.name, text = opts.text, numhl = ''}
+    )
+end
+sign({name = 'DiagnosticSignError', text = '✘'})
+sign({name = 'DiagnosticSignWarn', text = '▲'})
+sign({name = 'DiagnosticSignHint', text = '⚑'})
+sign({name = 'DiagnosticSignInfo', text = ''})
+
+vim.diagnostic.config({
+    float = {
+        border = 'rounded',
+        source = 'always',
+    },
+})
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics,
+    {
+        signs = true,
+        underline = false,
+        virtual_text = false,
+        severity_sort = true,
+    }
+)
+
+--
+-- Mason tools configuration
+--
+-- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
+
+local install_ok, install = pcall(require, "mason-tool-installer")
+if not install_ok then
+    return
+end
+
+install.setup({
+    ensure_installed = SERVERS,
+    auto_update = false,
+    run_on_start = true,
+})
 
 --
 -- Mason configuration
@@ -91,7 +145,7 @@ end
 local MASON_DEFAULTS = {
     ui = {
         check_outdated_packages_on_open = true,
-        border = "none",
+        border = "rounded",
         icons = {
             package_installed = "✓",
             package_pending = "➜",
@@ -126,11 +180,10 @@ if not lspmason_ok then
     return
 end
 
-local LSPMASON_DEFAULTS = {
+lspmason.setup({
     ensure_installed = SERVERS,
     automatic_installation = true,
-}
-lspmason.setup(LSPMASON_DEFAULTS)
+})
 
 lspmason.setup_handlers({
     function (server_name)
