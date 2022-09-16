@@ -18,6 +18,8 @@
 
 ### Installation
 
+Backup your existing config first!
+
 Step 1: Cleanup
 ```
 rm -rf ~/.config/nvim ~/.cache/nvim ~/.local/share/nvim
