@@ -13,7 +13,10 @@ configs.setup({
     ensure_installed = {
         "bash",
         "c",
+        "comment",
+        "dockerfile",
         "go",
+        "gomod",
         "json",
         "latex",
         "lua",
@@ -22,6 +25,7 @@ configs.setup({
         "perl",
         "python",
         "rust",
+        "sql",
         "toml",
         "vim",
         "yaml",

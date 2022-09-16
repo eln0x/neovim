@@ -92,8 +92,21 @@ end
 
 local LSPMASON_DEFAULTS = {
     ensure_installed = {
+        "ansible-language-server",
         "bash-language-server",
+        "clangd",
+        "dockerfile-language-server",
+        "gopls",
+        "json-lsp",
         "lua-language-server",
+        "perlnavigator",
+        "puppet-editor-services",
+        "python-lsp-server",
+        "rust-analyzer",
+        "salt-lsp",
+        "terraform-ls",
+        "texlab",
+        "typescript-language-server",
         "vim-language-server",
         "yaml-language-server",
     },
