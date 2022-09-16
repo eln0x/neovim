@@ -6,75 +6,76 @@
 call plug#begin()
 
 " airline
-Plug 'vim-airline/vim-airline'                  " Status bar
-Plug 'enricobacis/vim-airline-clock'            " Airline clock
-Plug 'ryanoasis/vim-devicons'                   " Developer Icons
+Plug 'vim-airline/vim-airline'                      " Status bar
+Plug 'enricobacis/vim-airline-clock'                " Airline clock
+Plug 'ryanoasis/vim-devicons'                       " Developer Icons
 
 " colorscheme
-Plug 'folke/tokyonight.nvim'                    " Tokyo theme
-Plug 'lunarvim/darkplus.nvim'                   " Lunar theme
+Plug 'folke/tokyonight.nvim'                        " Tokyo theme
+Plug 'lunarvim/darkplus.nvim'                       " Lunar theme
 
 " dashboard
-Plug 'goolord/alpha-nvim'                       " Startup screen
-Plug 'BlakeJC94/alpha-nvim-fortune'             " Fortune plugin for alpha
-Plug 'kyazdani42/nvim-web-devicons'             " File icons
-Plug 'kyazdani42/nvim-tree.lua'                 " File explorer
+Plug 'goolord/alpha-nvim'                           " Startup screen
+Plug 'BlakeJC94/alpha-nvim-fortune'                 " Fortune plugin for alpha
+Plug 'kyazdani42/nvim-web-devicons'                 " File icons
+Plug 'kyazdani42/nvim-tree.lua'                     " File explorer
 
 " tags
-Plug 'preservim/tagbar'                         " Tags browser
-Plug 'ludovicchabant/vim-gutentags'             " Tags management
+Plug 'preservim/tagbar'                             " Tags browser
+Plug 'ludovicchabant/vim-gutentags'                 " Tags management
 
 " telescope
-Plug 'nvim-lua/plenary.nvim'                    " Lua functions
-Plug 'nvim-telescope/telescope.nvim'            " Fuzzy finder
-Plug 'ahmedkhalf/project.nvim'                  " Project jumper
-Plug 'nvim-treesitter/nvim-treesitter'          " Syntax highlightings
+Plug 'nvim-lua/plenary.nvim'                        " Lua functions
+Plug 'nvim-telescope/telescope.nvim'                " Fuzzy finder
+Plug 'ahmedkhalf/project.nvim'                      " Project jumper
+Plug 'nvim-treesitter/nvim-treesitter'              " Syntax highlightings
 
 " lsp
-Plug 'williamboman/mason.nvim'                  " Manage external editors
-Plug 'williamboman/mason-lspconfig.nvim'        " Bridge mason with lspconfig
-Plug 'neovim/nvim-lspconfig'                    " Lsp configuration
-Plug 'onsails/lspkind-nvim'                     " Add pictograms to builtin lsp
+Plug 'williamboman/mason.nvim'                      " Manage external editors
+Plug 'williamboman/mason-lspconfig.nvim'            " Bridge mason with lspconfig
+Plug 'WhoIsSethDaniel/mason-tool-installer.nvim'    " Install or upgrade 3rd party tools
+Plug 'neovim/nvim-lspconfig'                        " Lsp configuration
+Plug 'onsails/lspkind-nvim'                         " Add pictograms to builtin lsp
 
 " completion
-Plug 'hrsh7th/nvim-cmp'                         " Nvim completion
-Plug 'hrsh7th/cmp-nvim-lsp'                     " Lsp completion
-Plug 'hrsh7th/cmp-buffer'                       " Buffer words
-Plug 'hrsh7th/cmp-path'                         " Filesystem path
-Plug 'hrsh7th/cmp-cmdline'                      " Nvim's commandline
-Plug 'hrsh7th/cmp-calc'                         " Math calculation
+Plug 'hrsh7th/nvim-cmp'                             " Nvim completion
+Plug 'hrsh7th/cmp-nvim-lsp'                         " Lsp completion
+Plug 'hrsh7th/cmp-buffer'                           " Buffer words
+Plug 'hrsh7th/cmp-path'                             " Filesystem path
+Plug 'hrsh7th/cmp-cmdline'                          " Nvim's commandline
+Plug 'hrsh7th/cmp-calc'                             " Math calculation
 
 " snippets
-Plug 'rafamadriz/friendly-snippets'             " Snippets collection
-Plug 'hrsh7th/vim-vsnip'                        " Vsnip users
-Plug 'hrsh7th/cmp-vsnip'                        " Vsnip completion
-"Plug 'L3MON4D3/LuaSnip'                         " Luasnip users
-"Plug 'saadparwaiz1/cmp_luasnip'                 " Luasnip completion
-"Plug 'SirVer/ultisnips'                         " Ultisnips users
-"Plug 'quangnguyen30192/cmp-nvim-ultisnips'      " Ultisnips completion
+Plug 'rafamadriz/friendly-snippets'                 " Snippets collection
+Plug 'hrsh7th/vim-vsnip'                            " Vsnip users
+Plug 'hrsh7th/cmp-vsnip'                            " Vsnip completion
+"Plug 'L3MON4D3/LuaSnip'                             " Luasnip users
+"Plug 'saadparwaiz1/cmp_luasnip'                     " Luasnip completion
+"Plug 'SirVer/ultisnips'                             " Ultisnips users
+"Plug 'quangnguyen30192/cmp-nvim-ultisnips'          " Ultisnips completion
 
 " utils
-Plug 'akinsho/toggleterm.nvim'                  " Toggle terminal
-Plug 'Raimondi/delimitMate'                     " Autoclose quotes, bracket etc...
-Plug 'roxma/vim-paste-easy'                     " Automatic paste mode
-Plug 'terryma/vim-multiple-cursors'             " Multiple cursors
-Plug 'tpope/vim-commentary'                     " For Commenting gcc & gc
-Plug 'tpope/vim-surround'                       " Surrounding ysw)
-Plug 'tpope/vim-eunuch'                         " Common shell commands
-Plug 'troydm/zoomwintab.vim'                    " Simple tab zoomer
-Plug 'Yggdroot/indentLine'                      " Show indentation when no tab
-Plug 'yuttie/comfortable-motion.vim'            " Vim Scroller
-Plug 'mhinz/vim-rfc'                            " Download RFC
+Plug 'akinsho/toggleterm.nvim'                      " Toggle terminal
+Plug 'Raimondi/delimitMate'                         " Autoclose quotes, bracket etc...
+Plug 'roxma/vim-paste-easy'                         " Automatic paste mode
+Plug 'terryma/vim-multiple-cursors'                 " Multiple cursors
+Plug 'tpope/vim-commentary'                         " For Commenting gcc & gc
+Plug 'tpope/vim-surround'                           " Surrounding ysw)
+Plug 'tpope/vim-eunuch'                             " Common shell commands
+Plug 'troydm/zoomwintab.vim'                        " Simple tab zoomer
+Plug 'Yggdroot/indentLine'                          " Show indentation when no tab
+Plug 'yuttie/comfortable-motion.vim'                " Vim Scroller
+Plug 'mhinz/vim-rfc'                                " Download RFC
 
 " git
-Plug 'mhinz/vim-signify'                        " Show modified lines for VCS files
-Plug 'tpope/vim-fugitive'                       " Github Wrapper
-Plug 'rhysd/git-messenger.vim'                  " Show git hidden messages
+Plug 'mhinz/vim-signify'                            " Show modified lines for VCS files
+Plug 'tpope/vim-fugitive'                           " Github Wrapper
+Plug 'rhysd/git-messenger.vim'                      " Show git hidden messages
 
 " syntax
-Plug 'Joorem/vim-haproxy'                       " HAProxy syntax
-Plug 'chr4/nginx.vim'                           " Nginx syntax
-Plug 'saltstack/salt-vim'                       " Saltstack syntax
-Plug 'glench/vim-jinja2-syntax'                 " Jinja2 syntax
+Plug 'Joorem/vim-haproxy'                           " HAProxy syntax
+Plug 'chr4/nginx.vim'                               " Nginx syntax
+Plug 'saltstack/salt-vim'                           " Saltstack syntax
+Plug 'glench/vim-jinja2-syntax'                     " Jinja2 syntax
 
 call plug#end()

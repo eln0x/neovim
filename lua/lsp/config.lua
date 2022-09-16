@@ -43,6 +43,42 @@ lspconfig.util.default_config = vim.tbl_deep_extend(
 )
 
 --
+-- Mason tools configuration
+--
+-- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
+
+local install_ok, install = pcall(require, "mason-tool-installer")
+if not install_ok then
+    return
+end
+
+local SERVERS = {
+        "ansible-language-server",
+        "bash-language-server",
+        "clangd",
+        "dockerfile-language-server",
+        "gopls",
+        "json-lsp",
+        "lua-language-server",
+        "perlnavigator",
+        "puppet-editor-services",
+        "python-lsp-server",
+        "rust-analyzer",
+        "salt-lsp",
+        "terraform-ls",
+        "texlab",
+        "typescript-language-server",
+        "vim-language-server",
+        "yaml-language-server",
+}
+
+install.setup {
+  ensure_installed = SERVERS,
+  auto_update = false,
+  run_on_start = true,
+}
+
+--
 -- Mason configuration
 --
 -- https://github.com/williamboman/mason.nvim
@@ -91,25 +127,7 @@ if not lspmason_ok then
 end
 
 local LSPMASON_DEFAULTS = {
-    ensure_installed = {
-        "ansible-language-server",
-        "bash-language-server",
-        "clangd",
-        "dockerfile-language-server",
-        "gopls",
-        "json-lsp",
-        "lua-language-server",
-        "perlnavigator",
-        "puppet-editor-services",
-        "python-lsp-server",
-        "rust-analyzer",
-        "salt-lsp",
-        "terraform-ls",
-        "texlab",
-        "typescript-language-server",
-        "vim-language-server",
-        "yaml-language-server",
-    },
+    ensure_installed = SERVERS,
     automatic_installation = true,
 }
 lspmason.setup(LSPMASON_DEFAULTS)
