@@ -3,7 +3,7 @@
 --
 -- https://github.com/nanotech/jellybeans.vim
 
-local colorscheme = "jellybeans"    -- Preferred color scheme
+local colorscheme = "jellybeans-nvim"    -- Preferred color scheme
 
 local scheme_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 if not scheme_ok then

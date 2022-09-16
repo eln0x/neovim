@@ -11,6 +11,9 @@ Plug 'enricobacis/vim-airline-clock'                " Airline clock
 Plug 'ryanoasis/vim-devicons'                       " Developer Icons
 
 " colorscheme
+Plug 'rktjmp/lush.nvim'                             " Theme creation helper
+Plug 'rktjmp/shipwright.nvim'                       " Build theme from lush
+Plug 'metalelf0/jellybeans-nvim'                    " Jellybeans port to lua
 Plug 'folke/tokyonight.nvim'                        " Tokyo theme
 Plug 'lunarvim/darkplus.nvim'                       " Lunar theme
 
