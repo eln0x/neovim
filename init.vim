@@ -27,11 +27,6 @@ augroup remember_folds
     au BufWinEnter ?* silent! loadview 1
 augroup END
 
-" plugins
-if filereadable(expand("~/.config/nvim/vimrc.plug"))
-    source ~/.config/nvim/vimrc.plug
-endif
-
 " lua
 if filereadable(expand("~/.config/nvim/lua/init.lua"))
     lua require('init')
