@@ -36,6 +36,7 @@ Plug 'williamboman/mason-lspconfig.nvim'            " Bridge mason with lspconfi
 Plug 'WhoIsSethDaniel/mason-tool-installer.nvim'    " Install or upgrade 3rd party tools
 Plug 'neovim/nvim-lspconfig'                        " Lsp configuration
 Plug 'onsails/lspkind-nvim'                         " Add pictograms to builtin lsp
+Plug 'stevearc/aerial.nvim'                         " Code outline and nav helper
 
 " completion
 Plug 'hrsh7th/nvim-cmp'                             " Nvim completion

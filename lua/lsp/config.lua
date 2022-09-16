@@ -8,6 +8,9 @@ if not lspconfig_ok then
     return
 end
 
+-- aerial extension
+local aerial_ok, aerial = pcall(require, 'aerial')
+
 -- define capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local cmp_ok, cmp = pcall(require, 'cmp_nvim_lsp')
@@ -66,6 +69,9 @@ local LSP_DEFAULTS = {
         vim.keymap.set('n', '<space>,', vim.diagnostic.goto_prev, bufopts)
         vim.keymap.set('n', '<space>.', vim.diagnostic.goto_next, bufopts)
         vim.keymap.set('n', '<space>L', vim.diagnostic.setloclist, bufopts)
+
+        -- Aerial setup
+        if aerial_ok then aerial.on_attach(client, bufnr) end
     end
 }
 

@@ -19,3 +19,4 @@ require 'plug.toggleterm'
 -- lsp
 require 'lsp.cmp'
 require 'lsp.config'
+require 'lsp.aerial'
