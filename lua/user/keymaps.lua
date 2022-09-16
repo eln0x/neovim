@@ -51,6 +51,8 @@ keymap("n", "<F2>", "<cmd>TagbarToggle<cr>", opts)
 keymap("n", "<F3>", "<cmd>Alpha<cr>", opts)
 keymap("n", "<leader>tt", "<cmd>ToggleTerm dir=%:p:h<cr>", opts)
 keymap("n", "<leader>tg", "<cmd>lua LazyGitToggle()<CR>", opts)
+keymap("n", "<leader>ta", "<cmd>AerialToggle<cr>", opts)
+keymap("n", "<leader>ti", "<cmd>IndentLinesToggle<cr>", opts)
 
 -- Telescope
 keymap("n", "<leader>f", "<cmd>Telescope find_files<cr>", opts)
