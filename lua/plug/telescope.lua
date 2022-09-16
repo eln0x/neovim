@@ -37,16 +37,4 @@ telescope.setup({
             preview_cutoff = 120,
         },
     },
-    extensions = {
-        repo = {
-            list = {
-                fd_opts = {
-                    "--no-ignore-vcs",
-                },
-                search_dirs = {
-                    "~/sources/gitlab",
-                },
-            },
-        },
-    },
 })
