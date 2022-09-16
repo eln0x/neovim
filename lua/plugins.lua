@@ -130,6 +130,9 @@ packer.startup(function(use)
     use 'saltstack/salt-vim'                          -- Saltstack syntax
     use 'glench/vim-jinja2-syntax'                    -- Jinja2 syntax
 
+    -- new
+    use 'lewis6991/impatient.nvim'                    -- Speedup startup time
+
     -- sync configuration after cloning packer.nvim
     if packer_bootstrap then
         packer.sync()

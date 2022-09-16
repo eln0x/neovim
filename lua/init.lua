@@ -18,6 +18,7 @@ require 'plug.telescope'
 require 'plug.project'
 require 'plug.treesitter'
 require 'plug.toggleterm'
+require 'plug.impatient'
 
 -- lsp
 require 'lsp.cmp'
