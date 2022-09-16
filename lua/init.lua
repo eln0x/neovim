@@ -2,11 +2,14 @@
 -- Neovim lua configuration
 --
 
+-- plugins
+require 'plugins'
+
 -- common
 require 'user.colors'
 require 'user.options'
-require 'user.autocmds'
 require 'user.keymaps'
+require 'user.autocmds'
 
 -- plugins
 require 'plug.alpha'

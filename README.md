@@ -31,18 +31,7 @@ git clone git@gitlab.com:elnox/neovim.git ~/.config/nvim
 cd ~/.config/nvim && git fetch origin
 ```
 
-Step 3: Plugins autoloader
-```
-sh -c 'curl -fLo ~/.local/share/nvim/site/autoload/plug.vim \
-    --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-```
-
-Step 4: Load configuration
-```
-nvim +PlugClean +PlugInstall +qall
-```
-
-Step 5: Enjoy ;)
+Step 3: Enjoy ;)
 ```
 nvim
 ```

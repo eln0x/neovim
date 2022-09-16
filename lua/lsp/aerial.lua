@@ -34,7 +34,7 @@ aerial.setup({
     link_tree_to_folds = true,
     manage_folds = false,
     nerd_font = "auto",
-    open_automatic = true,
+    open_automatic = false,
     show_guides = true,
     float = {
         border = "rounded",

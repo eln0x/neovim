@@ -53,5 +53,9 @@ opt.pumheight = 10                              -- Pop up menu height
 opt.splitbelow = true                           -- Horizontal splits to go below current window
 opt.splitright = true                           -- Vertical splits to go to the right of current window
 opt.list = true                                 -- Enable list mode
+vim.opt.cmdheight = 1                           -- more space in the neovim command line for displaying messages
+vim.opt.conceallevel = 0                        -- so that `` is visible in markdown files
 opt.listchars = "tab:› ,trail:•,extends:#,nbsp:."
 opt.wildignore:append "*.pyc,*.o,*.obj,*.svn,*.swp,*.class,*.hg,*.DS_Store,*.min.*,*.pdf,*.jpg,*.png,*.gif"
+vim.opt.whichwrap:append("<,>,[,],h,l")
+vim.opt.iskeyword:append("-")
