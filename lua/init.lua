@@ -21,6 +21,7 @@ require 'plug.toggleterm'
 require 'plug.impatient'
 require 'plug.indentline'
 require 'plug.notify'
+require 'plug.whichkey'
 
 -- lsp
 require 'lsp.cmp'

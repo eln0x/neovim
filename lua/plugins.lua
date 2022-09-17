@@ -103,6 +103,7 @@ packer.startup(function(use)
     use 'rafamadriz/friendly-snippets'                -- Snippets collection
 
     -- utils
+    use 'folke/which-key.nvim'                        -- Key binding completion
     use 'akinsho/toggleterm.nvim'                     -- Toggle terminal
     use 'Raimondi/delimitMate'                        -- Autoclose quotes, bracket etc...
     use 'roxma/vim-paste-easy'                        -- Automatic paste mode
