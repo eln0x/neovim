@@ -93,7 +93,7 @@ packer.startup(function(use)
     -- dap
     use 'mfussenegger/nvim-dap'                       -- Debug adapter protocol
     use 'rcarriga/nvim-dap-ui'                        -- Dap ui
-    -- use 'ravenxrz/DAPInstall.nvim'                    -- Dap installer
+    -- use 'ravenxrz/DAPInstall.nvim'                 -- Dap installer
 
     -- completion
     use 'hrsh7th/nvim-cmp'                            -- Nvim completion
@@ -137,6 +137,12 @@ packer.startup(function(use)
     -- new
     use 'lewis6991/impatient.nvim'                    -- Speedup startup time
     use 'rcarriga/nvim-notify'                        -- Notification manager
+
+    -- testing
+    -- use 'windwp/nvim-autopairs'
+    -- use 'numToStr/Comment.nvim'
+    -- use 'JoosepAlviste/nvim-ts-context-commentstring'
+    -- use 'lewis6991/gitsigns.nvim'
 
     -- sync configuration after cloning packer.nvim
     if packer_bootstrap then
