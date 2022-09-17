@@ -82,6 +82,7 @@ cmp.setup({
         { name = 'nvim_lsp' },
 		{ name = "nvim_lua" },
         { name = 'vsnip' },
+        { name = 'treesitter' },
     }, {
         { name = 'buffer' },
     }),
@@ -90,13 +91,14 @@ cmp.setup({
             mode = 'symbol_text',
             maxwidth = 50,
             menu = ({
-                buffer = "[Buffer]",
+                buffer = "[Buff]",
                 path = "[Path]",
                 look = "[Look]",
                 nvim_lsp = "[LSP]",
                 nvim_lua = "[Lua]",
-                luasnip = "[Luasnip]",
-                latex_symbols = "[Latex]",
+                luasnip = "[Snip]",
+                latex_symbols = "[Latx]",
+                treesitter = "[Tree]",
             }),
             before = function(_, vim_item)
                 vim_item.abbr = ' ' .. vim_item.abbr
