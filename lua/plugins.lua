@@ -96,15 +96,11 @@ packer.startup(function(use)
     use 'hrsh7th/cmp-path'                            -- Filesystem path
     use 'hrsh7th/cmp-cmdline'                         -- Nvim's commandline
     use 'hrsh7th/cmp-calc'                            -- Math calculation
+    use 'hrsh7th/cmp-nvim-lua'                        -- Complete lua api
 
     -- snippets
+    use 'L3MON4D3/LuaSnip'                            -- Luasnip users
     use 'rafamadriz/friendly-snippets'                -- Snippets collection
-    use 'hrsh7th/vim-vsnip'                           -- Vsnip users
-    use 'hrsh7th/cmp-vsnip'                           -- Vsnip completion
-    -- use 'L3MON4D3/LuaSnip'                            -- Luasnip users
-    -- use 'saadparwaiz1/cmp_luasnip'                    -- Luasnip completion
-    -- use 'SirVer/ultisnips'                            -- Ultisnips users
-    -- use 'quangnguyen30192/cmp-nvim-ultisnips'         -- Ultisnips completion
 
     -- utils
     use 'akinsho/toggleterm.nvim'                     -- Toggle terminal
@@ -133,7 +129,6 @@ packer.startup(function(use)
     -- new
     use 'lewis6991/impatient.nvim'                    -- Speedup startup time
     use 'rcarriga/nvim-notify'                        -- Notification manager
-    -- use 'hrsh7th/cmp-nvim-lua'
     -- use 'jose-elias-alvarez/null-ls.nvim'
     -- use 'mfussenegger/nvim-dap'
     -- use 'rcarriga/nvim-dap-ui'
