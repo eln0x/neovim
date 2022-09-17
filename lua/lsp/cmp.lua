@@ -13,14 +13,26 @@ if not lspkind_ok then
     return
 end
 
+local snip_ok, luasnip = pcall(require, "luasnip")
+if not snip_ok then
+    return
+end
+
+require("luasnip/loaders/from_vscode").lazy_load()
+
 vim.opt.completeopt = "menuone,noselect"
 
 local select_opts = {behavior = cmp.SelectBehavior.Select}
 
+local check_backspace = function()
+    local col = vim.fn.col(".") - 1
+    return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+end
+
 cmp.setup({
     snippet = {
         expand = function(args)
-            vim.fn["vsnip#anonymous"](args.body)
+            luasnip.lsp_expand(args.body)
         end,
     },
     window = {
@@ -43,23 +55,32 @@ cmp.setup({
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<Tab>'] = function(fallback)
+        ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
+            elseif luasnip.expandable() then
+                luasnip.expand()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            elseif check_backspace() then
+                fallback()
             else
                 fallback()
             end
-        end,
-        ['<S-Tab>'] = function(fallback)
+        end),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
             else
                 fallback()
             end
-        end,
+        end),
     }),
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
+		{ name = "nvim_lua" },
         { name = 'vsnip' },
     }, {
         { name = 'buffer' },
@@ -74,7 +95,7 @@ cmp.setup({
                 look = "[Look]",
                 nvim_lsp = "[LSP]",
                 nvim_lua = "[Lua]",
-                vsnip = "[VSnip]",
+                luasnip = "[Luasnip]",
                 latex_symbols = "[Latex]",
             }),
             before = function(_, vim_item)
@@ -83,7 +104,10 @@ cmp.setup({
                 return vim_item
             end
         })
-    }
+    },
+	experimental = {
+		ghost_text = true,
+	},
 })
 
 -- Set configuration for specific filetype.
