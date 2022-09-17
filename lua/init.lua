@@ -22,6 +22,7 @@ require 'plug.impatient'
 require 'plug.indentline'
 require 'plug.notify'
 require 'plug.whichkey'
+require 'plug.dap'
 
 -- lsp
 require 'lsp.cmp'

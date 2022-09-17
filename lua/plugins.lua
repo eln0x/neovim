@@ -88,6 +88,12 @@ packer.startup(function(use)
     use 'neovim/nvim-lspconfig'                       -- Lsp configuration
     use 'onsails/lspkind-nvim'                        -- Add pictograms to builtin lsp
     use 'stevearc/aerial.nvim'                        -- Code outline and nav helper
+    -- use 'jose-elias-alvarez/null-ls.nvim'
+
+    -- dap
+    use 'mfussenegger/nvim-dap'                       -- Debug adapter protocol
+    use 'rcarriga/nvim-dap-ui'                        -- Dap ui
+    -- use 'ravenxrz/DAPInstall.nvim'                    -- Dap installer
 
     -- completion
     use 'hrsh7th/nvim-cmp'                            -- Nvim completion
@@ -131,10 +137,6 @@ packer.startup(function(use)
     -- new
     use 'lewis6991/impatient.nvim'                    -- Speedup startup time
     use 'rcarriga/nvim-notify'                        -- Notification manager
-    -- use 'jose-elias-alvarez/null-ls.nvim'
-    -- use 'mfussenegger/nvim-dap'
-    -- use 'rcarriga/nvim-dap-ui'
-    -- use 'ravenxrz/DAPInstall.nvim'
 
     -- sync configuration after cloning packer.nvim
     if packer_bootstrap then
