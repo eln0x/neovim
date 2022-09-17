@@ -11,6 +11,9 @@ end
 -- aerial extension
 local aerial_ok, aerial = pcall(require, 'aerial')
 
+-- signature extension
+local signature_ok, signature = pcall(require, 'lsp_signature')
+
 -- define capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local cmp_ok, cmp = pcall(require, 'cmp_nvim_lsp')
@@ -72,6 +75,16 @@ local LSP_DEFAULTS = {
 
         -- Aerial setup
         if aerial_ok then aerial.on_attach(client, bufnr) end
+
+        -- Signature setup
+        if signature_ok then
+            signature.on_attach({
+                bind = true,
+                handlers_opts = {
+                    border = "rounded"
+                }
+            }, bufnr)
+        end
     end
 }
 

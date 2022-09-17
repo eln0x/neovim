@@ -97,6 +97,7 @@ packer.startup(function(use)
     use 'hrsh7th/cmp-cmdline'                         -- Nvim's commandline
     use 'hrsh7th/cmp-calc'                            -- Math calculation
     use 'hrsh7th/cmp-nvim-lua'                        -- Complete lua api
+    use "ray-x/lsp_signature.nvim"                    -- Signature completion
 
     -- snippets
     use 'L3MON4D3/LuaSnip'                            -- Luasnip users
