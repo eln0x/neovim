@@ -20,22 +20,28 @@ if not ui_ok then
     return
 end
 
-dapui.setup {
-  sidebar = {
-    elements = {
-      {
-        id = "scopes",
-        size = 0.25, -- Can be float or integer > 1
-      },
-      { id = "breakpoints", size = 0.25 },
+dapui.setup({
+    layouts = {
+        {
+            elements = {
+                'scopes',
+                'breakpoints',
+                'stacks',
+                'watches',
+            },
+            size = 40,
+            position = 'left',
+        },
+        {
+            elements = {
+                'repl',
+                'console',
+            },
+            size = 10,
+            position = 'bottom',
+        },
     },
-    size = 40,
-    position = "right", -- Can be "left", "right", "top", "bottom"
-  },
-  tray = {
-    elements = {},
-  },
-}
+})
 
 dap.listeners.after.event_initialized["dapui_config"] = function()
   dapui.open()
