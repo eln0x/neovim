@@ -40,5 +40,13 @@ telescope.setup({
             height = 0.80,
             preview_cutoff = 120,
         },
+    mappings = {
+      i = {
+        ["<C-_>"] = actions.which_key,
+      },
+      n = {
+        ["?"] = actions.which_key,
+      },
+    },
     },
 })
