@@ -115,7 +115,7 @@ packer.startup(function(use)
     use 'tpope/vim-surround'                          -- Surrounding ysw)
     use 'tpope/vim-eunuch'                            -- Common shell commands
     use 'troydm/zoomwintab.vim'                       -- Simple tab zoomer
-    use 'Yggdroot/indentLine'                         -- Show indentation when no tab
+    use 'lukas-reineke/indent-blankline.nvim'         -- Show indentation when no tab
     use 'yuttie/comfortable-motion.vim'               -- Vim Scroller
     use 'mhinz/vim-rfc'                               -- Download RFC
 
@@ -129,6 +129,15 @@ packer.startup(function(use)
     use 'chr4/nginx.vim'                              -- Nginx syntax
     use 'saltstack/salt-vim'                          -- Saltstack syntax
     use 'glench/vim-jinja2-syntax'                    -- Jinja2 syntax
+
+    -- new
+    use 'lewis6991/impatient.nvim'                    -- Speedup startup time
+    use 'rcarriga/nvim-notify'                        -- Notification manager
+    -- use 'hrsh7th/cmp-nvim-lua'
+    -- use 'jose-elias-alvarez/null-ls.nvim'
+    -- use 'mfussenegger/nvim-dap'
+    -- use 'rcarriga/nvim-dap-ui'
+    -- use 'ravenxrz/DAPInstall.nvim'
 
     -- sync configuration after cloning packer.nvim
     if packer_bootstrap then
