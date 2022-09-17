@@ -88,7 +88,7 @@ packer.startup(function(use)
     use 'neovim/nvim-lspconfig'                       -- Lsp configuration
     use 'onsails/lspkind-nvim'                        -- Add pictograms to builtin lsp
     use 'stevearc/aerial.nvim'                        -- Code outline and nav helper
-    -- use 'jose-elias-alvarez/null-ls.nvim'
+    use 'jose-elias-alvarez/null-ls.nvim'             -- Diagnostic and code injection
 
     -- dap
     use 'mfussenegger/nvim-dap'                       -- Debug adapter protocol
