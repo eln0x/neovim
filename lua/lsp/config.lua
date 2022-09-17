@@ -14,6 +14,9 @@ local aerial_ok, aerial = pcall(require, 'aerial')
 -- signature extension
 local signature_ok, signature = pcall(require, 'lsp_signature')
 
+-- notify extension
+local notify_ok, notify = pcall(require, 'notify')
+
 -- define capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local cmp_ok, cmp = pcall(require, 'cmp_nvim_lsp')
@@ -84,6 +87,16 @@ local LSP_DEFAULTS = {
                     border = "rounded"
                 }
             }, bufnr)
+        end
+
+        -- Notify setup
+        if notify_ok then
+            notify(
+                string.format("%s", client.name),
+                "info",
+                { title = "[lsp] active" },
+                true
+            )
         end
     end
 }
