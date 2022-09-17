@@ -132,6 +132,12 @@ packer.startup(function(use)
 
     -- new
     use 'lewis6991/impatient.nvim'                    -- Speedup startup time
+    use 'rcarriga/nvim-notify'                        -- Notification manager
+    -- use 'hrsh7th/cmp-nvim-lua'
+    -- use 'jose-elias-alvarez/null-ls.nvim'
+    -- use 'mfussenegger/nvim-dap'
+    -- use 'rcarriga/nvim-dap-ui'
+    -- use 'ravenxrz/DAPInstall.nvim'
 
     -- sync configuration after cloning packer.nvim
     if packer_bootstrap then
