@@ -19,6 +19,10 @@ keymap("n", "<C-S>", "<cmd>w<cr>")
 -- Clear highlights
 keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", opts)
 
+-- Move text up and down
+keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
+keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
+
 -- Split
 keymap("n", "<leader>!", "<cmd>vsplit<cr>")
 keymap("n", "<leader>/", "<cmd>split<cr>")
@@ -66,7 +70,22 @@ keymap("n", "<leader>c", "<cmd>Telescope colorscheme<cr>", opts)
 keymap("n", "<leader>i", "<cmd>LspInfo<cr>", opts)
 
 -- Insert_mode = "i",
+
+--
 -- Visual_mode = "v",
+--
+
+-- Move text up and down
+keymap("v", "<A-j>", ":m .+1<CR>==", opts)
+keymap("v", "<A-k>", ":m .-2<CR>==", opts)
+
+--
 -- Visual_block_mode = "x",
+--
+
+-- Move text up and down
+keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
+keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
+
 -- Term_mode = "t",
 -- Command_mode = "c",
