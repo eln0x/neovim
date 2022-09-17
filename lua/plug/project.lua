@@ -9,8 +9,12 @@ if not project_ok then
 end
 
 project.setup({
+    active = true,
     detection_methods = { "pattern" },
     patterns = { ".git", "Makefile", "package.json" },
+    show_hidden = false,
+    silent_chdir = true,
+    datapath = vim.fn.stdpath("data"),
 })
 
 local tele_ok, telescope = pcall(require, "telescope")
