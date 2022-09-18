@@ -112,8 +112,6 @@ packer.startup(function(use)
     use 'Raimondi/delimitMate'                        -- Autoclose quotes, bracket etc...
     use 'roxma/vim-paste-easy'                        -- Automatic paste mode
     use 'terryma/vim-multiple-cursors'                -- Multiple cursors
-    use 'tpope/vim-commentary'                        -- For Commenting gcc & gc
-    use 'tpope/vim-surround'                          -- Surrounding ysw)
     use 'tpope/vim-eunuch'                            -- Common shell commands
     use 'troydm/zoomwintab.vim'                       -- Simple tab zoomer
     use 'lukas-reineke/indent-blankline.nvim'         -- Show indentation when no tab
