@@ -109,6 +109,8 @@ packer.startup(function(use)
     use 'kyazdani42/nvim-tree.lua'                    -- File explorer
     use 'folke/which-key.nvim'                        -- Key binding completion
     use 'akinsho/toggleterm.nvim'                     -- Toggle terminal
+    use 'numToStr/Comment.nvim'                       -- Comment helper
+    use 'JoosepAlviste/nvim-ts-context-commentstring' -- Comment string helper
     use 'Raimondi/delimitMate'                        -- Autoclose quotes, bracket etc...
     use 'roxma/vim-paste-easy'                        -- Automatic paste mode
     use 'terryma/vim-multiple-cursors'                -- Multiple cursors
@@ -135,8 +137,6 @@ packer.startup(function(use)
 
     -- testing
     -- use 'windwp/nvim-autopairs'
-    -- use 'numToStr/Comment.nvim'
-    -- use 'JoosepAlviste/nvim-ts-context-commentstring'
 
     -- sync configuration after cloning packer.nvim
     if packer_bootstrap then
