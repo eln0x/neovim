@@ -5,14 +5,18 @@
 -- plugins
 require 'plugins'
 
--- common
-require 'user.colors'
+-- theme
+require 'theme.alpha'
+require 'theme.lualine'
+require 'theme.bufferline'
+require 'theme.colors'
+
+-- settings
 require 'user.options'
 require 'user.keymaps'
 require 'user.autocmds'
 
 -- plugins
-require 'plug.alpha'
 require 'plug.nvtree'
 require 'plug.telescope'
 require 'plug.project'
