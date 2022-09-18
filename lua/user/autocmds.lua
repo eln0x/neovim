@@ -8,6 +8,8 @@ vim.cmd [[
         autocmd FileType qf,help,man,lspinfo nnoremap <silent> <buffer> q :close<CR>
         autocmd TextYankPost * silent!lua require('vim.highlight').on_yank({higroup = 'Visual', timeout = 200})
         autocmd BufWinEnter * :set formatoptions-=cro
+        autocmd BufWritePre * :%s/\s\+$//e
+        autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
     augroup end
 ]]
 
@@ -24,4 +26,12 @@ vim.cmd [[
         autocmd BufRead,BufNewFile *.tex set filetype=tex
         autocmd BufRead,BufNewFile *.cls set filetype=tex
     augroup end
+]]
+
+vim.cmd [[
+    augroup __remember_folds
+        autocmd!
+        au BufWinLeave ?* mkview 1
+        au BufWinEnter ?* silent! loadview 1
+    augroup END
 ]]

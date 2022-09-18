@@ -1,0 +1,47 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+GutentagsEnableFunc	lua/plug/tags.lua	/^    function! GutentagsEnableFunc(path)$/;"	f
+LazyGitToggle	lua/plug/toggleterm.lua	/^function LazyGitToggle()$/;"	f
+["<S-Tab>"] 	lua/lsp/cmp.lua	/^        ["<S-Tab>"] = cmp.mapping(function(fallback)$/;"	f
+["<Tab>"] 	lua/lsp/cmp.lua	/^        ["<Tab>"] = cmp.mapping(function(fallback)$/;"	f
+["sumneko_lua"] 	lua/lsp/config.lua	/^    ["sumneko_lua"] = function ()$/;"	f
+_G.set_terminal_keymaps	lua/plug/toggleterm.lua	/^function _G.set_terminal_keymaps()$/;"	f
+before 	lua/lsp/cmp.lua	/^            before = function(_, vim_item)$/;"	f
+close_command 	lua/theme/bufferline.lua	/^        close_command = "bdelete! %d",          -- can be a string | function, see "Mouse actions"$/;"	f
+dap.listeners.after.event_initialized["dapui_config"] 	lua/plug/dap.lua	/^dap.listeners.after.event_initialized["dapui_config"] = function()$/;"	f
+dap.listeners.before.event_exited["dapui_config"] 	lua/plug/dap.lua	/^dap.listeners.before.event_exited["dapui_config"] = function()$/;"	f
+dap.listeners.before.event_terminated["dapui_config"] 	lua/plug/dap.lua	/^dap.listeners.before.event_terminated["dapui_config"] = function()$/;"	f
+expand 	lua/lsp/cmp.lua	/^        expand = function(args)$/;"	f
+file_button	lua/plug/alpha.lua	/^local function file_button(fn, sc, short_fn)$/;"	f
+file_button	lua/theme/alpha.lua	/^local function file_button(fn, sc, short_fn)$/;"	f
+fmt 	lua/theme/lualine.lua	/^    fmt = function(str)$/;"	f
+get_extension	lua/plug/alpha.lua	/^local function get_extension(fn)$/;"	f
+get_extension	lua/theme/alpha.lua	/^local function get_extension(fn)$/;"	f
+icon	lua/plug/alpha.lua	/^local function icon(fn)$/;"	f
+icon	lua/theme/alpha.lua	/^local function icon(fn)$/;"	f
+ignore 	lua/plug/alpha.lua	/^    ignore = function(path, ext)$/;"	f
+ignore 	lua/theme/alpha.lua	/^    ignore = function(path, ext)$/;"	f
+keep 	lua/plug/notify.lua	/^            keep = function()$/;"	f
+left_mouse_command 	lua/theme/bufferline.lua	/^        left_mouse_command = "buffer %d",       -- can be a string | function, see "Mouse actions"$/;"	f
+local check_backspace 	lua/lsp/cmp.lua	/^local check_backspace = function()$/;"	f
+local ensure_packer 	lua/plugins.lua	/^local ensure_packer = function()$/;"	f
+local hide_in_width 	lua/theme/lualine.lua	/^local hide_in_width = function()$/;"	f
+local sign 	lua/lsp/config.lua	/^local sign = function(opts)$/;"	f
+local spaces 	lua/theme/lualine.lua	/^local spaces = function()$/;"	f
+middle_mouse_command 	lua/theme/bufferline.lua	/^        middle_mouse_command = nil,             -- can be a string | function, see "Mouse actions"$/;"	f
+mru	lua/plug/alpha.lua	/^local function mru(start, cwd, items_number, opts)$/;"	f
+mru	lua/theme/alpha.lua	/^local function mru(start, cwd, items_number, opts)$/;"	f
+numbers 	lua/theme/bufferline.lua	/^        numbers = "none",                       -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,$/;"	f
+on_attach 	lua/lsp/config.lua	/^    on_attach = function(client, bufnr)$/;"	f
+open_fn 	lua/plugins.lua	/^        open_fn = function()$/;"	f
+override 	lua/lsp/aerial.lua	/^        override = function(conf)$/;"	f
+pre_hook 	lua/plug/comment.lua	/^    pre_hook = function(ctx)$/;"	f
+right_mouse_command 	lua/theme/bufferline.lua	/^        right_mouse_command = "bdelete! %d",    -- can be a string | function, see "Mouse actions"$/;"	f
+val 	lua/plug/alpha.lua	/^            val = function()$/;"	f
+val 	lua/theme/alpha.lua	/^            val = function()$/;"	f
+vim.lsp.buf.rename 	lua/plug/notify.lua	/^vim.lsp.buf.rename = function()$/;"	f
+vim.lsp.handlers['window/showMessage'] 	lua/plug/notify.lua	/^vim.lsp.handlers['window\/showMessage'] = function(_, result, ctx)$/;"	f

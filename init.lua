@@ -2,6 +2,15 @@
 -- Neovim lua configuration
 --
 
+-- ensure pynvim is installed
+vim.cmd [[
+    if !has('python3')
+        echohl WarningMsg
+        echo 'Missing python3 support - need to pip install pynvim'
+        echohl None
+    endif
+]]
+
 -- plugins
 require 'plugins'
 
@@ -29,6 +38,7 @@ require 'plug.notify'
 require 'plug.whichkey'
 require 'plug.gitsigns'
 require 'plug.dap'
+require 'plug.tags'
 
 -- lsp
 require 'lsp.cmp'

@@ -58,6 +58,13 @@ keymap("n", "<leader>tg", "<cmd>lua LazyGitToggle()<CR>", opts)
 keymap("n", "<leader>ta", "<cmd>AerialToggle<cr>", opts)
 keymap("n", "<leader>ti", "<cmd>IndentLinesToggle<cr>", opts)
 
+-- Cmotion
+vim.g.comfortable_motion_no_default_key_mappings = 1
+keymap('n', '<C-Down>', '<cmd>call comfortable_motion#flick(100)<cr>', opts)
+keymap('n', '<C-Up>', '<cmd>call comfortable_motion#flick(-100)<cr>', opts)
+keymap('n', '<C-f>', '<cmd>call comfortable_motion#flick(200)<cr>', opts)
+keymap('n', '<C-b>', '<cmd>call comfortable_motion#flick(-200)<cr>', opts)
+
 -- Telescope
 keymap("n", "<leader>f", "<cmd>Telescope find_files<cr>", opts)
 keymap("n", "<leader>w", "<cmd>Telescope live_grep<cr>", opts)

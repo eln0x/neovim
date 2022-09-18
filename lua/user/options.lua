@@ -57,13 +57,18 @@ local options = {
     conceallevel = 0,                            -- so that `` is visible in markdown files
 }
 
-opt.shortmess:append "c"                         -- Don't give ins-completion-menu messages
+vim.cmd [[
+    filetype off                            " Force plug-ins to load correctly.
+    filetype plugin indent on               " For plug-ins to load correctly.
+    syntax on                               " Syntax highlightings
+]]
 
 for k, v in pairs(options) do
-    vim.opt[k] = v
+    opt[k] = v
 end
 
+opt.shortmess:append "c"                         -- Don't give ins-completion-menu messages
 opt.listchars = "tab:› ,trail:•,extends:#,nbsp:."
 opt.wildignore:append "*.pyc,*.o,*.obj,*.svn,*.swp,*.class,*.hg,*.DS_Store,*.min.*,*.pdf,*.jpg,*.png,*.gif"
-vim.opt.whichwrap:append("<,>,[,],h,l")
-vim.opt.iskeyword:append("-")
+opt.whichwrap:append("<,>,[,],h,l")
+opt.iskeyword:append("-")
