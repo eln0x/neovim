@@ -50,11 +50,14 @@ cmp.setup({
         ['<Down>'] = cmp.mapping.select_next_item(select_opts),
         ["<C-p>"] = cmp.mapping.select_prev_item(select_opts),
         ["<C-n>"] = cmp.mapping.select_next_item(select_opts),
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+        ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.abort(),
+        ["<C-e>"] = cmp.mapping {
+            i = cmp.mapping.abort(),
+            c = cmp.mapping.close(),
+        },
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
@@ -67,7 +70,10 @@ cmp.setup({
             else
                 fallback()
             end
-        end),
+        end, {
+            "i",
+            "s",
+        }),
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
@@ -76,11 +82,14 @@ cmp.setup({
             else
                 fallback()
             end
-        end),
+        end, {
+            "i",
+            "s",
+        }),
     }),
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-		{ name = "nvim_lua" },
+        { name = "nvim_lua" },
         { name = 'vsnip' },
         { name = 'treesitter' },
     }, {
@@ -107,9 +116,13 @@ cmp.setup({
             end
         })
     },
-	experimental = {
-		ghost_text = true,
-	},
+    confirm_opts = {
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = false,
+    },
+    experimental = {
+        ghost_text = true,
+    },
 })
 
 -- Set configuration for specific filetype.

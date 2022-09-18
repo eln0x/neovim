@@ -55,7 +55,7 @@ vim.lsp.handlers['window/showMessage'] = function(_, result, ctx)
         {
             title = '[lsp] | ' .. client.name,
             keep = function()
-                return level == 'ERROR' or lvl == 'WARN'
+                return level == 'ERROR' or level == 'WARN'
             end,
         }
     )
