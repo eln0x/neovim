@@ -185,7 +185,6 @@ local section_buttons = {
         dashboard.button("p", "  Find project", ":Telescope projects<cr>"),
         dashboard.button("w", "  Find word", ":Telescope live_grep<cr>"),
         dashboard.button("m", "  Find modified file", ":Telescope git_status<cr>"),
-        dashboard.button("c", "  Nvim configuration", ":e ~/.config/nvim/init.vim<cr>"),
         dashboard.button("u", "  Sync plugins", ":PackerUpdate<cr>"),
         dashboard.button("h", "  Check health", ":checkhealth<cr>"),
         dashboard.button("q", "  Quit", "<Cmd>qa<cr>")
