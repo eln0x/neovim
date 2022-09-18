@@ -53,10 +53,12 @@ packer.startup(function(use)
     -- packer
     use 'wbthomason/packer.nvim'
 
-    -- airline
-    use 'vim-airline/vim-airline'                     --  Status bar
-    use 'enricobacis/vim-airline-clock'               -- Airline clock
-    use 'ryanoasis/vim-devicons'                      -- Developer Icons
+    -- theme
+    use 'goolord/alpha-nvim'                          -- Startup screen
+    use 'BlakeJC94/alpha-nvim-fortune'                -- Fortune plugin for alpha
+    use 'nvim-lualine/lualine.nvim'                   -- Statusline
+    use 'akinsho/bufferline.nvim'                     -- Bufferline
+    use 'kyazdani42/nvim-web-devicons'                -- File icons
 
     -- colorscheme
     use 'rktjmp/lush.nvim'                            -- Theme creation helper
@@ -64,12 +66,6 @@ packer.startup(function(use)
     use 'metalelf0/jellybeans-nvim'                   -- Jellybeans port to lua
     use 'folke/tokyonight.nvim'                       -- Tokyo theme
     use 'lunarvim/darkplus.nvim'                      -- Lunar theme
-
-    -- dashboard
-    use 'goolord/alpha-nvim'                          -- Startup screen
-    use 'BlakeJC94/alpha-nvim-fortune'                -- Fortune plugin for alpha
-    use 'kyazdani42/nvim-web-devicons'                -- File icons
-    use 'kyazdani42/nvim-tree.lua'                    -- File explorer
 
     -- tags
     use 'preservim/tagbar'                            -- Tags browser
@@ -110,6 +106,7 @@ packer.startup(function(use)
     use 'rafamadriz/friendly-snippets'                -- Snippets collection
 
     -- utils
+    use 'kyazdani42/nvim-tree.lua'                    -- File explorer
     use 'folke/which-key.nvim'                        -- Key binding completion
     use 'akinsho/toggleterm.nvim'                     -- Toggle terminal
     use 'Raimondi/delimitMate'                        -- Autoclose quotes, bracket etc...
