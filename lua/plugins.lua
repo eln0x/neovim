@@ -59,6 +59,7 @@ packer.startup(function(use)
     use 'nvim-lualine/lualine.nvim'                   -- Statusline
     use 'akinsho/bufferline.nvim'                     -- Bufferline
     use 'kyazdani42/nvim-web-devicons'                -- File icons
+    use 'rcarriga/nvim-notify'                        -- Notification manager
 
     -- colorscheme
     use 'rktjmp/lush.nvim'                            -- Theme creation helper
@@ -106,6 +107,7 @@ packer.startup(function(use)
     use 'rafamadriz/friendly-snippets'                -- Snippets collection
 
     -- utils
+    use 'lewis6991/impatient.nvim'                    -- Speedup startup time
     use 'kyazdani42/nvim-tree.lua'                    -- File explorer
     use 'folke/which-key.nvim'                        -- Key binding completion
     use 'akinsho/toggleterm.nvim'                     -- Toggle terminal
@@ -130,13 +132,6 @@ packer.startup(function(use)
     use 'chr4/nginx.vim'                              -- Nginx syntax
     use 'saltstack/salt-vim'                          -- Saltstack syntax
     use 'glench/vim-jinja2-syntax'                    -- Jinja2 syntax
-
-    -- new
-    use 'lewis6991/impatient.nvim'                    -- Speedup startup time
-    use 'rcarriga/nvim-notify'                        -- Notification manager
-
-    -- testing
-    -- use 'windwp/nvim-autopairs'
 
     -- sync configuration after cloning packer.nvim
     if packer_bootstrap then
