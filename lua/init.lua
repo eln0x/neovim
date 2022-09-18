@@ -26,6 +26,7 @@ require 'plug.impatient'
 require 'plug.indentline'
 require 'plug.notify'
 require 'plug.whichkey'
+require 'plug.gitsigns'
 require 'plug.dap'
 
 -- lsp

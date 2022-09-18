@@ -121,7 +121,7 @@ packer.startup(function(use)
     use 'mhinz/vim-rfc'                               -- Download RFC
 
     -- git
-    use 'mhinz/vim-signify'                           -- Show modified lines for VCS files
+    use 'lewis6991/gitsigns.nvim'                     -- Show modified lines for VCS files
     use 'tpope/vim-fugitive'                          -- Github Wrapper
     use 'rhysd/git-messenger.vim'                     -- Show git hidden messages
 
@@ -139,7 +139,6 @@ packer.startup(function(use)
     -- use 'windwp/nvim-autopairs'
     -- use 'numToStr/Comment.nvim'
     -- use 'JoosepAlviste/nvim-ts-context-commentstring'
-    -- use 'lewis6991/gitsigns.nvim'
 
     -- sync configuration after cloning packer.nvim
     if packer_bootstrap then
