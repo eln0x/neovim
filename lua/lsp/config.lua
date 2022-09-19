@@ -71,9 +71,9 @@ local LSP_DEFAULTS = {
         vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, bufopts)
 
         -- Diagnostics keymaps
-        vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, bufopts)
+        vim.keymap.set('n', '<space>d', vim.diagnostic.open_float, bufopts)
         vim.keymap.set('n', '<space>,', vim.diagnostic.goto_prev, bufopts)
-        vim.keymap.set('n', '<space>.', vim.diagnostic.goto_next, bufopts)
+        vim.keymap.set('n', '<space>;', vim.diagnostic.goto_next, bufopts)
         vim.keymap.set('n', '<space>L', vim.diagnostic.setloclist, bufopts)
 
         -- Aerial setup

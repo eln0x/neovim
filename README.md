@@ -13,8 +13,9 @@
 ### Requirements
 
 - Neovim (version >= 0.7.0), run `nvim -v` to check neovim version.
+- Python3 / Nodejs / Npm / Ripgrep / Fd-find
 - Exuberant Ctags and/or Universal Ctags.
-- Ripgrep & Fd-find
+- Ncdu / Htop / Lazygit
 
 ### Installation
 
@@ -27,7 +28,7 @@ rm -rf ~/.config/nvim ~/.cache/nvim ~/.local/share/nvim
 
 Step 2: Clone & fetch
 ```
-git clone git@gitlab.com:elnox/neovim.git ~/.config/nvim
+git clone https://gitlab.com/elnox/neovim.git ~/.config/nvim
 cd ~/.config/nvim && git fetch origin
 ```
 

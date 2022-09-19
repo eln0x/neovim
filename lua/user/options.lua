@@ -32,7 +32,8 @@ local options = {
     undolevels = 10000,                          -- Maximum number of changes that can be undone
     undoreload = 100000,                         -- Maximum number lines to save for undo on reload
     history = 1000,                              -- keep 1000 lines of command history
-    foldmethod = "syntax",                       -- Use syntax based folding method
+    foldmethod = "expr",                         -- Use syntax based folding method
+    foldexpr = "nvim_treesitter#foldexpr()",     -- Use Treesitter folding
     backspace = "indent,eol,start",              -- Activate backspace
     laststatus = 2,                              -- Always print status line
     wildmenu = true,                             -- Activate wildmenu
@@ -53,8 +54,10 @@ local options = {
     splitbelow = true,                           -- Horizontal splits to go below current window
     splitright = true,                           -- Vertical splits to go to the right of current window
     list = true,                                 -- Enable list mode
-    cmdheight = 1,                               -- more space in the neovim command line for displaying messages
-    conceallevel = 0,                            -- so that `` is visible in markdown files
+    cmdheight = 1,                               -- More space in the neovim command line for displaying messages
+    conceallevel = 0,                            -- So that `` is visible in markdown files
+    scrolloff = 8,                               -- Keep cursor centered
+    sidescrolloff = 8,
 }
 
 vim.cmd [[

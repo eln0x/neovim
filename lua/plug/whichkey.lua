@@ -63,18 +63,15 @@ which_key.setup(setup)
 local opts = {
     mode = "n",                             -- NORMAL mode
     prefix = "<leader>",
-    buffer = nir,                           -- Global mappings. Specify a buffer number for buffer local mappings
+    buffer = nil,                           -- Global mappings. Specify a buffer number for buffer local mappings
     silent = true,                          -- use `silent` when creating keymaps
     noremap = true,                         -- use `noremap` when creating keymaps
     nowait = true,                          -- use `nowait` when creating keymaps
 }
 
 local mappings = {
-    a = { "<cmd>Alpha<cr>", "Alpha" },
     b = { "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>", "Buffers" },
     c = { "<cmd>bdelete<CR>", "Close Buffer" },
-    E = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-    d = { "<cmd>AerialToggle<cr>", "Aerial" },
     f = { "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",  "files" },
     G = { "<cmd>Telescope live_grep theme=ivy<cr>", "Live Grep" },
     h = { "<cmd>nohlsearch<CR>", "No Highlight" },
@@ -82,7 +79,6 @@ local mappings = {
     k = { "<cmd>WhichKey<cr>", "Which Key" },
     P = { "<cmd>lua require('telescope').extensions.projects.projects(require('telescope.themes').get_dropdown{previewer = false})<cr>", "Projects" },
     q = { "<cmd>q<CR>", "Quit" },
-    T = { "<cmd>TagbarToggle<cr>", "Tags" },
     w = { "<cmd>w<CR>", "Save" },
     x = { "<cmd>source %<CR>", "Reload Conf" },
     ["!"] = { "<cmd>vsplit<CR>", "Split Vertical" },

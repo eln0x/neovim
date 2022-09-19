@@ -37,7 +37,11 @@ keymap("n", "<leader><Right>", "<cmd>bnext<cr>", opts)
 keymap("n", "<leader><Left>", "<cmd>bprev<cr>", opts)
 
 -- Toggles
-keymap("n", "<leader>ta", "<cmd>AerialToggle<cr>", opts)
+keymap("n", "<F1>", "<cmd>NvimTreeToggl<cr>", opts)
+keymap("n", "<F2>", "<cmd>TagbarToggle<cr>", opts)
+keymap("n", "<F3>", "<cmd>Alpha<cr>", opts)
+keymap("n", "<F4>", "<cmd>AerialToggle<cr>", opts)
+keymap("n", "<F5>", "<cmd>Mason<cr>", opts)
 
 -- Cmotion
 vim.g.comfortable_motion_no_default_key_mappings = 1
