@@ -69,6 +69,8 @@ set pumheight=10                        " Pop up menu height
 set splitbelow                          " Horizontal splits to go below current window
 set splitright                          " Vertical splits to go to the right of current window
 set list                                " Enable list mode
+set scrolloff=8                         " Keep cursor centered
+set sidescrolloff=8
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
 set wildignore+=*.pyc,*.o,*.obj,*.svn,*.swp,*.class,*.hg,*.DS_Store,*.min.*,*.pdf,*.jpg,*.png,*.gif
 
@@ -112,3 +114,7 @@ let mapleader = " "                     " Leader key set to <space bar>
 map <F1>         :NERDTreeToggle<CR>
 nmap <F2>        :TagbarToggle<CR>
 nmap <F3>        :Startify<CR>
+
+map <C-PageDown> :tabprevious<CR>
+map <C-PageUp>   :tabnext<CR>
+map <C-t>        :tabnew<CR>
