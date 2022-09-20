@@ -37,8 +37,6 @@ function deploy()
     # cleanup existing neovim
     [ -d $HOME/.local/nvim ] && rm -rf $HOME/.local/nvim
     [ -L $HOME/.local/bin/nvim ] && rm -f $HOME/.local/bin/nvim
-    [ -L $HOME/.local/bin/vim ] && rm -f $HOME/.local/bin/vim
-    [ -L $HOME/.local/bin/vi ] && rm -f $HOME/.local/bin/vi
 
     # install latest REL from appImage
     wget $URL/$REL/nvim.appimage -O $TMPDIR/nvim.appimage 2>/dev/null || \
@@ -49,8 +47,6 @@ function deploy()
     mv $TMPDIR/squashfs-root $HOME/.local/nvim
 
     ln -s $HOME/.local/nvim/usr/bin/nvim $HOME/.local/bin/nvim
-    ln -s $HOME/.local/nvim/usr/bin/nvim $HOME/.local/bin/vim
-    ln -s $HOME/.local/nvim/usr/bin/nvim $HOME/.local/bin/vi
 }
 
 function config()
@@ -68,8 +64,7 @@ function config()
     if [[ "$FLAVOR" == "master" ]]; then
         echo "- setup master"
         git clone https://gitlab.com/elnox/neovim.git ~/.config/nvim
-        cd ~/.config/nvim
-        nvim
+        cd ~/.config/nvim && nvim
     fi
 
     # legacy
@@ -89,8 +84,8 @@ function main ()
 {
     echo "*** Neovim installer"
 
+    # parse args
     [[ $# -eq 0 ]] && print_help
-
     while [[ $# -ne 0 ]]; do
         arg="$1"; shift
         case "$arg" in
@@ -110,10 +105,10 @@ function main ()
     # config flavor
     [ ! -z $FLAVOR ] && config
 
-    echo "*** Done!"
-
     # cleanup temp
     rm -rf $TMPDIR
+
+    echo "*** Done!"
 }
 
 main "$@"

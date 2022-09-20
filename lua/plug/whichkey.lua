@@ -102,11 +102,10 @@ local mappings = {
     l = {
         name = "Lsp",
         a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-        d = { "<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics" },
-        w = { "<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" },
+        d = { "<cmd>Telescope diagnostics bufnr=0<cr>", "Document Diagnostics" },
+        w = { "<cmd>Telescope diagnostics<cr>", "Workspace Diagnostics" },
         f = { "<cmd>lua vim.lsp.buf.format{async=true}<cr>", "Format" },
         i = { "<cmd>LspInfo<cr>", "Info" },
-        I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
         j = { "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "Next Diagnostic" },
         k = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>", "Prev Diagnostic", },
         l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },

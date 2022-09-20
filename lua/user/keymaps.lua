@@ -13,6 +13,9 @@ vim.g.mapleader = " "
 -- Normal_mode = "n",
 --
 
+-- Copy whole file
+keymap("n", "<C-c>", "<cmd> %y+ <CR>", opts)
+
 -- Move text up and down
 keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
