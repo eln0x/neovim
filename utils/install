@@ -1,0 +1,117 @@
+#!/bin/bash
+#
+# install script helper
+
+SCRIPT=$(readlink -f $0)
+BIN="$HOME/.local/bin"
+URL="https://github.com/neovim/neovim/releases/download"
+
+function print_help ()
+{
+    echo "
+    $0 --release <stable || nightly> --conf <master || legacy>
+    "
+    exit 0
+}
+
+function deploy()
+{
+    if test $REL != "stable" && test $REL != "nightly"; then
+        print_help
+    fi
+
+    # check dependencies
+    if which node >/dev/null; then
+        echo "- install neovim $REL"
+    else
+        echo "!! curl -sL https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.0/install.sh | zsh"
+        [ -z $1 ] && exit 0
+    fi
+
+    # ensure bin directory exists
+    if [ ! -d $BIN ]; then
+        echo "- creating $BIN directory, ensure $BIN is in your PATH"
+        mkdir $BIN
+    fi
+
+    # cleanup existing neovim
+    [ -d $HOME/.local/nvim ] && rm -rf $HOME/.local/nvim
+    [ -L $HOME/.local/bin/nvim ] && rm -f $HOME/.local/bin/nvim
+    [ -L $HOME/.local/bin/vim ] && rm -f $HOME/.local/bin/vim
+
+    # install latest REL from appImage
+    wget $URL/$REL/nvim.appimage -O $TMPDIR/nvim.appimage 2>/dev/null || \
+        cp nvim/nvim.appimage $TMPDIR
+    chmod +x $TMPDIR/nvim.appimage
+
+    cd $TMPDIR/ && ./nvim.appimage --appimage-extract &> /dev/null
+    mv $TMPDIR/squashfs-root $HOME/.local/nvim
+
+    ln -s $HOME/.local/nvim/usr/bin/nvim $HOME/.local/bin/nvim
+    ln -s $HOME/.local/nvim/usr/bin/nvim $HOME/.local/bin/vim
+}
+
+function config()
+{
+    if test $FLAVOR != "master" && test $FLAVOR != "legacy"; then
+        print_help
+    fi
+
+    # cleanup existing config
+    [ -d ~/.config/nvim ] && rm -rf ~/.config/nvim
+    [ -d ~/.cache/nvim ] && rm -rf ~/.cache/nvim
+    [ -d ~/.local/share/nvim ] && rm -rf ~/.local/share/nvim
+
+    # master
+    if [[ "$FLAVOR" == "master" ]]; then
+        echo "- setup master"
+        git clone https://gitlab.com/elnox/neovim.git ~/.config/nvim
+        cd ~/.config/nvim
+        nvim
+    fi
+
+    # legacy
+    if [[ "$FLAVOR" == "legacy" ]]; then
+        echo "- setup legacy"
+        git clone https://gitlab.com/elnox/neovim.git ~/.config/nvim
+        sh -c 'curl -fLo ~/.local/share/nvim/site/autoload/plug.vim \
+            --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+        cd ~/.config/nvim
+        git fetch origin && git checkout legacy
+        nvim +PlugInstall +qall
+    fi
+}
+
+function main ()
+{
+    echo "*** Neovim installer"
+
+    [[ $# -eq 0 ]] && print_help
+
+    while [[ $# -ne 0 ]]; do
+        arg="$1"; shift
+        case "$arg" in
+            --release) REL=$1; shift;;
+            --config) FLAVOR=$1; shift;;
+            --help)   print_help ;;
+            * ) [[ $arg =~ \-+.* ]] && print_help "$arg unknown"
+        esac
+    done
+
+    # create temp directory
+    TMPDIR=$(mktemp -d -t neovim-XXXXXXXXXX)
+
+    # install release
+    [ ! -z $REL ] && deploy
+
+    # config flavor
+    [ ! -z $FLAVOR ] && config
+
+    echo "*** Done!"
+
+    # cleanup temp
+    rm -rf $TMPDIR
+}
+
+main "$@"
