@@ -36,3 +36,8 @@ Step 3: Enjoy ;)
 ```
 nvim
 ```
+
+Or if you know what you are doing:
+```
+bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --release stable --config master
+```
