@@ -135,6 +135,7 @@ packer.startup(function(use)
     use 'chr4/nginx.vim'                                -- Nginx syntax
     use 'saltstack/salt-vim'                            -- Saltstack syntax
     use 'glench/vim-jinja2-syntax'                      -- Jinja2 syntax
+    use 'rodjek/vim-puppet'                             -- Puppet syntax
 
     -- sync configuration after cloning packer.nvim
     if packer_bootstrap then
