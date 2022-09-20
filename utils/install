@@ -1,0 +1,192 @@
+#!/bin/bash
+#
+# install script helper
+
+BAK="$HOME/bakup/neovim"
+BIN="$HOME/.local/bin"
+URL="https://github.com/neovim/neovim/releases/download"
+NVIMDIR=(
+	".local/nvim"
+	".cache/nvim"
+	".config/nvim"
+	".local/share/nvim"
+)
+FLAVORS=(
+	"init"
+	"master"
+	"lazy"
+	"legacy"
+	"devel"
+)
+
+function usage() {
+	printf "usage: $0 [options]\n\noptions:
+        --release   <stable || nightly || v0.7.2>
+        --config    <init || master || lazy || legacy || devel>
+        --bakup     <bakup name>
+        --restore   <bakup name>"
+	exit 0
+}
+
+function bakup() {
+	echo "- Creating neovim backup ${BAK}"
+
+	for DIR in "${NVIMDIR[@]}"; do
+		if [[ -d ${HOME}/${DIR} ]]; then
+			[[ ! -d ${BAK}/${BAKUP}/${DIR} ]] && mkdir -p "${BAK}/${BAKUP}/${DIR}"
+			rsync -ar --delete "${HOME}/${DIR}/" "${BAK}/${BAKUP}/${DIR}"
+			echo "ok ${HOME}/${DIR} > ${BAK}/${BAKUP}/${DIR}"
+		fi
+	done
+
+	echo "- Done: ls -la ${BAK}"
+}
+
+function restore() {
+	STATUS=1
+
+	echo "- Checking neovim bakup"
+
+	for DIR in "${NVIMDIR[@]}"; do
+		if [[ ! -d ${BAK}/${RESTORE}/${DIR} ]]; then
+			echo "ko ${BAK}/${RESTORE}/${DIR}"
+			STATUS=0
+		fi
+	done
+
+	if [[ $STATUS -eq 0 ]]; then
+		echo "! skipping restore"
+		exit 1
+	fi
+
+	for DIR in "${NVIMDIR[@]}"; do
+		rsync -ar --delete "${BAK}/${RESTORE}/${DIR}/" "$HOME/${DIR}"
+		echo "ok ${BAK}/${RESTORE}/${DIR}"
+	done
+
+	echo "- Restoring neovim from bakup ${BAK}/${RESTORE}"
+
+	exit 0
+}
+
+function deploy() {
+	if [[ $REL =~ ^v[0-9]\.[0-9]\.[0-9]$ ]]; then
+		echo "- Install neovim from tag $REL"
+	elif test "$REL" != "stable" && test "$REL" != "nightly"; then
+		usage
+	else
+		echo "- Install neovim from branch $REL"
+	fi
+
+	# ensure bin directory exists
+	if [ ! -d "$BIN" ]; then
+		echo "- creating $BIN directory, ensure $BIN is in your PATH"
+		mkdir "$BIN"
+	fi
+
+	# cleanup existing neovim
+	[ -d "$HOME/.local/nvim" ] && rm -rf "$HOME/.local/nvim"
+	[ -L "$HOME/.local/bin/nvim" ] && rm -f "$HOME/.local/bin/nvim"
+
+	# create temp directory
+	TMPDIR=$(mktemp -d --tmpdir=$HOME -t neovim-XXXXXXXXXX)
+
+	# install latest REL from appImage
+	wget "$URL/$REL/nvim.appimage" -O "$TMPDIR/nvim.appimage" 2>/dev/null ||
+		cp nvim/nvim.appimage "$TMPDIR"
+	chmod +x "$TMPDIR/nvim.appimage"
+
+	cd "$TMPDIR/" && ./nvim.appimage --appimage-extract &>/dev/null
+	mv "$TMPDIR/squashfs-root" "$HOME/.local/nvim"
+
+	# cleanup temp
+	cd ~/ && rm -rf "$TMPDIR"
+
+	ln -s "$HOME/.local/nvim/usr/bin/nvim" "$HOME/.local/bin/nvim"
+}
+
+function config() {
+	if [[ ! ${FLAVORS[@]} =~ $FLAVOR ]]; then
+		usage
+	fi
+
+	# cleanup existing config
+	[ -d ~/.config/nvim ] && rm -rf ~/.config/nvim
+	[ -d ~/.cache/nvim ] && rm -rf ~/.cache/nvim
+	[ -d ~/.local/share/nvim ] && rm -rf ~/.local/share/nvim
+
+	# init
+	[[ "$FLAVOR" == "init" ]] && return 0
+
+	# legacy
+	if [[ "$FLAVOR" == "legacy" ]]; then
+		echo "- Setup configuration legacy"
+		git clone https://gitlab.com/elnox/neovim.git ~/.config/nvim -q
+		sh -c 'curl -fLo ~/.local/share/nvim/site/autoload/plug.vim \
+            --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+		cd ~/.config/nvim || exit
+		git fetch origin && git checkout legacy
+		nvim +PlugInstall +qall
+
+		# master / lazy
+	else
+		if which node >/dev/null; then
+			echo "- Setup configuration $FLAVOR"
+		else
+			echo "! nodejs not found, either run one of these commands"
+			echo "! apt install npm nodejs --no-install-recommends"
+			echo "! curl -sL https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.0/install.sh | $SHELL"
+			[ -z "$1" ] && exit 0
+		fi
+		git clone https://gitlab.com/elnox/neovim.git ~/.config/nvim -q
+		cd ~/.config/nvim || exit
+		git fetch origin && git checkout $FLAVOR
+		nvim
+	fi
+}
+
+function main() {
+	echo "*** Neovim installer"
+
+	# parse args
+	[[ $# -eq 0 ]] && usage
+	while [[ $# -ne 0 ]]; do
+		arg="$1"
+		shift
+		case "$arg" in
+		--bakup)
+			BAKUP=$1
+			shift
+			;;
+		--restore)
+			RESTORE=$1
+			shift
+			;;
+		--release)
+			REL=$1
+			shift
+			;;
+		--config)
+			FLAVOR=$1
+			shift
+			;;
+		--help) usage ;;
+		*) [[ $arg =~ \-+.* ]] && usage "$arg unknown" ;;
+		esac
+	done
+
+	# bakup
+	[ -n "$BAKUP" ] && bakup
+
+	# restore
+	[ -n "$RESTORE" ] && restore
+
+	# install release
+	[ -n "$REL" ] && deploy
+
+	# config flavor
+	[ -n "$FLAVOR" ] && config
+}
+
+main "$@"
