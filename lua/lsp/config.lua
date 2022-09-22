@@ -43,6 +43,8 @@ local SERVERS = {
         "typescript-language-server",
         "vim-language-server",
         "yaml-language-server",
+        "shfmt",
+        "stylua",
 }
 
 -- define lsp defaults
