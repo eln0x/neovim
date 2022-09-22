@@ -10,7 +10,7 @@ end
 
 notify.setup({
     stages = 'slide',
-    timeout = 2000,
+    timeout = 5000,
 })
 
 vim.notify = require('notify')

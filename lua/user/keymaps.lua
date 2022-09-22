@@ -45,6 +45,7 @@ keymap("n", "<F2>", "<cmd>TagbarToggle<cr>", opts)
 keymap("n", "<F3>", "<cmd>Alpha<cr>", opts)
 keymap("n", "<F4>", "<cmd>AerialToggle<cr>", opts)
 keymap("n", "<F5>", "<cmd>Mason<cr>", opts)
+keymap("n", "<F6>", "<cmd>NullLsInfo<cr>", opts)
 
 -- Cmotion
 vim.g.comfortable_motion_no_default_key_mappings = 1

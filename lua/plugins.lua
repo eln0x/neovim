@@ -83,9 +83,9 @@ packer.startup(function(use)
     use 'williamboman/mason-lspconfig.nvim'             -- Bridge mason with lspconfig
     use 'WhoIsSethDaniel/mason-tool-installer.nvim'     -- Install or upgrade 3rd party tools
     use 'neovim/nvim-lspconfig'                         -- Lsp configuration
+    use 'jose-elias-alvarez/null-ls.nvim'               -- Diagnostic and code injection
     use 'onsails/lspkind-nvim'                          -- Add pictograms to builtin lsp
     use 'stevearc/aerial.nvim'                          -- Code outline and nav helper
-    use 'jose-elias-alvarez/null-ls.nvim'               -- Diagnostic and code injection
 
     -- dap
     use 'mfussenegger/nvim-dap'                         -- Debug adapter protocol

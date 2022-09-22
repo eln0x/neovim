@@ -30,6 +30,12 @@ local check_backspace = function()
 end
 
 cmp.setup({
+    completion = {
+        keyword_length = 1,
+    },
+    matching = {
+        disallow_fuzzy_matching = false,
+    },
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -48,8 +54,6 @@ cmp.setup({
     mapping = cmp.mapping.preset.insert({
         ['<Up>'] = cmp.mapping.select_prev_item(select_opts),
         ['<Down>'] = cmp.mapping.select_next_item(select_opts),
-        ["<C-p>"] = cmp.mapping.select_prev_item(select_opts),
-        ["<C-n>"] = cmp.mapping.select_next_item(select_opts),
         ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
         ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
         ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
@@ -89,11 +93,13 @@ cmp.setup({
     }),
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = "nvim_lua" },
         { name = 'vsnip' },
+        { name = "nvim_lua" },
         { name = 'treesitter' },
     }, {
         { name = 'buffer' },
+    }, {
+        { name = 'nvim_lsp_signature_help' },
     }),
     formatting = {
         format = lspkind.cmp_format({
@@ -108,6 +114,11 @@ cmp.setup({
                 luasnip = "[Snip]",
                 latex_symbols = "[Latx]",
                 treesitter = "[Tree]",
+                spell = "[Spel]",
+                zsh = "[Zsh]",
+                calc = "[Calc]",
+                nvim_lsp_signature_help = "[Sig]",
+                cmdline = "[Cmd]",
             }),
             before = function(_, vim_item)
                 vim_item.abbr = ' ' .. vim_item.abbr
@@ -146,9 +157,8 @@ cmp.setup.cmdline('/', {
 cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
-        { name = 'path' }
-    }, {
-        { name = 'cmdline' }
+        { name = 'path' },
+        { name = 'cmdline' },
     })
 })
 
