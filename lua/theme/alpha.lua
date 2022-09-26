@@ -180,7 +180,6 @@ local section_buttons = {
         { type = "text", val = "Quick links", opts = { hl = "Constant", position = "center" } },
         { type = "padding", val = 1 },
         dashboard.button("e", "  New file", ":ene <BAR> startinsert <cr>"),
-        dashboard.button("o", "ﭯ  Recently opened files", ":Telescope oldfiles<cr>"),
         dashboard.button("f", "  Find file", ":Telescope find_files<cr>"),
         dashboard.button("p", "  Find project", ":Telescope projects<cr>"),
         dashboard.button("w", "  Find word", ":Telescope live_grep<cr>"),

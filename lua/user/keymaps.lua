@@ -14,11 +14,11 @@ vim.g.mapleader = " "
 --
 
 -- Copy whole file
-keymap("n", "<C-c>", "<cmd> %y+ <CR>", opts)
+keymap("n", "<C-c>", "<cmd> %y+ <cr>", opts)
 
 -- Move text up and down
-keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
-keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
+keymap("n", "<A-k>", "<Esc>:m .-2<cr>==gi", opts)
+keymap("n", "<A-j>", "<Esc>:m .+1<cr>==gi", opts)
 
 -- Navigate line
 keymap("n", "<C-a>", "^", opts)
@@ -36,13 +36,14 @@ keymap("n", "<C-w><Right>", "<cmd>wincmd l<cr>")
 keymap("n", "<C-w><Left>", "<cmd>wincmd h<cr>")
 
 -- Navigate buffers
+keymap("n", "<leader>n", "<cmd>enew<cr>", opts)
 keymap("n", "<leader><Right>", "<cmd>bnext<cr>", opts)
 keymap("n", "<leader><Left>", "<cmd>bprev<cr>", opts)
 
 -- Toggles
-keymap("n", "<F1>", "<cmd>NvimTreeToggl<cr>", opts)
-keymap("n", "<F2>", "<cmd>TagbarToggle<cr>", opts)
-keymap("n", "<F3>", "<cmd>Alpha<cr>", opts)
+keymap("n", "<F1>", "<cmd>Alpha<cr>", opts)
+keymap("n", "<F2>", "<cmd>NvimTreeToggl<cr>", opts)
+keymap("n", "<F3>", "<cmd>TagbarToggle<cr>", opts)
 keymap("n", "<F4>", "<cmd>AerialToggle<cr>", opts)
 keymap("n", "<F5>", "<cmd>Mason<cr>", opts)
 keymap("n", "<F6>", "<cmd>NullLsInfo<cr>", opts)
@@ -61,16 +62,16 @@ keymap('n', '<C-b>', '<cmd>call comfortable_motion#flick(-200)<cr>', opts)
 --
 
 -- Move text up and down
-keymap("v", "<A-j>", ":m .+1<CR>==", opts)
-keymap("v", "<A-k>", ":m .-2<CR>==", opts)
+keymap("v", "<A-j>", ":m .+1<cr>==", opts)
+keymap("v", "<A-k>", ":m .-2<cr>==", opts)
 
 --
 -- Visual_block_mode = "x",
 --
 
 -- Move text up and down
-keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
+keymap("x", "<A-j>", ":move '>+1<cr>gv-gv", opts)
+keymap("x", "<A-k>", ":move '<-2<cr>gv-gv", opts)
 
 -- Term_mode = "t",
 -- Command_mode = "c",

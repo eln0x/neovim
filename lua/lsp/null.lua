@@ -10,7 +10,7 @@ end
 
 local frmt = null.builtins.formatting
 local diag = null.builtins.diagnostics
-local comp = null.builtins.completion
+--local comp = null.builtins.completion
 
 null.setup({
     debounce = 250,
@@ -33,6 +33,5 @@ null.setup({
         diag.shellcheck,
 
         -- completion
-        comp.spell,
     },
 })
