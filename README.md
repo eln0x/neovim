@@ -13,7 +13,7 @@
 
 ### Requirements
 
-- Neovim (version >= 0.7.0), run `nvim -v` to check neovim version.
+- Neovim (version >= 0.8.0), run `nvim -v` to check neovim version.
 - Python3 / Nodejs / Npm / Ripgrep / Fd-find
 - Exuberant Ctags and/or Universal Ctags.
 - Ncdu / Htop / Lazygit
@@ -41,7 +41,7 @@ nvim
 Or if you know what you are doing:
 ```
 bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) \
-    --release stable --config master
+    --release nightly --config master
 ```
 ### Mappings
 
