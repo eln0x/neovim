@@ -10,7 +10,6 @@ end
 
 local frmt = null.builtins.formatting
 local diag = null.builtins.diagnostics
---local comp = null.builtins.completion
 
 null.setup({
     debounce = 250,
@@ -21,17 +20,27 @@ null.setup({
     sources = {
         -- formatter
         frmt.shfmt.with({
+            filetypes = { "sh" },
             extra_args = { "--indent", 4 },
         }),
+
         frmt.stylua.with({
+            filetypes = { "lua" },
             extra_args = { "--indent-type", "Spaces" },
         }),
-        frmt.prettier,
+
+        frmt.prettier.with({
+            filetypes = { "json", "yaml", "markdown" },
+        }),
 
         -- linter
-        diag.flake8,
-        diag.shellcheck,
+        diag.flake8.with({
+            filetypes = { "python" },
+        }),
 
-        -- completion
+        diag.shellcheck.with({
+            filetypes = { "sh" },
+            diagnostic_config = { underline = false },
+        }),
     },
 })
