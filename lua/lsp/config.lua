@@ -35,13 +35,10 @@ local SERVERS = {
         "json-lsp",
         "lua-language-server",
         "perlnavigator",
-        "puppet-editor-services",
         "python-lsp-server",
         "rust-analyzer",
         "salt-lsp",
-        "terraform-ls",
         "texlab",
-        "typescript-language-server",
         "vim-language-server",
         "yaml-language-server",
 
