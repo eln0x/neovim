@@ -25,7 +25,8 @@ toggleterm.setup({
 
 function _G.set_terminal_keymaps()
     local opts = {noremap = true}
-    vim.api.nvim_buf_set_keymap(0, 't', '<leader><UP>', [[<cmd>wincmd k<cr>]], opts)
+    vim.api.nvim_buf_set_keymap(0, 't', '<leader><Up>', [[<cmd>wincmd k<cr>]], opts)
+    vim.api.nvim_buf_set_keymap(0, 't', '<leader><Left>', [[<cmd>wincmd h<cr>]], opts)
 end
 
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
