@@ -2,7 +2,6 @@
 #
 # install script helper
 
-SCRIPT=$(readlink -f $0)
 BIN="$HOME/.local/bin"
 URL="https://github.com/neovim/neovim/releases/download"
 
@@ -16,7 +15,7 @@ function print_help ()
 
 function deploy()
 {
-    if test $REL != "stable" && test $REL != "nightly"; then
+    if test "$REL" != "stable" && test "$REL" != "nightly"; then
         print_help
     fi
 
@@ -25,33 +24,33 @@ function deploy()
         echo "- install neovim $REL"
     else
         echo "!! curl -sL https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.0/install.sh | zsh"
-        [ -z $1 ] && exit 0
+        [ -z "$1" ] && exit 0
     fi
 
     # ensure bin directory exists
-    if [ ! -d $BIN ]; then
+    if [ ! -d "$BIN" ]; then
         echo "- creating $BIN directory, ensure $BIN is in your PATH"
-        mkdir $BIN
+        mkdir "$BIN"
     fi
 
     # cleanup existing neovim
-    [ -d $HOME/.local/nvim ] && rm -rf $HOME/.local/nvim
-    [ -L $HOME/.local/bin/nvim ] && rm -f $HOME/.local/bin/nvim
+    [ -d "$HOME/.local/nvim" ] && rm -rf "$HOME/.local/nvim"
+    [ -L "$HOME/.local/bin/nvim" ] && rm -f "$HOME/.local/bin/nvim"
 
     # install latest REL from appImage
-    wget $URL/$REL/nvim.appimage -O $TMPDIR/nvim.appimage 2>/dev/null || \
-        cp nvim/nvim.appimage $TMPDIR
-    chmod +x $TMPDIR/nvim.appimage
+    wget "$URL/$REL/nvim.appimage" -O "$TMPDIR/nvim.appimage" 2>/dev/null || \
+        cp nvim/nvim.appimage "$TMPDIR"
+    chmod +x "$TMPDIR/nvim.appimage"
 
-    cd $TMPDIR/ && ./nvim.appimage --appimage-extract &> /dev/null
-    mv $TMPDIR/squashfs-root $HOME/.local/nvim
+    cd "$TMPDIR/" && ./nvim.appimage --appimage-extract &> /dev/null
+    mv "$TMPDIR/squashfs-root" "$HOME/.local/nvim"
 
-    ln -s $HOME/.local/nvim/usr/bin/nvim $HOME/.local/bin/nvim
+    ln -s "$HOME/.local/nvim/usr/bin/nvim" "$HOME/.local/bin/nvim"
 }
 
 function config()
 {
-    if test $FLAVOR != "master" && test $FLAVOR != "legacy"; then
+    if test "$FLAVOR" != "master" && test "$FLAVOR" != "legacy"; then
         print_help
     fi
 
@@ -74,7 +73,7 @@ function config()
         sh -c 'curl -fLo ~/.local/share/nvim/site/autoload/plug.vim \
             --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
-        cd ~/.config/nvim
+        cd ~/.config/nvim || exit
         git fetch origin && git checkout legacy
         nvim +PlugInstall +qall
     fi
@@ -100,13 +99,13 @@ function main ()
     TMPDIR=$(mktemp -d -t neovim-XXXXXXXXXX)
 
     # install release
-    [ ! -z $REL ] && deploy
+    [ -n "$REL" ] && deploy "$@"
 
     # config flavor
-    [ ! -z $FLAVOR ] && config
+    [ -n "$FLAVOR" ] && config
 
     # cleanup temp
-    rm -rf $TMPDIR
+    rm -rf "$TMPDIR"
 
     echo "*** Done!"
 }
