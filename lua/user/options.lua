@@ -4,6 +4,12 @@
 local opt = vim.opt
 local undodir = os.getenv( "HOME" ) .. '/.cache/nvim/undo'
 
+vim.cmd [[
+    let g:loaded_ruby_provider = 0               " Disable ruby provider
+    let g:loaded_node_provider = 0               " Disable node provider
+    let g:loaded_perl_provider = 0               " Disable perl provider
+]]
+
 local options = {
     mouse = "a",                                 -- Enable mouse
     compatible = false,                          -- Set compatibility to Vim only.
@@ -61,9 +67,9 @@ local options = {
 }
 
 vim.cmd [[
-    filetype off                            " Force plug-ins to load correctly.
-    filetype plugin indent on               " For plug-ins to load correctly.
-    syntax on                               " Syntax highlightings
+    filetype off                                " Force plug-ins to load correctly.
+    filetype plugin indent on                   " For plug-ins to load correctly.
+    syntax on                                   " Syntax highlightings
 ]]
 
 for k, v in pairs(options) do
