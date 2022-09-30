@@ -6,6 +6,7 @@
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Mappings](#mappings)
+- [Language](#language)
 
 ### Screenshot
 
@@ -139,3 +140,16 @@ Leader command: \<space>
 | n     | tf             | Term float              |                  |
 | n     | th             | Term horizontal         |                  |
 | n     | tv             | Term vertical           |                  |
+
+### Language
+
+| Syntax        | LSP                   | Linter         | Format     |
+| --            | ---                   | ---            | --         |
+| bash          | bash-language-server  | shellcheck     | shfmt      |
+| lua           | lua-language-server   | selene         | stylelua   |
+| python        | python-lsp-server     | flake8         | black      |
+| go            | gopls                 | golangci-lint  | goimports  |
+| rust          | rust-analyzer         |                |            |
+| c             | clangd                |                |            |
+| perl          | perlnavigator         |                |            |
+|               |                       |                |            |

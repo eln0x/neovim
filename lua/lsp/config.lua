@@ -41,15 +41,20 @@ local SERVERS = {
         "texlab",
         "vim-language-server",
         "yaml-language-server",
+        "marksman",
 
         -- formatter
         "shfmt",
         "stylua",
+        "black",
+        "goimports",
         "prettier",
 
         -- linter
-        "flake8",
         "shellcheck",
+        "selene",
+        "flake8",
+        "golangci-lint",
 }
 
 -- define lsp defaults

@@ -29,18 +29,34 @@ null.setup({
             extra_args = { "--indent-type", "Spaces" },
         }),
 
+        frmt.black.with({
+            filetypes = { "python" },
+        }),
+
+        frmt.goimports.with({
+            filetypes = { "go" },
+        }),
+
         frmt.prettier.with({
             filetypes = { "json", "yaml", "markdown" },
         }),
 
         -- linter
+        diag.shellcheck.with({
+            filetypes = { "sh" },
+            diagnostic_config = { underline = false },
+        }),
+
+        diag.selene.with({
+            filetypes = { "lua" },
+        }),
+
         diag.flake8.with({
             filetypes = { "python" },
         }),
 
-        diag.shellcheck.with({
-            filetypes = { "sh" },
-            diagnostic_config = { underline = false },
+        diag.golangci_lint.with({
+            filetypes = { "go" },
         }),
     },
 })
