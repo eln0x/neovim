@@ -5,7 +5,7 @@
 BIN="$HOME/.local/bin"
 URL="https://github.com/neovim/neovim/releases/download"
 
-function print_help ()
+function usage()
 {
     echo "
     $0 --release <stable || nightly> --conf <master || legacy>
@@ -16,7 +16,7 @@ function print_help ()
 function deploy()
 {
     if test "$REL" != "stable" && test "$REL" != "nightly"; then
-        print_help
+        usage
     fi
 
     # check dependencies
@@ -51,7 +51,7 @@ function deploy()
 function config()
 {
     if test "$FLAVOR" != "master" && test "$FLAVOR" != "legacy"; then
-        print_help
+        usage
     fi
 
     # cleanup existing config
@@ -84,14 +84,14 @@ function main ()
     echo "*** Neovim installer"
 
     # parse args
-    [[ $# -eq 0 ]] && print_help
+    [[ $# -eq 0 ]] && usage
     while [[ $# -ne 0 ]]; do
         arg="$1"; shift
         case "$arg" in
             --release) REL=$1; shift;;
             --config) FLAVOR=$1; shift;;
-            --help)   print_help ;;
-            * ) [[ $arg =~ \-+.* ]] && print_help "$arg unknown"
+            --help)   usage ;;
+            * ) [[ $arg =~ \-+.* ]] && usage "$arg unknown"
         esac
     done
 
