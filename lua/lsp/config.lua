@@ -21,7 +21,7 @@ local notify_ok, notify = pcall(require, 'notify')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local cmp_ok, cmp = pcall(require, 'cmp_nvim_lsp')
 if cmp_ok then
-    capabilities = cmp.update_capabilities(capabilities)
+    capabilities = cmp.default_capabilities(capabilities)
 end
 
 -- define wanted servers
