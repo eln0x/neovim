@@ -272,7 +272,7 @@ if not lspmason_ok then
 end
 
 lspmason.setup({
-    ensure_installed = SERVERS,
+    ensure_installed = {},
     automatic_installation = true,
 })
 
