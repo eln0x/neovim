@@ -8,18 +8,20 @@ URL="https://github.com/neovim/neovim/releases/download"
 function usage()
 {
     echo "
-    $0 --release <stable || nightly> --config <master || legacy>
+    $0 --release <stable || nightly || v0.7.2> --config <master || legacy>
     "
     exit 0
 }
 
 function deploy()
 {
-    if test "$REL" != "stable" && test "$REL" != "nightly"; then
+    if [[ $REL =~ ^v[0-9]\.[0-9]\.[0-9]$ ]]; then
+        echo "- install neovim from tag $REL"
+    elif test "$REL" != "stable" && test "$REL" != "nightly"; then
         usage
+    else
+        echo "- install neovim from branch $REL"
     fi
-
-    echo "- install neovim $REL"
 
     # ensure bin directory exists
     if [ ! -d "$BIN" ]; then
@@ -89,9 +91,9 @@ function main ()
     while [[ $# -ne 0 ]]; do
         arg="$1"; shift
         case "$arg" in
-            --release) REL=$1; shift;;
-            --config) FLAVOR=$1; shift;;
-            --help)   usage ;;
+            --release)  REL=$1; shift;;
+            --config)   FLAVOR=$1; shift;;
+            --help)     usage ;;
             * ) [[ $arg =~ \-+.* ]] && usage "$arg unknown"
         esac
     done
