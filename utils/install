@@ -97,7 +97,7 @@ function main ()
     done
 
     # create temp directory
-    TMPDIR=$(mktemp -d -t neovim-XXXXXXXXXX)
+    TMPDIR=$(mktemp -d --tmpdir=$HOME -t neovim-XXXXXXXXXX)
 
     # install release
     [ -n "$REL" ] && deploy "$@"
