@@ -8,9 +8,6 @@ if not lspconfig_ok then
     return
 end
 
--- aerial extension
-local aerial_ok, aerial = pcall(require, 'aerial')
-
 -- signature extension
 local signature_ok, signature = pcall(require, 'lsp_signature')
 
@@ -131,9 +128,6 @@ local LSP_DEFAULTS = {
                 callback = vim.lsp.buf.clear_references,
             })
         end
-
-        -- Aerial setup
-        if aerial_ok then aerial.on_attach(client, bufnr) end
 
         -- Signature setup
         if signature_ok then
