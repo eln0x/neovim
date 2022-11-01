@@ -19,28 +19,37 @@
 - Exuberant Ctags or Universal Ctags.
 - Ncdu / Htop / Lazygit
 
+```bash
+# Nodejs & npm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+nvm install node
+
+# Python3 & pynvim
+pip3 install pynvim
+```
+
 ### Installation
 
 Backup your existing config first!
 
 Step 1: Cleanup
-```
+```bash
 rm -rf ~/.config/nvim ~/.cache/nvim ~/.local/share/nvim
 ```
 
 Step 2: Clone & fetch
-```
+```bash
 git clone https://gitlab.com/elnox/neovim.git ~/.config/nvim
 cd ~/.config/nvim && git fetch origin
 ```
 
 Step 3: Enjoy ;)
-```
+```bash
 nvim
 ```
 
 Or if you know what you are doing:
-```
+```bash
 bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) \
     --release stable --config master
 ```
