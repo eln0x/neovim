@@ -16,11 +16,11 @@ function usage()
 function deploy()
 {
     if [[ $REL =~ ^v[0-9]\.[0-9]\.[0-9]$ ]]; then
-        echo "- install neovim from tag $REL"
+        echo "- Install neovim from tag $REL"
     elif test "$REL" != "stable" && test "$REL" != "nightly"; then
         usage
     else
-        echo "- install neovim from branch $REL"
+        echo "- Install neovim from branch $REL"
     fi
 
     # ensure bin directory exists
@@ -58,20 +58,20 @@ function config()
     # master
     if [[ "$FLAVOR" == "master" ]]; then
         if which node >/dev/null; then
-            echo "- setup master"
+            echo "- Setup configuration master"
         else
             echo "! nodejs not found, either run one of these commands"
             echo "! apt install npm nodejs --no-install-recommends"
             echo "! curl -sL https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.0/install.sh | $SHELL"
             [ -z "$1" ] && exit 0
         fi
-        git clone https://gitlab.com/elnox/neovim.git ~/.config/nvim
+        git clone https://gitlab.com/elnox/neovim.git ~/.config/nvim -q
         cd ~/.config/nvim && nvim
     fi
 
     # legacy
     if [[ "$FLAVOR" == "legacy" ]]; then
-        echo "- setup legacy"
+        echo "- Setup configuration legacy"
         git clone https://gitlab.com/elnox/neovim.git ~/.config/nvim
         sh -c 'curl -fLo ~/.local/share/nvim/site/autoload/plug.vim \
             --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -109,8 +109,6 @@ function main ()
 
     # cleanup temp
     rm -rf "$TMPDIR"
-
-    echo "*** Done!"
 }
 
 main "$@"
