@@ -274,18 +274,12 @@ lspmason.setup_handlers({
     function(server_name)
         lspconfig[server_name].setup {}
     end,
-    ["sumneko_lua"] = function()
-        lspconfig.sumneko_lua.setup {
+    ["lua_ls"] = function()
+        lspconfig.lua_ls.setup {
             settings = {
                 Lua = {
                     diagnostics = {
                         globals = { "vim" }
-                    },
-                    workspace = {
-                        library = vim.api.nvim_get_runtime_file("", true),
-                    },
-                    telemetry = {
-                        enable = false,
                     },
                 }
             }
