@@ -39,6 +39,7 @@ require 'plug.whichkey'
 require 'plug.gitsigns'
 require 'plug.dap'
 require 'plug.tags'
+require 'plug.golang'
 
 -- lsp
 require 'lsp.cmp'
