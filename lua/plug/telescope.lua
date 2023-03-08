@@ -12,7 +12,9 @@ local actions = require "telescope.actions"
 
 -- notify extension
 local notify_ok, notify = pcall(require, 'notify')
-if notify_ok then telescope.load_extension("notify") end
+if notify_ok then
+    telescope.load_extension("notify")
+end
 
 -- setup
 telescope.setup({
