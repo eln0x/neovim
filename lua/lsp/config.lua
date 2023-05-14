@@ -285,4 +285,9 @@ lspmason.setup_handlers({
             }
         }
     end,
+    ["salt_ls"] = function()
+        lspconfig.salt_ls.setup {
+            cmd = { "salt-lsp" }
+        }
+    end,
 })
