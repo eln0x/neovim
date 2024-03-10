@@ -14,7 +14,7 @@
 
 ### Requirements
 
-- Neovim (version >= 0.8.0), run `nvim -v` to check neovim version.
+- Neovim (version >= 0.9.0), run `nvim -v` to check neovim version.
 - Python3 / Nodejs / Npm / Ripgrep / Fd-find / Xclip
 - Exuberant Ctags or Universal Ctags.
 - Ncdu / Htop / Lazygit
@@ -30,29 +30,27 @@ pip3 install pynvim
 
 ### Installation
 
-Backup your existing config first!
-
-Step 1: Cleanup
+Backup:
 ```bash
-rm -rf ~/.config/nvim ~/.cache/nvim ~/.local/share/nvim
+bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --bakup
 ```
 
-Step 2: Clone & fetch
-```bash
-git clone https://gitlab.com/elnox/neovim.git ~/.config/nvim
-cd ~/.config/nvim && git fetch origin
-```
-
-Step 3: Enjoy ;)
-```bash
-nvim
-```
-
-Or if you know what you are doing:
+Install:
 ```bash
 bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) \
     --release stable --config master
 ```
+
+Cleanup:
+```bash
+rm -rf ~/.config/nvim ~/.cache/nvim ~/.local/nvim ~/.local/share/nvim ~/.local/state/nvim
+```
+
+Restore:
+```bash
+bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --restore
+```
+
 ### Mappings
 
 Leader command: \<space>

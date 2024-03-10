@@ -2,14 +2,64 @@
 #
 # install script helper
 
+BAK="$HOME/bakup/neovim"
 BIN="$HOME/.local/bin"
 URL="https://github.com/neovim/neovim/releases/download"
+NVIMDIR=(
+    ".local/nvim"
+    ".cache/nvim"
+    ".config/nvim"
+    ".local/share/nvim"
+)
 
 function usage()
 {
     echo "
     $0 --release <stable || nightly || v0.7.2> --config <master || legacy>
     "
+    exit 0
+}
+
+function bakup()
+{
+    echo "- Creating neovim backup$BAK"
+
+    for DIR in "${NVIMDIR[@]}"; do
+        if [[ -d $HOME/${DIR} ]]; then
+            [[ ! -d $BAK/${DIR} ]] && mkdir -p "$BAK/${DIR}"
+            rsync -ar --delete  "$HOME/${DIR}/" "$BAK/${DIR}"
+            echo "ok $HOME/${DIR} > $BAK/${DIR}"
+        fi
+    done
+
+    echo "- Done: ls -la $BAK"
+}
+
+function restore()
+{
+    STATUS=1
+
+    echo "- Checking neovim bakup"
+
+    for DIR in "${NVIMDIR[@]}"; do
+        if [[ ! -d $BAK/${DIR} ]]; then
+            echo "ko $BAK/${DIR}"
+            STATUS=0
+        fi
+    done
+
+    if [[ $STATUS -eq 0 ]]; then
+        echo "! skipping restore"
+        exit 1
+    fi
+
+    for DIR in "${NVIMDIR[@]}"; do
+        rsync -ar --delete  "$BAK/${DIR}/" "$HOME/${DIR}"
+        echo "ok $BAK/${DIR}"
+    done
+
+    echo "- Restoring neovim from bakup $BAK"
+
     exit 0
 }
 
@@ -82,7 +132,7 @@ function config()
     fi
 }
 
-function main ()
+function main()
 {
     echo "*** Neovim installer"
 
@@ -91,6 +141,8 @@ function main ()
     while [[ $# -ne 0 ]]; do
         arg="$1"; shift
         case "$arg" in
+            --bakup)    BAKUP=1; shift;;
+            --restore)  RESTORE=1; shift;;
             --release)  REL=$1; shift;;
             --config)   FLAVOR=$1; shift;;
             --help)     usage ;;
@@ -101,8 +153,14 @@ function main ()
     # create temp directory
     TMPDIR=$(mktemp -d --tmpdir=$HOME -t neovim-XXXXXXXXXX)
 
+    # bakup
+    [ -n "$BAKUP" ] && bakup
+
+    # restore
+    [ -n "$RESTORE" ] && restore
+
     # install release
-    [ -n "$REL" ] && deploy "$@"
+    [ -n "$REL" ] && deploy
 
     # config flavor
     [ -n "$FLAVOR" ] && config
