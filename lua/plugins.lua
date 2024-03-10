@@ -91,6 +91,7 @@ packer.startup(function(use)
     -- dap
     use 'mfussenegger/nvim-dap'                         -- Debug adapter protocol
     use 'rcarriga/nvim-dap-ui'                          -- Dap ui
+    use 'theHamsta/nvim-dap-virtual-text'               -- Virtual text support
     -- use 'ravenxrz/DAPInstall.nvim'                   -- Dap installer
 
     -- completion
@@ -125,6 +126,7 @@ packer.startup(function(use)
     use 'lukas-reineke/indent-blankline.nvim'           -- Show indentation when no tab
     use 'yuttie/comfortable-motion.vim'                 -- Vim Scroller
     use 'mhinz/vim-rfc'                                 -- Download RFC
+    use 'ray-x/guihua.lua'                              -- Lua Gui and utils
 
     -- git
     use 'lewis6991/gitsigns.nvim'                       -- Show modified lines for VCS files

@@ -26,6 +26,7 @@ require 'user.keymaps'
 require 'user.autocmds'
 
 -- plugins
+require 'plug.guihua'
 require 'plug.nvtree'
 require 'plug.telescope'
 require 'plug.project'
