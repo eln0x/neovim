@@ -83,6 +83,9 @@ function deploy()
     [ -d "$HOME/.local/nvim" ] && rm -rf "$HOME/.local/nvim"
     [ -L "$HOME/.local/bin/nvim" ] && rm -f "$HOME/.local/bin/nvim"
 
+    # create temp directory
+    TMPDIR=$(mktemp -d --tmpdir=$HOME -t neovim-XXXXXXXXXX)
+
     # install latest REL from appImage
     wget "$URL/$REL/nvim.appimage" -O "$TMPDIR/nvim.appimage" 2>/dev/null || \
         cp nvim/nvim.appimage "$TMPDIR"
@@ -90,6 +93,9 @@ function deploy()
 
     cd "$TMPDIR/" && ./nvim.appimage --appimage-extract &> /dev/null
     mv "$TMPDIR/squashfs-root" "$HOME/.local/nvim"
+
+    # cleanup temp
+    cd ~/ && rm -rf "$TMPDIR"
 
     ln -s "$HOME/.local/nvim/usr/bin/nvim" "$HOME/.local/bin/nvim"
 }
@@ -150,9 +156,6 @@ function main()
         esac
     done
 
-    # create temp directory
-    TMPDIR=$(mktemp -d --tmpdir=$HOME -t neovim-XXXXXXXXXX)
-
     # bakup
     [ -n "$BAKUP" ] && bakup
 
@@ -165,8 +168,6 @@ function main()
     # config flavor
     [ -n "$FLAVOR" ] && config
 
-    # cleanup temp
-    rm -rf "$TMPDIR"
 }
 
 main "$@"

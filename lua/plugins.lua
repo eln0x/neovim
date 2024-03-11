@@ -58,7 +58,10 @@ packer.startup(function(use)
     use 'BlakeJC94/alpha-nvim-fortune'                  -- Fortune plugin for alpha
     use 'nvim-lualine/lualine.nvim'                     -- Statusline
     use 'akinsho/bufferline.nvim'                       -- Bufferline
-    use 'kyazdani42/nvim-web-devicons'                  -- File icons
+    use {                                               -- File icons
+        'kyazdani42/nvim-web-devicons',
+        commit = '75df79f'
+    }
     use 'rcarriga/nvim-notify'                          -- Notification manager
 
     -- colorscheme
