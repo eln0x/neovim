@@ -45,6 +45,8 @@ cmp.setup({
         completion = {
             winhighlight = "Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None",
             border = "rounded",
+            col_offset = -3,
+            side_padding = 0,
         },
         documentation = {
             winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None',
@@ -92,40 +94,72 @@ cmp.setup({
         }),
     }),
     sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'vsnip' },
-        { name = "nvim_lua" },
-        { name = 'treesitter' },
-    }, {
-        { name = 'buffer' },
-    }, {
-        { name = 'nvim_lsp_signature_help' },
-    }),
+            { name = 'nvim_lsp' },
+            { name = 'vsnip' },
+            { name = "nvim_lua" },
+            { name = 'treesitter' },
+        }, {
+            { name = 'buffer' },
+        }, {
+            { name = 'nvim_lsp_signature_help' },
+        }),
     formatting = {
-        format = lspkind.cmp_format({
-            mode = 'symbol_text',
-            maxwidth = 50,
-            menu = ({
-                buffer = "[Buff]",
-                path = "[Path]",
-                look = "[Look]",
-                nvim_lsp = "[LSP]",
-                nvim_lua = "[Lua]",
-                luasnip = "[Snip]",
-                latex_symbols = "[Latx]",
-                treesitter = "[Tree]",
-                spell = "[Spel]",
-                zsh = "[Zsh]",
-                calc = "[Calc]",
-                nvim_lsp_signature_help = "[Sig]",
-                cmdline = "[Cmd]",
-            }),
-            before = function(_, vim_item)
-                vim_item.abbr = ' ' .. vim_item.abbr
-                vim_item.menu = (vim_item.menu or '') .. ' '
-                return vim_item
-            end
-        })
+        fields = { "kind", "abbr", "menu" },
+        format = function(entry, vim_item)
+            local kind = lspkind.cmp_format(
+                {
+                    preset = 'default',
+                    mode = 'symbol_text',
+                    maxwidth = 50,
+                    symbol_map = {
+                        Text = "",
+                        Method = "",
+                        Function = "",
+                        Constructor = "",
+                        Field = "",
+                        Variable = "",
+                        Class = "",
+                        Interface = "",
+                        Module = "",
+                        Property = "",
+                        Unit = "λ",
+                        Value = "",
+                        Enum = "",
+                        Keyword = "",
+                        Snippet = "",
+                        Color = "",
+                        File = "",
+                        Reference = "",
+                        Folder = "",
+                        EnumMember = "",
+                        Constant = "",
+                        Struct = "",
+                        Event = "",
+                        Operator = "",
+                        TypeParameter = "",
+                    },
+                    menu = ({
+                        buffer = "[Buff]",
+                        path = "[Path]",
+                        look = "[Look]",
+                        nvim_lsp = "[LSP]",
+                        nvim_lua = "[Lua]",
+                        luasnip = "[Snip]",
+                        latex_symbols = "[Latx]",
+                        treesitter = "[Tree]",
+                        spell = "[Spel]",
+                        zsh = "[Zsh]",
+                        calc = "[Calc]",
+                        nvim_lsp_signature_help = "[Sig]",
+                        cmdline = "[Cmd]",
+                    }),
+                })(entry, vim_item)
+            local strings = vim.split(kind.kind, "%s", { trimempty = true })
+            kind.kind = " " .. (strings[1] or "") .. " "
+            kind.menu = "    (" .. (strings[2] or "") .. ")"
+
+            return kind
+        end,
     },
     confirm_opts = {
         behavior = cmp.ConfirmBehavior.Replace,
