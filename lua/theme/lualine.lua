@@ -35,6 +35,13 @@ local branch = {
     icon = "",
 }
 
+local date = {
+    "mode",
+    fmt = function()
+        return " " .. os.date("%R")
+    end,
+}
+
 local spaces = function()
     return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
 end
@@ -42,7 +49,7 @@ end
 lualine.setup({
     options = {
         icons_enabled = true,
-        theme = "powerline_dark",
+        theme = "auto",
         component_separators = { left = '', right = ''},
         section_separators = { left = '', right = ''},
         disabled_filetypes = { "alpha", "NvimTree", "Outline" },
@@ -52,10 +59,31 @@ lualine.setup({
     sections = {
         lualine_a = { mode },
         lualine_b = { branch, 'diff', diagnostics},
-        lualine_c = {},
-        lualine_x = { 'filetype', spaces, 'encoding', 'fileformat' },
-        lualine_y = { 'location' },
-        lualine_z = { 'progress' },
+        lualine_c = { },
+        lualine_x = {
+            {
+                function() return require("noice").api.status.command.get() end,
+                cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
+            },
+            {
+                function() return require("noice").api.status.mode.get() end,
+                cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
+            },
+            'filetype', spaces, 'encoding', 'fileformat'
+
+        },
+        lualine_y = {
+            {
+                "progress",
+                separator = " ",
+                padding = { left = 1, right = 0 }
+            },
+            {
+                "location",
+                padding = { left = 0, right = 1 }
+            },
+        },
+        lualine_z = { date },
     },
     inactive_sections = {
         lualine_a = {},

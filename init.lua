@@ -2,6 +2,9 @@
 -- Neovim lua configuration
 --
 
+-- encoding written to a file
+vim.opt.fileencoding = 'utf-8'
+
 -- ensure pynvim is installed
 vim.cmd [[
     if !has('python3')
@@ -12,38 +15,55 @@ vim.cmd [[
 ]]
 
 -- plugins
-require 'plugins'
+require 'config.packer'
+
+-- settings
+require 'config.autocmds'
+require 'config.options'
+require 'config.keymaps'
+
+-- library
+require 'plug.guihua'
 
 -- theme
 require 'theme.alpha'
 require 'theme.lualine'
 require 'theme.bufferline'
+require 'theme.noice'
+require 'theme.notify'
 require 'theme.colors'
+require 'theme.illuminate'
 
--- settings
-require 'user.options'
-require 'user.keymaps'
-require 'user.autocmds'
+-- tags
+require 'plug.tags'
 
--- plugins
-require 'plug.guihua'
-require 'plug.nvtree'
+-- telescope
 require 'plug.telescope'
 require 'plug.project'
 require 'plug.treesitter'
-require 'plug.toggleterm'
-require 'plug.impatient'
-require 'plug.indentline'
-require 'plug.comment'
-require 'plug.notify'
-require 'plug.whichkey'
+
+-- git
 require 'plug.gitsigns'
-require 'plug.dap'
-require 'plug.tags'
+
+-- utils
+require 'plug.persistence'
+require 'plug.impatient'
+require 'plug.nvtree'
+require 'plug.whichkey'
+require 'plug.toggleterm'
+require 'plug.comment'
+require 'plug.indentline'
 require 'plug.golang'
+require 'plug.dap'
+require 'plug.todos'
+require 'plug.trouble'
+require 'plug.flash'
+require 'plug.spectre'
+require 'plug.hardtime'
 
 -- lsp
 require 'lsp.cmp'
 require 'lsp.config'
 require 'lsp.aerial'
 require 'lsp.null'
+require 'lsp.lint'

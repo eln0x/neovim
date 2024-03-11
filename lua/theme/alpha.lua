@@ -139,6 +139,12 @@ local logo = {
     [[         ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀          ⠀ ]],
     [[         ⠀⠀⠀⠀⠐⢤⣀⣀⢀⣀⣠⣴⣿⣿⠿⠋⠙⠿⣿⣿⣦⣄⣀⠀⠀⣀⡠⠂⠀⠀⠀           ]],
     [[         ⠀⠀⠀⠀⠀⠀⠈⠉⠛⠛⠛⠛⠉⠀⠀⠀⠀⠀⠈⠉⠛⠛⠛⠛⠋⠁⠀⠀⠀⠀⠀           ]],
+    [[                             __                    ]],
+    [[      _____ _____    _______/  |_  ___________     ]],
+    [[     /     \\__  \  /  ___/\   __\/ __ \_  __ \    ]],
+    [[    |  Y Y  \/ __ \_\___ \  |  | \  ___/|  | \/    ]],
+    [[    |__|_|  (____  /____  > |__|  \___  >__|       ]],
+    [[          \/     \/     \/            \/           ]],
 }
 
 local section_header = {
@@ -179,14 +185,15 @@ local section_buttons = {
     val = {
         { type = "text", val = "Quick links", opts = { hl = "Constant", position = "center" } },
         { type = "padding", val = 1 },
-        dashboard.button("e", "  New file", ":ene <BAR> startinsert <cr>"),
-        dashboard.button("f", "  Find file", ":Telescope find_files<cr>"),
-        dashboard.button("p", "  Find project", ":Telescope projects<cr>"),
-        dashboard.button("w", "  Find word", ":Telescope live_grep<cr>"),
-        dashboard.button("m", "  Find modified file", ":Telescope git_status<cr>"),
-        dashboard.button("u", "  Sync plugins", ":PackerUpdate<cr>"),
-        dashboard.button("h", "  Check health", ":checkhealth<cr>"),
-        dashboard.button("q", "  Quit", "<Cmd>qa<cr>")
+        dashboard.button("n", " " .. " New file", "<cmd> ene <BAR> startinsert <cr>"),
+        dashboard.button("f", " " .. " Find file", "<cmd> Telescope find_files <cr>"),
+        dashboard.button("p", " " .. " Find project", "<cmd> Telescope projects <cr>"),
+        dashboard.button("g", " " .. " Find text", "<cmd> Telescope live_grep <cr>"),
+        dashboard.button("m", " " .. " Find modified file", "<cmd> Telescope git_status <cr>"),
+        dashboard.button("u", " " .. " Sync plugins", "<cmd> PackerUpdate <cr>"),
+        dashboard.button("s", " " .. " Restore Session", [[<cmd> lua require("persistence").load() <cr>]]),
+        dashboard.button("h", " " .. " Check health", "<cmd> checkhealth <cr>"),
+        dashboard.button("q", " " .. " Quit", "<cmd> qa <cr>"),
     },
     position = "center",
 }
