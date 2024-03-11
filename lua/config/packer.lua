@@ -53,12 +53,20 @@ packer.startup(function(use)
     -- packer
     use 'wbthomason/packer.nvim'
 
+    -- library
+    use 'nvim-lua/plenary.nvim'                         -- Lua functions
+    use 'ray-x/guihua.lua'                              -- Lua Gui and utils
+    use 'MunifTanjim/nui.nvim'                          -- UI component library
+
     -- theme
     use 'goolord/alpha-nvim'                            -- Startup screen
-    use 'BlakeJC94/alpha-nvim-fortune'                  -- Fortune plugin for alpha
     use 'nvim-lualine/lualine.nvim'                     -- Statusline
     use 'akinsho/bufferline.nvim'                       -- Bufferline
-    use 'kyazdani42/nvim-web-devicons'                  -- File icons
+    use {                                               -- File icons
+        'kyazdani42/nvim-web-devicons',
+        commit = '75df79f'
+    }
+    use 'folke/noice.nvim'                              -- Experimental UI replacement
     use 'rcarriga/nvim-notify'                          -- Notification manager
 
     -- colorscheme
@@ -67,13 +75,13 @@ packer.startup(function(use)
     use 'metalelf0/jellybeans-nvim'                     -- Jellybeans port to lua
     use 'folke/tokyonight.nvim'                         -- Tokyo theme
     use 'lunarvim/darkplus.nvim'                        -- Lunar theme
+    use 'NvChad/nvim-colorizer.lua'                     -- Color highlighter
 
     -- tags
     use 'preservim/tagbar'                              -- Tags browser
     use 'ludovicchabant/vim-gutentags'                  -- Tags management
 
     -- telescope
-    use 'nvim-lua/plenary.nvim'                         -- Lua functions
     use 'nvim-telescope/telescope.nvim'                 -- Fuzzy finder
     use 'ahmedkhalf/project.nvim'                       -- Project jumper
     use 'nvim-treesitter/nvim-treesitter'               -- Syntax highlightings
@@ -86,13 +94,6 @@ packer.startup(function(use)
     use 'jose-elias-alvarez/null-ls.nvim'               -- Diagnostic and code injection
     use 'onsails/lspkind-nvim'                          -- Add pictograms to builtin lsp
     use 'stevearc/aerial.nvim'                          -- Code outline and nav helper
-    use 'ray-x/go.nvim'                                 -- Golang neovim plugin
-
-    -- dap
-    use 'mfussenegger/nvim-dap'                         -- Debug adapter protocol
-    use 'rcarriga/nvim-dap-ui'                          -- Dap ui
-    use 'theHamsta/nvim-dap-virtual-text'               -- Virtual text support
-    -- use 'ravenxrz/DAPInstall.nvim'                   -- Dap installer
 
     -- completion
     use 'hrsh7th/nvim-cmp'                              -- Nvim completion
@@ -104,9 +105,16 @@ packer.startup(function(use)
     use 'hrsh7th/cmp-nvim-lua'                          -- Complete lua api
     use "ray-x/lsp_signature.nvim"                      -- Signature completion
 
-    -- snippets
-    use 'L3MON4D3/LuaSnip'                              -- Luasnip users
-    use 'rafamadriz/friendly-snippets'                  -- Snippets collection
+    -- dap
+    use 'mfussenegger/nvim-dap'                         -- Debug adapter protocol
+    use 'rcarriga/nvim-dap-ui'                          -- Dap ui
+    use 'theHamsta/nvim-dap-virtual-text'               -- Virtual text support
+    -- use 'ravenxrz/DAPInstall.nvim'                   -- Dap installer
+
+    -- git
+    use 'lewis6991/gitsigns.nvim'                       -- Show modified lines for VCS files
+    use 'tpope/vim-fugitive'                            -- Github Wrapper
+    use 'rhysd/git-messenger.vim'                       -- Show git hidden messages
 
     -- utils
     use 'lewis6991/impatient.nvim'                      -- Speedup startup time
@@ -114,6 +122,7 @@ packer.startup(function(use)
     use 'folke/which-key.nvim'                          -- Key binding completion
     use 'akinsho/toggleterm.nvim'                       -- Toggle terminal
     use 'numToStr/Comment.nvim'                         -- Comment helper
+    use 'lukas-reineke/indent-blankline.nvim'           -- Show indentation when no tab
     use {                                               -- Comment string helper
         'JoosepAlviste/nvim-ts-context-commentstring',
         after = 'nvim-treesitter'
@@ -123,17 +132,15 @@ packer.startup(function(use)
     use 'terryma/vim-multiple-cursors'                  -- Multiple cursors
     use 'tpope/vim-eunuch'                              -- Common shell commands
     use 'troydm/zoomwintab.vim'                         -- Simple tab zoomer
-    use 'lukas-reineke/indent-blankline.nvim'           -- Show indentation when no tab
     use 'yuttie/comfortable-motion.vim'                 -- Vim Scroller
     use 'mhinz/vim-rfc'                                 -- Download RFC
-    use 'ray-x/guihua.lua'                              -- Lua Gui and utils
 
-    -- git
-    use 'lewis6991/gitsigns.nvim'                       -- Show modified lines for VCS files
-    use 'tpope/vim-fugitive'                            -- Github Wrapper
-    use 'rhysd/git-messenger.vim'                       -- Show git hidden messages
+    -- snippets
+    use 'L3MON4D3/LuaSnip'                              -- Luasnip users
+    use 'rafamadriz/friendly-snippets'                  -- Snippets collection
 
     -- syntax
+    use 'ray-x/go.nvim'                                 -- Golang neovim plugin
     use 'Joorem/vim-haproxy'                            -- HAProxy syntax
     use 'chr4/nginx.vim'                                -- Nginx syntax
     use 'saltstack/salt-vim'                            -- Saltstack syntax

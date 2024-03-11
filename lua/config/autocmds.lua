@@ -1,6 +1,7 @@
 --
 -- NeoVim autocommands
 --
+-- Add any additional autocmds here
 
 vim.cmd [[
     augroup _general_settings

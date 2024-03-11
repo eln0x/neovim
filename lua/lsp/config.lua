@@ -34,7 +34,7 @@ local SERVERS = {
         "perlnavigator",
         "python-lsp-server",
         "rust-analyzer",
-        "salt-lsp",
+        --"salt-lsp",
         "texlab",
         "vim-language-server",
         "yaml-language-server",
