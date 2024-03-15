@@ -11,39 +11,39 @@ vim.cmd [[
     endif
 ]]
 
--- plugins
-require 'plugins'
+---- plugins
+require("config.lazy")
 
--- theme
-require 'theme.alpha'
-require 'theme.lualine'
-require 'theme.bufferline'
-require 'theme.colors'
-
--- settings
-require 'user.options'
-require 'user.keymaps'
-require 'user.autocmds'
-
--- plugins
-require 'plug.guihua'
-require 'plug.nvtree'
-require 'plug.telescope'
-require 'plug.project'
-require 'plug.treesitter'
-require 'plug.toggleterm'
-require 'plug.impatient'
-require 'plug.indentline'
-require 'plug.comment'
-require 'plug.notify'
-require 'plug.whichkey'
-require 'plug.gitsigns'
-require 'plug.dap'
-require 'plug.tags'
-require 'plug.golang'
-
--- lsp
-require 'lsp.cmp'
-require 'lsp.config'
-require 'lsp.aerial'
-require 'lsp.null'
+---- theme
+--require 'theme.alpha'
+--require 'theme.lualine'
+--require 'theme.bufferline'
+--require 'theme.colors'
+--
+---- settings
+--require 'user.options'
+--require 'user.keymaps'
+--require 'user.autocmds'
+--
+---- plugins
+--require 'plug.guihua'
+--require 'plug.nvtree'
+--require 'plug.telescope'
+--require 'plug.project'
+--require 'plug.treesitter'
+--require 'plug.toggleterm'
+--require 'plug.impatient'
+--require 'plug.indentline'
+--require 'plug.comment'
+--require 'plug.notify'
+--require 'plug.whichkey'
+--require 'plug.gitsigns'
+--require 'plug.dap'
+--require 'plug.tags'
+--require 'plug.golang'
+--
+---- lsp
+--require 'lsp.cmp'
+--require 'lsp.config'
+--require 'lsp.aerial'
+--require 'lsp.null'

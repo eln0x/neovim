@@ -102,7 +102,7 @@ function deploy()
 
 function config()
 {
-    if test "$FLAVOR" != "master" && test "$FLAVOR" != "legacy"; then
+    if test "$FLAVOR" != "lazy" && test "$FLAVOR" != "legacy"; then
         usage
     fi
 
@@ -112,7 +112,7 @@ function config()
     [ -d ~/.local/share/nvim ] && rm -rf ~/.local/share/nvim
 
     # master
-    if [[ "$FLAVOR" == "master" ]]; then
+    if [[ "$FLAVOR" == "lazy" ]]; then
         if which node >/dev/null; then
             echo "- Setup configuration master"
         else
@@ -122,13 +122,15 @@ function config()
             [ -z "$1" ] && exit 0
         fi
         git clone https://gitlab.com/elnox/neovim.git ~/.config/nvim -q
-        cd ~/.config/nvim && nvim
+        cd ~/.config/nvim || exit
+        git fetch origin && git checkout lazy
+        nvim
     fi
 
     # legacy
     if [[ "$FLAVOR" == "legacy" ]]; then
         echo "- Setup configuration legacy"
-        git clone https://gitlab.com/elnox/neovim.git ~/.config/nvim
+        git clone https://gitlab.com/elnox/neovim.git ~/.config/nvim -q
         sh -c 'curl -fLo ~/.local/share/nvim/site/autoload/plug.vim \
             --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
