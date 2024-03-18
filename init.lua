@@ -15,7 +15,7 @@ vim.cmd [[
 ]]
 
 -- plugins
-require 'config.packer'
+require 'config.lazy'
 
 -- settings
 require 'config.autocmds'
@@ -52,7 +52,7 @@ require 'plug.toggleterm'
 require 'plug.comment'
 require 'plug.indentline'
 require 'plug.golang'
-require 'plug.dap'
+--require 'plug.dap'
 
 -- lsp
 require 'lsp.cmp'
