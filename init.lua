@@ -3,7 +3,7 @@
 --
 
 -- encoding written to a file
-vim.opt.fileencoding = "utf-8"
+vim.opt.fileencoding = 'utf-8'
 
 -- ensure pynvim is installed
 vim.cmd [[
@@ -15,7 +15,7 @@ vim.cmd [[
 ]]
 
 -- plugins
-require 'config.packer'
+require 'config.lazy'
 
 -- settings
 require 'config.autocmds'
@@ -32,6 +32,7 @@ require 'theme.bufferline'
 require 'theme.noice'
 require 'theme.notify'
 require 'theme.colors'
+require 'theme.illuminate'
 
 -- tags
 require 'plug.tags'
@@ -45,6 +46,7 @@ require 'plug.treesitter'
 require 'plug.gitsigns'
 
 -- utils
+require 'plug.persistence'
 require 'plug.impatient'
 require 'plug.nvtree'
 require 'plug.whichkey'
@@ -53,9 +55,15 @@ require 'plug.comment'
 require 'plug.indentline'
 require 'plug.golang'
 require 'plug.dap'
+require 'plug.todos'
+require 'plug.trouble'
+require 'plug.flash'
+require 'plug.spectre'
+require 'plug.hardtime'
 
 -- lsp
 require 'lsp.cmp'
 require 'lsp.config'
 require 'lsp.aerial'
 require 'lsp.null'
+require 'lsp.lint'

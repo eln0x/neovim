@@ -139,6 +139,12 @@ local logo = {
     [[         ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀          ⠀ ]],
     [[         ⠀⠀⠀⠀⠐⢤⣀⣀⢀⣀⣠⣴⣿⣿⠿⠋⠙⠿⣿⣿⣦⣄⣀⠀⠀⣀⡠⠂⠀⠀⠀           ]],
     [[         ⠀⠀⠀⠀⠀⠀⠈⠉⠛⠛⠛⠛⠉⠀⠀⠀⠀⠀⠈⠉⠛⠛⠛⠛⠋⠁⠀⠀⠀⠀⠀           ]],
+    [[            .__                                    ]],
+    [[            |  | _____  ___________.__.            ]],
+    [[            |  | \__  \ \___   <   |  |            ]],
+    [[            |  |__/ __ \_/    / \___  |            ]],
+    [[            |____(____  /_____ \/ ____|            ]],
+    [[                      \/      \/\/                 ]],
 }
 
 local section_header = {
@@ -184,7 +190,7 @@ local section_buttons = {
         dashboard.button("p", " " .. " Find project", "<cmd> Telescope projects <cr>"),
         dashboard.button("g", " " .. " Find text", "<cmd> Telescope live_grep <cr>"),
         dashboard.button("m", " " .. " Find modified file", "<cmd> Telescope git_status <cr>"),
-        dashboard.button("u", " " .. " Sync plugins", "<cmd> PackerUpdate <cr>"),
+        dashboard.button("l", "󰒲 " .. " Lazy", "<cmd> Lazy <cr>"),
         dashboard.button("s", " " .. " Restore Session", [[<cmd> lua require("persistence").load() <cr>]]),
         dashboard.button("h", " " .. " Check health", "<cmd> checkhealth <cr>"),
         dashboard.button("q", " " .. " Quit", "<cmd> qa <cr>"),

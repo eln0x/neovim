@@ -69,6 +69,10 @@ lualine.setup({
                 function() return require("noice").api.status.mode.get() end,
                 cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
             },
+            {
+                require("lazy.status").updates,
+                cond = require("lazy.status").has_updates,
+            },
             'filetype', spaces, 'encoding', 'fileformat'
 
         },
@@ -94,5 +98,5 @@ lualine.setup({
         lualine_z = {},
     },
     tabline = {},
-    extensions = {},
+    extensions = { "lazy" },
 })
