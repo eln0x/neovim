@@ -86,3 +86,10 @@ vim.cmd([[
     hi TelescopeMatching            guifg=#e9b143   guibg=#161616
     hi TelescopeSelection           guifg=#ffffff   guibg=#32302f
 ]])
+
+-- illuminate
+vim.cmd([[
+    hi IlluminatedWordText gui=bold
+    hi IlluminatedWordRead gui=bold
+    hi IlluminatedWordWrite gui=bold
+]])

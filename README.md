@@ -25,7 +25,11 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
 nvm install node
 
 # Python3 & pynvim
+apt install python3-venv
 pip3 install pynvim
+
+# Utils
+apt install ripgrep fd-find xclip ncdu universal-ctags
 ```
 
 ### Installation
@@ -38,7 +42,7 @@ bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --bak
 Install:
 ```bash
 bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) \
-    --release stable --config master
+    --release stable --config lazy
 ```
 
 Cleanup:
