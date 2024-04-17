@@ -59,7 +59,7 @@ require 'plug.todos'
 require 'plug.trouble'
 require 'plug.flash'
 require 'plug.spectre'
-require 'plug.hardtime'
+--require 'plug.hardtime'
 
 -- lsp
 require 'lsp.cmp'

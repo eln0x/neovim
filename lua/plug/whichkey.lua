@@ -73,15 +73,14 @@ local lead_opts = {
 local lead_mappings = {
     ["!"] = { "<cmd>vsplit<cr>", "Split Vertical" },
     ["/"] = { "<cmd>split<cr>", "Split Horizontal" },
-    b = { "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",  "Find Buffer" },
     c = { "<cmd>bdelete<cr>", "Close Buffer" },
-    f = { "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",  "Find Files" },
     h = { "<cmd>nohlsearch<cr>", "No Highlight" },
     i = { "<cmd>IndentBlanklineToggle<cr>", "Indent Line" },
-    p = { "<cmd>lua require('telescope').extensions.projects.projects(require('telescope.themes').get_dropdown{previewer = false})<cr>", "Find Projects" },
     q = { "<cmd>q<cr>", "Quit Neovim" },
     w = { "<cmd>w<cr>", "Save Buffer" },
     x = { "<cmd>source %<cr>", "Reload Conf" },
+
+
 }
 
 which_key.register(lead_mappings, lead_opts)
@@ -101,7 +100,7 @@ local f_map = {
 }
 which_key.register( f_map, {
     mode = "n",                             -- NORMAL mode
-    prefix = "f",
+    prefix = "<leader>f",
     buffer = nil,                           -- Global mappings. Specify a buffer number for buffer local mappings
     silent = true,                          -- use `silent` when creating keymaps
     noremap = true,                         -- use `noremap` when creating keymaps
@@ -128,7 +127,7 @@ local l_map = {
 }
 which_key.register(l_map, {
     mode = "n",                             -- NORMAL mode
-    prefix = "l",
+    prefix = "<leader>l",
     buffer = nil,                           -- Global mappings. Specify a buffer number for buffer local mappings
     silent = true,                          -- use `silent` when creating keymaps
     noremap = true,                         -- use `noremap` when creating keymaps
@@ -144,7 +143,7 @@ local g_map = {
 }
 which_key.register(g_map, {
     mode = "n",                             -- NORMAL mode
-    prefix = "g",
+    prefix = "<leader>g",
     buffer = nil,                           -- Global mappings. Specify a buffer number for buffer local mappings
     silent = true,                          -- use `silent` when creating keymaps
     noremap = true,                         -- use `noremap` when creating keymaps
@@ -164,7 +163,7 @@ local t_map = {
 }
 which_key.register(t_map, {
     mode = "n",                             -- NORMAL mode
-    prefix = "t",
+    prefix = "<leader>t",
     buffer = nil,                           -- Global mappings. Specify a buffer number for buffer local mappings
     silent = true,                          -- use `silent` when creating keymaps
     noremap = true,                         -- use `noremap` when creating keymaps
