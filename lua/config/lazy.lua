@@ -113,10 +113,8 @@ require('lazy').setup({
         'mhinz/vim-rfc',                                 -- Download RFC
         'm4xshen/hardtime.nvim',                         -- Best practice
 
-        -- snippets
-        'L3MON4D3/LuaSnip',                              -- Luasnip users
-        'saadparwaiz1/cmp_luasnip',                      -- Luasnip completion source
-        'rafamadriz/friendly-snippets',                  -- Snippets collection
+        -- import/override with your plugins to `lua/plugins/*.lua`
+        { import = "plugins" },
 
         -- syntax
         'ray-x/go.nvim',                                 -- Golang neovim plugin
@@ -125,9 +123,6 @@ require('lazy').setup({
         'saltstack/salt-vim',                            -- Saltstack syntax
         'glench/vim-jinja2-syntax',                      -- Jinja2 syntax
         'rodjek/vim-puppet',                             -- Puppet syntax
-
-        -- import/override with your plugins to `lua/plugins/*.lua`
-        --{ import = "plugins" },
     },
 
     -- lazy config

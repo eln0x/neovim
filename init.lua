@@ -14,13 +14,15 @@ vim.cmd [[
     endif
 ]]
 
+-- keymaps
+require 'config.keymaps'
+
 -- plugins
 require 'config.lazy'
 
 -- settings
 require 'config.autocmds'
 require 'config.options'
-require 'config.keymaps'
 
 -- library
 require 'plug.guihua'
