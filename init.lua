@@ -14,27 +14,15 @@ vim.cmd [[
     endif
 ]]
 
--- keymaps
-require 'config.keymaps'
-
--- plugins
-require 'config.lazy'
-
 -- settings
+require 'config.keymaps'
 require 'config.autocmds'
 require 'config.options'
+require 'config.lazy'
+require 'config.colors'
 
 -- library
 require 'plug.guihua'
-
--- theme
-require 'theme.alpha'
-require 'theme.lualine'
-require 'theme.bufferline'
-require 'theme.noice'
-require 'theme.notify'
-require 'theme.colors'
-require 'theme.illuminate'
 
 -- tags
 require 'plug.tags'
@@ -48,13 +36,14 @@ require 'plug.treesitter'
 require 'plug.gitsigns'
 
 -- utils
+require 'plug.illuminate'
+require 'plug.notify'
 require 'plug.persistence'
 require 'plug.impatient'
 require 'plug.nvtree'
 require 'plug.whichkey'
 require 'plug.toggleterm'
 require 'plug.comment'
-require 'plug.indentline'
 require 'plug.golang'
 require 'plug.dap'
 require 'plug.todos'
