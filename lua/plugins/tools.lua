@@ -41,9 +41,6 @@ return {
     -- Telescope
     'nvim-telescope/telescope.nvim',                 -- Fuzzy finder
     'ahmedkhalf/project.nvim',                       -- Project jumper
-    'nvim-treesitter/nvim-treesitter',               -- Syntax highlightings
-    'nvim-treesitter/nvim-treesitter-textobjects',   -- Treesitter for textobjects
-    'nvim-treesitter/nvim-treesitter-context',       -- Treesitter for context
 
     -- Tags
     'preservim/tagbar',                              -- Tags browser

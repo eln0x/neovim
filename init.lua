@@ -30,7 +30,6 @@ require 'plug.tags'
 -- telescope
 require 'plug.telescope'
 require 'plug.project'
-require 'plug.treesitter'
 
 -- git
 require 'plug.gitsigns'
