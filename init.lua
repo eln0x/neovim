@@ -24,31 +24,14 @@ require 'config.colors'
 -- library
 require 'plug.guihua'
 
--- tags
-require 'plug.tags'
-
--- telescope
-require 'plug.telescope'
-require 'plug.project'
-
--- git
-require 'plug.gitsigns'
-
 -- utils
-require 'plug.illuminate'
 require 'plug.notify'
 require 'plug.persistence'
 require 'plug.impatient'
-require 'plug.nvtree'
-require 'plug.whichkey'
 require 'plug.toggleterm'
 require 'plug.comment'
 require 'plug.golang'
 require 'plug.dap'
-require 'plug.todos'
-require 'plug.trouble'
-require 'plug.flash'
-require 'plug.spectre'
 --require 'plug.hardtime'
 
 -- lsp

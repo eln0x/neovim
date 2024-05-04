@@ -700,18 +700,6 @@ return {
         },
     },
 
-    -- Key binding completion
-    -- https://github.com/folke/which-key.nvim
-    {
-        'folke/which-key.nvim',
-        --opts = function(_, opts)
-        --    local noice_ok, _n = pcall(require, "noice")
-        --    if noice_ok then
-        --        opts.defaults["<leader>sn"] = { name = "+noice" }
-        --    end
-        --end,
-    },
-
     -- UI improvements
     {
         "stevearc/dressing.nvim",

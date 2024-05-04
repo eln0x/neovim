@@ -38,28 +38,17 @@ return {
     'theHamsta/nvim-dap-virtual-text',               -- Virtual text support
     -- 'ravenxrz/DAPInstall.nvim',                   -- Dap installer
 
-    -- Telescope
-    'nvim-telescope/telescope.nvim',                 -- Fuzzy finder
-    'ahmedkhalf/project.nvim',                       -- Project jumper
-
     -- Tags
     'preservim/tagbar',                              -- Tags browser
     'ludovicchabant/vim-gutentags',                  -- Tags management
 
     -- Git
-    'lewis6991/gitsigns.nvim',                       -- Show modified lines for VCS files
     'tpope/vim-fugitive',                            -- Github Wrapper
     'rhysd/git-messenger.vim',                       -- Show git hidden messages
 
     -- Tools
-    'RRethy/vim-illuminate',                         -- Highlighting other uses of the word
-    'folke/todo-comments.nvim',                      -- Highlight todo comments
-    'folke/trouble.nvim',                            -- List to show diag, ref, quickfix...
     'mfussenegger/nvim-lint',                        -- Nvim linter
-    'folke/flash.nvim',                              -- Navigate by search labels
-    'nvim-pack/nvim-spectre',                        -- Search and replace panel
     'lewis6991/impatient.nvim',                      -- Speedup startup time
-    'kyazdani42/nvim-tree.lua',                      -- File explorer
     'akinsho/toggleterm.nvim',                       -- Toggle terminal
     'numToStr/Comment.nvim',                         -- Comment helper
     'JoosepAlviste/nvim-ts-context-commentstring',   -- Comment string helper
@@ -68,7 +57,6 @@ return {
     'terryma/vim-multiple-cursors',                  -- Multiple cursors
     'tpope/vim-eunuch',                              -- Common shell commands
     'troydm/zoomwintab.vim',                         -- Simple tab zoomer
-    'yuttie/comfortable-motion.vim',                 -- Vim Scroller
     'mhinz/vim-rfc',                                 -- Download RFC
     'm4xshen/hardtime.nvim',                         -- Best practice
 
