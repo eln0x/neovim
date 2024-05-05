@@ -30,7 +30,6 @@ return {
     'neovim/nvim-lspconfig',                         -- Lsp configuration
     'jose-elias-alvarez/null-ls.nvim',               -- Diagnostic and code injection
     'onsails/lspkind-nvim',                          -- Add pictograms to builtin lsp
-    'stevearc/aerial.nvim',                          -- Code outline and nav helper
 
     -- Dap
     'mfussenegger/nvim-dap',                         -- Debug adapter protocol
@@ -38,18 +37,12 @@ return {
     'theHamsta/nvim-dap-virtual-text',               -- Virtual text support
     -- 'ravenxrz/DAPInstall.nvim',                   -- Dap installer
 
-    -- Tags
-    'preservim/tagbar',                              -- Tags browser
-    'ludovicchabant/vim-gutentags',                  -- Tags management
-
     -- Git
     'tpope/vim-fugitive',                            -- Github Wrapper
     'rhysd/git-messenger.vim',                       -- Show git hidden messages
 
     -- Tools
     'mfussenegger/nvim-lint',                        -- Nvim linter
-    'lewis6991/impatient.nvim',                      -- Speedup startup time
-    'akinsho/toggleterm.nvim',                       -- Toggle terminal
     'numToStr/Comment.nvim',                         -- Comment helper
     'JoosepAlviste/nvim-ts-context-commentstring',   -- Comment string helper
     'Raimondi/delimitMate',                          -- Autoclose quotes, bracket etc...
@@ -58,7 +51,6 @@ return {
     'tpope/vim-eunuch',                              -- Common shell commands
     'troydm/zoomwintab.vim',                         -- Simple tab zoomer
     'mhinz/vim-rfc',                                 -- Download RFC
-    'm4xshen/hardtime.nvim',                         -- Best practice
 
     -- Syntax
     'ray-x/go.nvim',                                 -- Golang neovim plugin

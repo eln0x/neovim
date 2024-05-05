@@ -137,25 +137,25 @@ return {
             --    nowait = true,
             --})
 
-            ---- Terminal related mappings
-            --local t_map = {
-            --    g = { "<cmd>lua GitToggle()<cr>", "Lazygit" },
-            --    n = { "<cmd>lua NodeToggle()<cr>", "Node" },
-            --    u = { "<cmd>lua NcduToggle()<cr>", "Ncdu" },
-            --    t = { "<cmd>lua HtopToggle()<cr>", "Htop" },
-            --    p = { "<cmd>lua PythonToggle()<cr>", "Python" },
-            --    f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
-            --    h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
-            --    v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
-            --}
-            --wk.register(t_map, {
-            --    mode = "n",
-            --    prefix = "<leader>t",
-            --    buffer = nil,
-            --    silent = true,
-            --    noremap = true,
-            --    nowait = true,
-            --})
+            -- Terminal related mappings
+            local t_map = {
+                g = { "<cmd>lua GitToggle()<cr>", "Lazygit" },
+                n = { "<cmd>lua NodeToggle()<cr>", "Node" },
+                u = { "<cmd>lua NcduToggle()<cr>", "Ncdu" },
+                t = { "<cmd>lua HtopToggle()<cr>", "Htop" },
+                p = { "<cmd>lua PythonToggle()<cr>", "Python" },
+                f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
+                h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
+                v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
+            }
+            wk.register(t_map, {
+                mode = "n",
+                prefix = "<leader>t",
+                buffer = nil,
+                silent = true,
+                noremap = true,
+                nowait = true,
+            })
         end,
     },
 
@@ -539,6 +539,45 @@ return {
         end,
     },
 
+    -- Code outline and nav helper
+    -- https://github.com/stevearc/aerial.nvim
+    {
+        'stevearc/aerial.nvim',
+        event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+        opts = {
+            attach_mode = "global",
+            backends = { "lsp", "treesitter", "markdown", "man" },
+            show_guides = true,
+            layout = {
+                max_width = { 40, 0.2 },
+                width = 40,
+                min_width = 20,
+                default_direction = "prefer_right",
+                placement = "edge",
+                resize_to_content = false,
+                win_opts = {
+                    winhl = "Normal:NormalFloat,FloatBorder:NormalFloat,SignColumn:SignColumnSB",
+                    signcolumn = "yes",
+                    statuscolumn = " ",
+                },
+            },
+            ignore = {
+                unlisted_buffers = true,
+            },
+            open_automatic = false,
+            lsp = {
+                diagnostics_trigger_update = true,
+            },
+            -- stylua: ignore
+            guides = {
+                mid_item   = "├╴",
+                last_item  = "└╴",
+                nested_top = "│ ",
+                whitespace = "  ",
+            },
+        }
+    },
+
     -- List to show diag, ref, quickfix...
     -- https://github.com/folke/trouble.nvim
     {
@@ -546,6 +585,64 @@ return {
         opts = {},
         config = function(_, opts)
             require("trouble").setup(opts)
+        end,
+    },
+
+    -- Toggle terminal
+    -- https://github.com/akinsho/toggleterm.nvim
+    {
+        'akinsho/toggleterm.nvim',
+        opts = {
+            size = 20,
+            open_mapping = [[<c-\>]],
+            hide_numbers = true,
+            shade_terminals = true,
+            shading_factor = 2,
+            start_in_insert = true,
+            insert_mappings = true,
+            persist_size = true,
+            direction = "float",
+            close_on_exit = true,
+            shell = vim.o.shell,
+            float_opts = { border = "curved" },
+        },
+        config = function(_, opts)
+            require("toggleterm").setup(opts)
+
+            function _G.set_terminal_keymaps()
+                local opts = {noremap = true}
+                vim.api.nvim_buf_set_keymap(0, 't', '<leader><Up>', [[<cmd>wincmd k<cr>]], opts)
+                vim.api.nvim_buf_set_keymap(0, 't', '<leader><Left>', [[<cmd>wincmd h<cr>]], opts)
+            end
+
+            vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+
+            local Terminal = require("toggleterm.terminal").Terminal
+
+            local git = Terminal:new({ cmd = "lazygit", hidden = true })
+            function GitToggle()
+                git:toggle()
+            end
+
+            local node = Terminal:new({ cmd = "node", hidden = true })
+            function NodeToggle()
+                node:toggle()
+            end
+
+            local ncdu = Terminal:new({ cmd = "ncdu", hidden = true })
+            function NcduToggle()
+                ncdu:toggle()
+            end
+
+            local htop = Terminal:new({ cmd = "htop", hidden = true })
+            function HtopToggle()
+                htop:toggle()
+            end
+
+            local python = Terminal:new({ cmd = "python", hidden = true })
+            function PythonToggle()
+                python:toggle()
+            end
         end,
     },
 

@@ -21,22 +21,13 @@ require 'config.options'
 require 'config.lazy'
 require 'config.colors'
 
--- library
-require 'plug.guihua'
-
 -- utils
-require 'plug.notify'
-require 'plug.persistence'
-require 'plug.impatient'
-require 'plug.toggleterm'
 require 'plug.comment'
 require 'plug.golang'
 require 'plug.dap'
---require 'plug.hardtime'
 
 -- lsp
 require 'lsp.cmp'
 require 'lsp.config'
-require 'lsp.aerial'
 require 'lsp.null'
 require 'lsp.lint'
