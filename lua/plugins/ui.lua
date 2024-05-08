@@ -747,24 +747,24 @@ return {
                     ["vim.lsp.util.stylize_markdown"] = true,
                     ["cmp.entry.get_documentation"] = true,
                 },
-                -- because of `vim.lsp.handlers["window/showMessage"]` has been overwritten by another plugin?
+                -- set to disable if `vim.lsp.handlers["window/showMessage"]` has been overwritten by another plugin.
                 signature = {
-                    enabled = false,
+                    enabled = true,
                 },
             },
-            --routes = {
-            --    {
-            --        filter = {
-            --            event = "msg_show",
-            --            any = {
-            --                { find = "%d+L, %d+B" },
-            --                { find = "; after #%d+" },
-            --                { find = "; before #%d+" },
-            --            },
-            --        },
-            --        view = "mini",
-            --    },
-            --},
+            routes = {
+                {
+                    filter = {
+                        event = "msg_show",
+                        any = {
+                            { find = "%d+L, %d+B" },
+                            { find = "; after #%d+" },
+                            { find = "; before #%d+" },
+                        },
+                    },
+                    view = "mini",
+                },
+            },
             presets = {
                 bottom_search = false,          -- popup cmdline for search
                 command_palette = true,         -- position the cmdline and popupmenu together

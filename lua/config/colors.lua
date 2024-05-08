@@ -2,6 +2,7 @@
 -- NeoVim colorscheme
 --
 
+local vim = vim
 local clz_ok, clz = pcall(require, "colorizer")
 if clz_ok then
     clz.setup()
@@ -79,4 +80,11 @@ vim.cmd([[
     hi IlluminatedWordText gui=bold
     hi IlluminatedWordRead gui=bold
     hi IlluminatedWordWrite gui=bold
+]])
+
+-- diagnostic
+vim.cmd([[
+    hi DiagnosticUnderlineWarn gui=NONE
+    hi DiagnosticUnderlineError gui=NONE
+    hi DiagnosticUnderlineInfo gui=NONE
 ]])

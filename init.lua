@@ -2,6 +2,9 @@
 -- Neovim lua configuration
 --
 
+-- reduce lua diagnostic noise
+local vim = vim
+
 -- encoding written to a file
 vim.opt.fileencoding = 'utf-8'
 
@@ -20,9 +23,3 @@ require 'config.autocmds'
 require 'config.options'
 require 'config.lazy'
 require 'config.colors'
-
----- lsp
---require 'lsp.config'
---require 'lsp.null'
---require 'lsp.lint'
---require 'plug.dap'
