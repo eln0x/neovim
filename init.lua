@@ -21,13 +21,8 @@ require 'config.options'
 require 'config.lazy'
 require 'config.colors'
 
--- utils
-require 'plug.comment'
-require 'plug.golang'
-require 'plug.dap'
-
--- lsp
-require 'lsp.cmp'
-require 'lsp.config'
-require 'lsp.null'
-require 'lsp.lint'
+---- lsp
+--require 'lsp.config'
+--require 'lsp.null'
+--require 'lsp.lint'
+--require 'plug.dap'

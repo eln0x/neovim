@@ -18,13 +18,10 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require('lazy').setup({
     spec = {
-        -- add LazyVim and import its plugins
-        -- { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-        -- { import = "lazyvim.plugins.extras.lang.typescript" },
-        -- { import = "lazyvim.plugins.extras.lang.json" },
-        -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
+        -- add LazyVim don't import its plugins
+        { "LazyVim/LazyVim" },
 
-        -- import/override with your plugins to `lua/plugins/*.lua`
+        -- import plugins to `lua/plugins/*.lua`
         { import = "plugins" },
     },
 
@@ -34,11 +31,7 @@ require('lazy').setup({
         version = false,
     },
     install = {
-        colorscheme = {
-            "jellybeans-nvim",
-            "tokyonight",
-            "habamax"
-        }
+        colorscheme = { "jellybeans-nvim" }
     },
     checker = {
         enabled = true
