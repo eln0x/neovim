@@ -231,7 +231,6 @@ return {
     {
         'nvim-telescope/telescope.nvim',
         cmd = "Telescope",
-        version = false, -- telescope did only one release, so use HEAD for now
         dependencies = {
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
@@ -653,3 +652,5 @@ return {
     },
 
 }
+
+-- vim: ts=4 sts=4 sw=4 et

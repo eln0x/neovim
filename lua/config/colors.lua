@@ -3,6 +3,7 @@
 --
 
 local vim = vim
+
 local clz_ok, clz = pcall(require, "colorizer")
 if clz_ok then
     clz.setup()
@@ -88,3 +89,5 @@ vim.cmd([[
     hi DiagnosticUnderlineError gui=NONE
     hi DiagnosticUnderlineInfo gui=NONE
 ]])
+
+-- vim: ts=4 sts=4 sw=4 et

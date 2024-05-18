@@ -7,7 +7,6 @@ return {
     -- https://github.com/hrsh7th/nvim-cmp
     {
         "hrsh7th/nvim-cmp",
-        version = false,                                     -- last release is way too old
         event = "InsertEnter",
         dependencies = {
             'hrsh7th/cmp-nvim-lsp',                          -- Lsp completion
@@ -280,3 +279,5 @@ return {
     },
 
 }
+
+-- vim: ts=4 sts=4 sw=4 et

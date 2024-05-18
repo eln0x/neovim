@@ -20,11 +20,11 @@ FLAVORS=(
 )
 
 function usage() {
-    printf "usage: $0 [options]\n\noptions:
-    --release   <stable || nightly || v0.7.2>
+    printf "usage: %s [options]\n\noptions:
+    --release   <stable || nightly || v0.9.5>
     --config    <init || master || lazy || legacy || devel>
     --bakup     <bakup name>
-    --restore   <bakup name>"
+    --restore   <bakup name>" "$0"
     exit 0
 }
 
@@ -89,7 +89,7 @@ function deploy() {
     [ -L "$HOME/.local/bin/nvim" ] && rm -f "$HOME/.local/bin/nvim"
 
     # create temp directory
-    TMPDIR=$(mktemp -d --tmpdir=$HOME -t neovim-XXXXXXXXXX)
+    TMPDIR=$(mktemp -d --tmpdir="$HOME" -t neovim-XXXXXXXXXX)
 
     # install latest REL from appImage
     wget "$URL/$REL/nvim.appimage" -O "$TMPDIR/nvim.appimage" 2>/dev/null ||
@@ -106,7 +106,7 @@ function deploy() {
 }
 
 function config() {
-    if [[ ! ${FLAVORS[@]} =~ $FLAVOR ]]; then
+    if [[ ! ${FLAVORS[*]} =~ $FLAVOR ]]; then
         usage
     fi
 
@@ -141,7 +141,7 @@ function config() {
         fi
         git clone https://gitlab.com/elnox/neovim.git ~/.config/nvim -q
         cd ~/.config/nvim || exit
-        git fetch origin && git checkout $FLAVOR
+        git fetch origin && git checkout "$FLAVOR"
         nvim
     fi
 }

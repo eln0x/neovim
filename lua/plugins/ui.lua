@@ -530,7 +530,6 @@ return {
                 char = "┊",
                 tab_char = "│",
             },
-            scope = { enabled = false },
             exclude = {
                 buftypes = {
                     "terminal",
@@ -724,7 +723,7 @@ return {
         end,
     },
 
-   -- UI for messages, cmdline and the popupmenu.
+    -- UI for messages, cmdline and the popupmenu.
     -- https://github.com/folke/noice.nvim
     {
         'folke/noice.nvim',
@@ -833,3 +832,5 @@ return {
     },
 
 }
+
+-- vim: ts=4 sts=4 sw=4 et

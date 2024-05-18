@@ -3,6 +3,8 @@
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
 
+local vim = vim
+
 vim.cmd [[
     augroup _general_settings
         autocmd!
@@ -36,3 +38,5 @@ vim.cmd [[
         au BufWinEnter ?* silent! loadview 1
     augroup END
 ]]
+
+-- vim: ts=4 sts=4 sw=4 et

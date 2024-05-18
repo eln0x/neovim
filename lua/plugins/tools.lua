@@ -22,3 +22,5 @@ return {
     'glench/vim-jinja2-syntax',                      -- Jinja2 syntax
     'rodjek/vim-puppet',                             -- Puppet syntax
 }
+
+-- vim: ts=4 sts=4 sw=4 et
