@@ -653,21 +653,18 @@ return {
     -- https://github.com/stevearc/dressing.nvim
     {
         'stevearc/dressing.nvim',
-        lazy = true,
     },
 
     -- UI components
     -- https://github.com/MunifTanjim/nui.nvim
     {
         'MunifTanjim/nui.nvim',
-        lazy = true,
     },
 
     -- Lua Gui and utils
     -- https://github.com/ray-x/guihua.lua
     {
         'ray-x/guihua.lua',
-        lazy = true,
         opts = {
             maps = {
                 close_view = '<C-e>',
@@ -691,7 +688,6 @@ return {
     -- https://github.com/nvim-tree/nvim-web-devicons
     {
         'nvim-tree/nvim-web-devicons',
-        lazy = true,
     },
 
 }
