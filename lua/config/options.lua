@@ -3,6 +3,8 @@
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
+local vim = vim
+
 -- Disable LazyVim auto format
 vim.g.autoformat = false
 
@@ -97,3 +99,5 @@ opt.listchars = "tab:› ,trail:•,extends:#,nbsp:."
 opt.wildignore:append "*.pyc,*.o,*.obj,*.svn,*.swp,*.class,*.hg,*.DS_Store,*.min.*,*.pdf,*.jpg,*.png,*.gif"
 opt.whichwrap:append("<,>,[,],h,l")
 opt.iskeyword:append("-")
+
+-- vim: ts=4 sts=4 sw=4 et
