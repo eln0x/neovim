@@ -6,7 +6,7 @@ return {
     -- Startup screen
     -- https://github.com/goolord/alpha-nvim
     {
-        "goolord/alpha-nvim",
+        'goolord/alpha-nvim',
         event = "VimEnter",
         enabled = true,
         init = false,
@@ -216,22 +216,15 @@ return {
                 },
             }
 
-            local opts = {
+            dashboard.opts = {
                 layout = {
-                    { type = "padding", val = 1 },
-                    section_header,
-                    { type = "padding", val = 1 },
-                    section_mru,
-                    { type = "padding", val = 1 },
-                    section_buttons,
+                    { type = "padding", val = 1 }, section_header,
+                    { type = "padding", val = 1 }, section_mru,
+                    { type = "padding", val = 1 }, section_buttons,
                     section_footer,
                 },
-                opts = {
-                    margin = 5,
-                },
+                opts = { margin = 5 },
             }
-
-            dashboard.opts = opts
             return dashboard
         end,
     },
