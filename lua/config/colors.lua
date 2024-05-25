@@ -1,13 +1,8 @@
---
 -- NeoVim colorscheme
---
+-- stylua: ignore
+--if true then return {} end
 
 local vim = vim
-
-local clz_ok, clz = pcall(require, "colorizer")
-if clz_ok then
-    clz.setup()
-end
 
 -- completion
 vim.cmd([[

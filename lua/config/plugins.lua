@@ -35,7 +35,7 @@ require('lazy').setup({
         colorscheme = { "jellybeans-nvim" }
     },
     checker = {
-        enabled = true
+        enabled = true,
     },
     performance = {
         rtp = {

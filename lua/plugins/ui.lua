@@ -8,13 +8,17 @@ return {
     {
         'goolord/alpha-nvim',
         event = "VimEnter",
+        dependencies = {
+            'nvim-tree/nvim-web-devicons',
+            'nvim-lua/plenary.nvim',
+        },
         enabled = true,
         init = false,
         opts = function()
-            local fortune   = require("alpha.fortune")
             local dashboard = require("alpha.themes.dashboard")
             local devicons  = require("nvim-web-devicons")
             local cdir      = vim.fn.getcwd()
+            local path      = require("plenary.path")
 
             local function get_extension(fn)
                 local match = fn:match("^.+(%..+)$")
@@ -122,40 +126,7 @@ return {
                 }
             end
 
-            local logo = {
-                [[         ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡖⠁⠀⠀⠀⠀⠀⠀⠈⢲⣄⠀⠀⠀⠀⠀⠀⠀ ⠀         ⠀ ]],
-                [[         ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣧⠀⠀ ⠀⠀⠀⠀⠀         ⠀ ]],
-                [[         ⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣇⠀⠀ ⠀⠀⠀⠀         ⠀ ]],
-                [[         ⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⡇⠀⢀⣀⣤⣤⣤⣤⣀⡀⠀⢸⣿⣿⠀⠀⠀ ⠀⠀⠀         ⠀ ]],
-                [[         ⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣔⢿⡿⠟⠛⠛⠻⢿⡿⣢⣿⣿⡟⠀⠀⠀⠀ ⠀⠀         ⠀ ]],
-                [[         ⠀⠀⠀⠀⠀⠀⣀⣤⣶⣾⣿⣿⣿⣷⣤⣀⡀⢀⣀⣤⣾⣿⣿⣿⣷⣶⣤⡀⠀⠀⠀         ⠀ ]],
-                [[         ⠀⠀⠀⠀⢠⣾⣿⡿⠿⠿⠿⣿⣿⣿⣿⡿⠏⠻⢿⣿⣿⣿⣿⠿⠿⠿⢿⣿⣷⡀⠀         ⠀ ]],
-                [[          ⠀⠀⢠⡿⠋⠁⠀⠀⢸⣿⡇⠉⠻⣿⠇⠀⠀⠸⣿⡿⠋⢰⣿⡇⠀⠀⠈⠙⢿⡄         ⠀ ]],
-                [[         ⠀ ⠀⡿⠁⠀⠀⠀⠀⠘⣿⣷⡀⠀⠰⣿⣶⣶⣿⡎⠀⢀⣾⣿⠇⠀⠀⠀⠀⠈⢿         ⠀ ]],
-                [[         ⠀ ⠀⡇⠀⠀⠀⠀⠀⠀⠹⣿⣷⣄⠀⣿⣿⣿⣿⠀⣠⣾⣿⠏⠀⠀⠀⠀⠀⠀⢸         ⠀ ]],
-                [[         ⠀ ⠀⠁⠀⠀⠀⠀⠀⠀⠀⠈⠻⢿⢇⣿⣿⣿⣿⡸⣿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠈         ⠀ ]],
-                [[         ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀          ⠀ ]],
-                [[         ⠀⠀⠀⠀⠐⢤⣀⣀⢀⣀⣠⣴⣿⣿⠿⠋⠙⠿⣿⣿⣦⣄⣀⠀⠀⣀⡠⠂⠀⠀⠀           ]],
-                [[         ⠀⠀⠀⠀⠀⠀⠈⠉⠛⠛⠛⠛⠉⠀⠀⠀⠀⠀⠈⠉⠛⠛⠛⠛⠋⠁⠀⠀⠀⠀⠀           ]],
-                [[            .__                                    ]],
-                [[            |  | _____  ___________.__.            ]],
-                [[            |  | \__  \ \___   <   |  |            ]],
-                [[            |  |__/ __ \_/    / \___  |            ]],
-                [[            |____(____  /_____ \/ ____|            ]],
-                [[                      \/      \/\/                 ]],
-            }
-
-            local section_header = {
-                type = "text",
-                val = logo,
-                opts = {
-                    hl = "Operator",
-                    shrink_margin = false,
-                    position = "center",
-                },
-            }
-
-            local section_mru = {
+            local mru = {
                 type = "group",
                 val = {
                     {
@@ -178,49 +149,87 @@ return {
                 },
             }
 
-            local section_buttons = {
+            local function header()
+                local logo = {
+                    [[         ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡖⠁⠀⠀⠀⠀⠀⠀⠈⢲⣄⠀⠀⠀⠀⠀⠀⠀ ⠀         ⠀ ]],
+                    [[         ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣧⠀⠀ ⠀⠀⠀⠀⠀         ⠀ ]],
+                    [[         ⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣇⠀⠀ ⠀⠀⠀⠀         ⠀ ]],
+                    [[         ⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⡇⠀⢀⣀⣤⣤⣤⣤⣀⡀⠀⢸⣿⣿⠀⠀⠀ ⠀⠀⠀         ⠀ ]],
+                    [[         ⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣔⢿⡿⠟⠛⠛⠻⢿⡿⣢⣿⣿⡟⠀⠀⠀⠀ ⠀⠀         ⠀ ]],
+                    [[         ⠀⠀⠀⠀⠀⠀⣀⣤⣶⣾⣿⣿⣿⣷⣤⣀⡀⢀⣀⣤⣾⣿⣿⣿⣷⣶⣤⡀⠀⠀⠀         ⠀ ]],
+                    [[         ⠀⠀⠀⠀⢠⣾⣿⡿⠿⠿⠿⣿⣿⣿⣿⡿⠏⠻⢿⣿⣿⣿⣿⠿⠿⠿⢿⣿⣷⡀⠀         ⠀ ]],
+                    [[          ⠀⠀⢠⡿⠋⠁⠀⠀⢸⣿⡇⠉⠻⣿⠇⠀⠀⠸⣿⡿⠋⢰⣿⡇⠀⠀⠈⠙⢿⡄         ⠀ ]],
+                    [[         ⠀ ⠀⡿⠁⠀⠀⠀⠀⠘⣿⣷⡀⠀⠰⣿⣶⣶⣿⡎⠀⢀⣾⣿⠇⠀⠀⠀⠀⠈⢿         ⠀ ]],
+                    [[         ⠀ ⠀⡇⠀⠀⠀⠀⠀⠀⠹⣿⣷⣄⠀⣿⣿⣿⣿⠀⣠⣾⣿⠏⠀⠀⠀⠀⠀⠀⢸         ⠀ ]],
+                    [[         ⠀ ⠀⠁⠀⠀⠀⠀⠀⠀⠀⠈⠻⢿⢇⣿⣿⣿⣿⡸⣿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠈         ⠀ ]],
+                    [[         ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀          ⠀ ]],
+                    [[         ⠀⠀⠀⠀⠐⢤⣀⣀⢀⣀⣠⣴⣿⣿⠿⠋⠙⠿⣿⣿⣦⣄⣀⠀⠀⣀⡠⠂⠀⠀⠀           ]],
+                    [[         ⠀⠀⠀⠀⠀⠀⠈⠉⠛⠛⠛⠛⠉⠀⠀⠀⠀⠀⠈⠉⠛⠛⠛⠛⠋⠁⠀⠀⠀⠀⠀           ]],
+                    [[            .__                                    ]],
+                    [[            |  | _____  ___________.__.            ]],
+                    [[            |  | \__  \ \___   <   |  |            ]],
+                    [[            |  |__/ __ \_/    / \___  |            ]],
+                    [[            |____(____  /_____ \/ ____|            ]],
+                    [[                      \/      \/\/                 ]],
+                }
+
+                return {
+                    type = "text",
+                    val = logo,
+                    opts = {
+                        hl = "Operator",
+                        shrink_margin = false,
+                        position = "center",
+                    },
+                }
+            end
+
+            local function footer()
+                local fortune   = require("alpha.fortune")
+                local stats = require("lazy").stats()
+                local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+                local footer_text = fortune()
+
+                table.insert(footer_text, "")
+                table.insert(footer_text, "⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms")
+
+                return {
+                    type = "group",
+                    val = {
+                        {
+                            type = "text",
+                            val = footer_text,
+                            opts = { hl = "Constant", position = "center" },
+                        },
+                    },
+                }
+            end
+
+            local buttons = {
                 type = "group",
                 val = {
                     { type = "text", val = "Quick links", opts = { hl = "Constant", position = "center" } },
                     { type = "padding", val = 1 },
-                    dashboard.button("n", " " .. " New file", "<cmd> ene <BAR> startinsert <cr>"),
-                    dashboard.button("f", " " .. " Find file", "<cmd> Telescope find_files <cr>"),
-                    dashboard.button("p", " " .. " Find project", "<cmd> Telescope projects <cr>"),
-                    dashboard.button("g", " " .. " Find text", "<cmd> Telescope live_grep <cr>"),
-                    dashboard.button("m", " " .. " Find modified file", "<cmd> Telescope git_status <cr>"),
-                    dashboard.button("l", "󰒲 " .. " Lazy", "<cmd> Lazy <cr>"),
-                    dashboard.button("c", " " .. " Config", "<cmd> lua require('lazyvim.util').telescope.config_files()() <cr>"),
-                    dashboard.button("s", " " .. " Restore Session", [[<cmd> lua require("persistence").load() <cr>]]),
-                    dashboard.button("h", " " .. " Check health", "<cmd> checkhealth <cr>"),
-                    dashboard.button("q", " " .. " Quit", "<cmd> qa <cr>"),
+                    dashboard.button("n", "  New file", "<cmd> ene <BAR> startinsert <cr>"),
+                    dashboard.button("f", "  Find file", "<cmd> Telescope find_files <cr>"),
+                    dashboard.button("p", "  Find project", "<cmd> Telescope projects <cr>"),
+                    dashboard.button("g", "  Find text", "<cmd> Telescope live_grep <cr>"),
+                    dashboard.button("m", "  Find modified file", "<cmd> Telescope git_status <cr>"),
+                    dashboard.button("l", "󰒲  Lazy", "<cmd> Lazy <cr>"),
+                    dashboard.button("u", "󱐥  Update plugins", "<cmd>Lazy sync<CR>"),
+                    dashboard.button("s", "  Restore Session", [[<cmd> lua require("persistence").load() <cr>]]),
+                    dashboard.button("h", "  Check health", "<cmd> checkhealth <cr>"),
+                    dashboard.button("q", "  Quit", "<cmd> qa <cr>"),
                 },
                 position = "center",
             }
 
-            local stats = require("lazy").stats()
-            local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-            local footer_text = fortune()
-
-            table.insert(footer_text, "")
-            table.insert(footer_text, "⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms")
-
-            local section_footer = {
-                type = "group",
-                val = {
-                    {
-                        type = "text",
-                        val = footer_text,
-                        opts = { hl = "Constant", position = "center" },
-                    },
-                },
-            }
-
             dashboard.opts = {
                 layout = {
-                    { type = "padding", val = 1 }, section_header,
-                    { type = "padding", val = 1 }, section_mru,
-                    { type = "padding", val = 1 }, section_buttons,
-                    section_footer,
+                    { type = "padding", val = 1 }, header(),
+                    { type = "padding", val = 1 }, mru,
+                    { type = "padding", val = 1 }, buttons,
+                    { type = "padding", val = 1 }, footer(),
                 },
                 opts = { margin = 5 },
             }
@@ -248,17 +257,17 @@ return {
     {
         'akinsho/bufferline.nvim',
         event = "VeryLazy",
-        --keys = {
-        --    { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
-        --    { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
-        --    { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete Other Buffers" },
-        --    { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
-        --    { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
-        --    { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
-        --    { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
-        --    { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
-        --    { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
-        --},
+        keys = {
+            { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
+            { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
+            { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete Other Buffers" },
+            { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
+            { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
+            { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
+            { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+            { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
+            { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+        },
         opts = {
             options = {
                 always_show_bufferline = true,

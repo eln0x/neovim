@@ -36,7 +36,6 @@ setkey("n", "<C-w><Up>", "<cmd>wincmd k<cr>")
 setkey("n", "<C-w><Down>", "<cmd>wincmd j<cr>")
 setkey("n", "<C-w><Right>", "<cmd>wincmd l<cr>")
 setkey("n", "<C-w><Left>", "<cmd>wincmd h<cr>")
-setkey("n", "<leader>!", "<cmd>vsplit<cr>")
 
 -- Navigate buffers
 setkey("n", "<leader>n", "<cmd>enew<cr>", opts)
@@ -46,10 +45,9 @@ setkey("n", "<leader><Left>", "<cmd>bprev<cr>", opts)
 -- Toggles
 setkey("n", "<F1>", "<cmd>Alpha<cr>", opts)
 setkey("n", "<F2>", "<cmd>NvimTreeToggl<cr>", opts)
-setkey("n", "<F3>", "<cmd>TagbarToggle<cr>", opts)
-setkey("n", "<F4>", "<cmd>AerialToggle<cr>", opts)
-setkey("n", "<F5>", "<cmd>Mason<cr>", opts)
-setkey("n", "<F6>", "<cmd>NullLsInfo<cr>", opts)
+setkey("n", "<F3>", "<cmd>AerialToggle<cr>", opts)
+setkey("n", "<F4>", "<cmd>Mason<cr>", opts)
+setkey("n", "<F5>", "<cmd>NullLsInfo<cr>", opts)
 
 -- Cmotion
 vim.g.comfortable_motion_no_default_key_mappings = 1
@@ -57,7 +55,6 @@ setkey('n', '<C-Down>', '<cmd>call comfortable_motion#flick(100)<cr>', opts)
 setkey('n', '<C-Up>', '<cmd>call comfortable_motion#flick(-100)<cr>', opts)
 setkey('n', '<C-f>', '<cmd>call comfortable_motion#flick(200)<cr>', opts)
 setkey('n', '<C-b>', '<cmd>call comfortable_motion#flick(-200)<cr>', opts)
-
 
 --
 -- Visual_mode = "v",
