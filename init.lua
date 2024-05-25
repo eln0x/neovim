@@ -17,4 +17,7 @@ vim.cmd [[
 -- plugins
 require 'config.plugins'
 
+-- colors
+require 'config.colors'
+
 -- vim: ts=4 sts=4 sw=4 et

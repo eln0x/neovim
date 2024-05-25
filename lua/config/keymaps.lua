@@ -17,6 +17,7 @@ vim.g.mapleader = " "
 
 -- Delete LazyVim keymaps
 delkey("n", "<leader>|", opts)
+delkey("n", "<leader>-", opts)
 
 -- Copy whole file
 setkey("n", "<C-c>", "<cmd> %y+ <cr>", opts)

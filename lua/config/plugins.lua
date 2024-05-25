@@ -3,6 +3,7 @@
 --
 -- https://github.com/folke/lazy.nvim.git
 
+local vim = vim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
@@ -16,13 +17,13 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
-require("lazy").setup({
+require('lazy').setup({
     spec = {
         -- add LazyVim and import its plugins
         { "LazyVim/LazyVim", import = "lazyvim.plugins" },
         { import = "lazyvim.plugins.extras.ui.alpha" },
 
-        -- import/override with your plugins to `lua/plugins/*.lua`
+        -- import plugins to `lua/plugins/*.lua`
         { import = "plugins" },
     },
 
@@ -32,11 +33,7 @@ require("lazy").setup({
         version = false,
     },
     install = {
-        colorscheme = {
-            "jellybeans-nvim",
-            "tokyonight",
-            "habamax",
-        },
+        colorscheme = { "jellybeans-nvim" }
     },
     checker = {
         enabled = true,
