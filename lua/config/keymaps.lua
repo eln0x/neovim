@@ -24,8 +24,8 @@ map("n", "<F5>", "<cmd>NullLsInfo<cr>", opts)
 
 -- Cmotion
 vim.g.comfortable_motion_no_default_key_mappings = 1
-map('n', '<C-Down>', '<cmd>call comfortable_motion#flick(100)<cr>', { desc = "Slide Down", silent = true } )
-map('n', '<C-Up>', '<cmd>call comfortable_motion#flick(-100)<cr>', { desc = "Slide Up", silent = true } )
+map('n', '<C-Down>', '<cmd>call comfortable_motion#flick(100)<cr>', { desc = "Scroll Down", silent = true } )
+map('n', '<C-Up>', '<cmd>call comfortable_motion#flick(-100)<cr>', { desc = "Scroll Up", silent = true } )
 
 -- Navigate windows
 map("n", "<C-w><Up>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window", remap = true } )
@@ -44,8 +44,8 @@ map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
 map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
 map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
 map("n", "<leader><tab>n", "<cmd>tabnext<cr>", { desc = "Next Tab" })
-map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
-map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+map("n", "<leader><tab>c", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+map("n", "<leader><tab>p", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 -- Navigate buffers
 map("n", "<leader>n", "<cmd>enew<cr>", { desc = "New File", silent = true } )
