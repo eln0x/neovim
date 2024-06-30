@@ -25,7 +25,11 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
 nvm install node
 
 # Python3 & pynvim
+apt install python3-venv
 pip3 install pynvim
+
+# Utils
+apt install ripgrep fd-find xclip ncdu universal-ctags
 ```
 
 ### Installation
@@ -38,7 +42,7 @@ bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --bak
 Install:
 ```bash
 bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) \
-    --release stable --config master
+    --release stable --config lazy
 ```
 
 Cleanup:
@@ -104,49 +108,49 @@ Leader command: \<space>
 
 | Mode  | Mapping        | Action                  | Alternative      |
 | --    | ---            | ---                     | --               |
-| n     | fb             | Buffers                 | leader-b         |
-| n     | ff             | Files                   | leader-f         |
-| n     | fp             | Projects                | :Tel projects    |
-| n     | fg             | Live grep               | :Tel live_grep   |
-| n     | fn             | Notifications           | :Tel notify      |
-| n     | fo             | Changed                 | :Tel git_status  |
-| n     | fs             | Color schemes           | :Tel colorscheme |
-| n     | fc             | Commands                | :Tel commands    |
-| n     | fk             | Keymaps                 | :Tel keymaps     |
-| n     | fm             | Man pages               | :Tel man_pages   |
+| n     | leader-fb      | Buffers                 | leader-b         |
+| n     | leader-ff      | Files                   | leader-f         |
+| n     | leader-fp      | Projects                | :Tel projects    |
+| n     | leader-fg      | Live grep               | :Tel live_grep   |
+| n     | leader-fn      | Notifications           | :Tel notify      |
+| n     | leader-fo      | Changed                 | :Tel git_status  |
+| n     | leader-fs      | Color schemes           | :Tel colorscheme |
+| n     | leader-fc      | Commands                | :Tel commands    |
+| n     | leader-fk      | Keymaps                 | :Tel keymaps     |
+| n     | leader-fm      | Man pages               | :Tel man_pages   |
 
 **Language Server Protocol**
 
 | Mode  | Mapping        | Action                  | Alternative      |
 | --    | ---            | ---                     | --               |
-| n     | l?             | Hover doc               | ?                |
-| n     | la             | Code action             | ga               |
-| n     | ld             | Goto definition         | gd               |
-| n     | lD             | Goto declaration        | gD               |
-| n     | lf             | Format buffer           | gf               |
-| n     | lh             | Signature helper        | gn               |
-| n     | li             | Goto implementation     | gi               |
-| n     | ln             | Goto next diagnostic    | dn               |
-| n     | lo             | Open Diagnostic         | do               |
-| n     | lp             | Goto prev diagnostic    | dp               |
-| n     | lr             | Get references          | gr               |
-| n     | ls             | Get symbols             | gs               |
-| n     | lS             | Workspace symbols       | gS               |
-| n     | lt             | Type definition         | gt               |
-| n     | lw             | Workspace diagnostics   | dl               |
+| n     | leader-l?      | Hover doc               | ?                |
+| n     | leader-la      | Code action             | ga               |
+| n     | leader-ld      | Goto definition         | gd               |
+| n     | leader-lD      | Goto declaration        | gD               |
+| n     | leader-lf      | Format buffer           | gf               |
+| n     | leader-lh      | Signature helper        | gn               |
+| n     | leader-li      | Goto implementation     | gi               |
+| n     | leader-ln      | Goto next diagnostic    | dn               |
+| n     | leader-lo      | Open Diagnostic         | do               |
+| n     | leader-lp      | Goto prev diagnostic    | dp               |
+| n     | leader-lr      | Get references          | gr               |
+| n     | leader-ls      | Get symbols             | gs               |
+| n     | leader-lS      | Workspace symbols       | gS               |
+| n     | leader-lt      | Type definition         | gt               |
+| n     | leader-lw      | Workspace diagnostics   | dl               |
 
 **Terminals**
 
 | Mode  | Mapping        | Action                  | Alternative      |
 | --    | ---            | ---                     | --               |
-| n     | tg             | Lazygit                 |                  |
-| n     | tn             | Node                    |                  |
-| n     | tu             | Ncdu                    |                  |
-| n     | tt             | Htop                    |                  |
-| n     | tp             | Python                  |                  |
-| n     | tf             | Term float              |                  |
-| n     | th             | Term horizontal         |                  |
-| n     | tv             | Term vertical           |                  |
+| n     | leader-tg      | Lazygit                 |                  |
+| n     | leader-tn      | Node                    |                  |
+| n     | leader-tu      | Ncdu                    |                  |
+| n     | leader-tt      | Htop                    |                  |
+| n     | leader-tp      | Python                  |                  |
+| n     | leader-tf      | Term float              |                  |
+| n     | leader-th      | Term horizontal         |                  |
+| n     | leader-tv      | Term vertical           |                  |
 
 ### Language
 
