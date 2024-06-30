@@ -27,7 +27,7 @@ return {
     -- Tokyonight
     {
         'folke/tokyonight.nvim',
-        opts = { style = "moon" },
+        opts = { style = "night" },
     },
 
     -- Lunar
@@ -41,8 +41,7 @@ return {
         init = function()
             require 'colorizer'.setup()
         end
-    }
-
+    },
 }
 
 -- vim: ts=4 sts=4 sw=4 et
