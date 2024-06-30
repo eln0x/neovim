@@ -2,19 +2,25 @@
 -- stylua: ignore
 --if true then return {} end
 
+local vim = vim
+
 return {
     -- Startup screen
     -- https://github.com/goolord/alpha-nvim
     {
         'goolord/alpha-nvim',
         event = "VimEnter",
+        dependencies = {
+            'nvim-tree/nvim-web-devicons',
+            'nvim-lua/plenary.nvim',
+        },
         enabled = true,
         init = false,
         opts = function()
-            local fortune   = require("alpha.fortune")
             local dashboard = require("alpha.themes.dashboard")
             local devicons  = require("nvim-web-devicons")
             local cdir      = vim.fn.getcwd()
+            local path      = require("plenary.path")
 
             local function get_extension(fn)
                 local match = fn:match("^.+(%..+)$")
@@ -59,8 +65,8 @@ return {
             local default_mru_ignore = { "gitcommit" }
 
             local mru_opts = {
-                ignore = function(path, ext)
-                    return (string.find(path, "COMMIT_EDITMSG")) or (vim.tbl_contains(default_mru_ignore, ext))
+                ignore = function(_path, ext)
+                    return (string.find(_path, "COMMIT_EDITMSG")) or (vim.tbl_contains(default_mru_ignore, ext))
                 end,
             }
 
@@ -122,40 +128,7 @@ return {
                 }
             end
 
-            local logo = {
-                [[         ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡖⠁⠀⠀⠀⠀⠀⠀⠈⢲⣄⠀⠀⠀⠀⠀⠀⠀ ⠀         ⠀ ]],
-                [[         ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣧⠀⠀ ⠀⠀⠀⠀⠀         ⠀ ]],
-                [[         ⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣇⠀⠀ ⠀⠀⠀⠀         ⠀ ]],
-                [[         ⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⡇⠀⢀⣀⣤⣤⣤⣤⣀⡀⠀⢸⣿⣿⠀⠀⠀ ⠀⠀⠀         ⠀ ]],
-                [[         ⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣔⢿⡿⠟⠛⠛⠻⢿⡿⣢⣿⣿⡟⠀⠀⠀⠀ ⠀⠀         ⠀ ]],
-                [[         ⠀⠀⠀⠀⠀⠀⣀⣤⣶⣾⣿⣿⣿⣷⣤⣀⡀⢀⣀⣤⣾⣿⣿⣿⣷⣶⣤⡀⠀⠀⠀         ⠀ ]],
-                [[         ⠀⠀⠀⠀⢠⣾⣿⡿⠿⠿⠿⣿⣿⣿⣿⡿⠏⠻⢿⣿⣿⣿⣿⠿⠿⠿⢿⣿⣷⡀⠀         ⠀ ]],
-                [[          ⠀⠀⢠⡿⠋⠁⠀⠀⢸⣿⡇⠉⠻⣿⠇⠀⠀⠸⣿⡿⠋⢰⣿⡇⠀⠀⠈⠙⢿⡄         ⠀ ]],
-                [[         ⠀ ⠀⡿⠁⠀⠀⠀⠀⠘⣿⣷⡀⠀⠰⣿⣶⣶⣿⡎⠀⢀⣾⣿⠇⠀⠀⠀⠀⠈⢿         ⠀ ]],
-                [[         ⠀ ⠀⡇⠀⠀⠀⠀⠀⠀⠹⣿⣷⣄⠀⣿⣿⣿⣿⠀⣠⣾⣿⠏⠀⠀⠀⠀⠀⠀⢸         ⠀ ]],
-                [[         ⠀ ⠀⠁⠀⠀⠀⠀⠀⠀⠀⠈⠻⢿⢇⣿⣿⣿⣿⡸⣿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠈         ⠀ ]],
-                [[         ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀          ⠀ ]],
-                [[         ⠀⠀⠀⠀⠐⢤⣀⣀⢀⣀⣠⣴⣿⣿⠿⠋⠙⠿⣿⣿⣦⣄⣀⠀⠀⣀⡠⠂⠀⠀⠀           ]],
-                [[         ⠀⠀⠀⠀⠀⠀⠈⠉⠛⠛⠛⠛⠉⠀⠀⠀⠀⠀⠈⠉⠛⠛⠛⠛⠋⠁⠀⠀⠀⠀⠀           ]],
-                [[              .___                 .__             ]],
-                [[            __| _/_______  __ ____ |  |            ]],
-                [[           / __ |/ __ \  \/ // __ \|  |            ]],
-                [[          / /_/ \  ___/\   /\  ___/|  |__          ]],
-                [[          \____ |\___  >\_/  \___  >____/          ]],
-                [[               \/    \/          \/                ]],
-            }
-
-            local section_header = {
-                type = "text",
-                val = logo,
-                opts = {
-                    hl = "Operator",
-                    shrink_margin = false,
-                    position = "center",
-                },
-            }
-
-            local section_mru = {
+            local recents = {
                 type = "group",
                 val = {
                     {
@@ -178,50 +151,88 @@ return {
                 },
             }
 
-            local section_buttons = {
+            local function header()
+                local logo = {
+                    [[         ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡖⠁⠀⠀⠀⠀⠀⠀⠈⢲⣄⠀⠀⠀⠀⠀⠀⠀ ⠀         ⠀ ]],
+                    [[         ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣧⠀⠀ ⠀⠀⠀⠀⠀         ⠀ ]],
+                    [[         ⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣇⠀⠀ ⠀⠀⠀⠀         ⠀ ]],
+                    [[         ⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⡇⠀⢀⣀⣤⣤⣤⣤⣀⡀⠀⢸⣿⣿⠀⠀⠀ ⠀⠀⠀         ⠀ ]],
+                    [[         ⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣔⢿⡿⠟⠛⠛⠻⢿⡿⣢⣿⣿⡟⠀⠀⠀⠀ ⠀⠀         ⠀ ]],
+                    [[         ⠀⠀⠀⠀⠀⠀⣀⣤⣶⣾⣿⣿⣿⣷⣤⣀⡀⢀⣀⣤⣾⣿⣿⣿⣷⣶⣤⡀⠀⠀⠀         ⠀ ]],
+                    [[         ⠀⠀⠀⠀⢠⣾⣿⡿⠿⠿⠿⣿⣿⣿⣿⡿⠏⠻⢿⣿⣿⣿⣿⠿⠿⠿⢿⣿⣷⡀⠀         ⠀ ]],
+                    [[          ⠀⠀⢠⡿⠋⠁⠀⠀⢸⣿⡇⠉⠻⣿⠇⠀⠀⠸⣿⡿⠋⢰⣿⡇⠀⠀⠈⠙⢿⡄         ⠀ ]],
+                    [[         ⠀ ⠀⡿⠁⠀⠀⠀⠀⠘⣿⣷⡀⠀⠰⣿⣶⣶⣿⡎⠀⢀⣾⣿⠇⠀⠀⠀⠀⠈⢿         ⠀ ]],
+                    [[         ⠀ ⠀⡇⠀⠀⠀⠀⠀⠀⠹⣿⣷⣄⠀⣿⣿⣿⣿⠀⣠⣾⣿⠏⠀⠀⠀⠀⠀⠀⢸         ⠀ ]],
+                    [[         ⠀ ⠀⠁⠀⠀⠀⠀⠀⠀⠀⠈⠻⢿⢇⣿⣿⣿⣿⡸⣿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠈         ⠀ ]],
+                    [[         ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀          ⠀ ]],
+                    [[         ⠀⠀⠀⠀⠐⢤⣀⣀⢀⣀⣠⣴⣿⣿⠿⠋⠙⠿⣿⣿⣦⣄⣀⠀⠀⣀⡠⠂⠀⠀⠀           ]],
+                    [[         ⠀⠀⠀⠀⠀⠀⠈⠉⠛⠛⠛⠛⠉⠀⠀⠀⠀⠀⠈⠉⠛⠛⠛⠛⠋⠁⠀⠀⠀⠀⠀           ]],
+                    [[              .___                 .__             ]],
+                    [[            __| _/_______  __ ____ |  |            ]],
+                    [[           / __ |/ __ \  \/ // __ \|  |            ]],
+                    [[          / /_/ \  ___/\   /\  ___/|  |__          ]],
+                    [[          \____ |\___  >\_/  \___  >____/          ]],
+                    [[               \/    \/          \/                ]],
+                }
+
+                return {
+                    type = "text",
+                    val = logo,
+                    opts = {
+                        hl = "Operator",
+                        shrink_margin = false,
+                        position = "center",
+                    },
+                }
+            end
+
+            local function footer()
+                local fortune   = require("alpha.fortune")
+                local stats = require("lazy").stats()
+                local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+                local footer_text = fortune()
+
+                table.insert(footer_text, "")
+                table.insert(footer_text, "⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms")
+
+                return {
+                    type = "group",
+                    val = {
+                        {
+                            type = "text",
+                            val = footer_text,
+                            opts = { hl = "Constant", position = "center" },
+                        },
+                    },
+                }
+            end
+
+            local buttons = {
                 type = "group",
                 val = {
                     { type = "text", val = "Quick links", opts = { hl = "Constant", position = "center" } },
                     { type = "padding", val = 1 },
-                    dashboard.button("n", " " .. " New file", "<cmd> ene <BAR> startinsert <cr>"),
-                    dashboard.button("f", " " .. " Find file", "<cmd> Telescope find_files <cr>"),
-                    dashboard.button("p", " " .. " Find project", "<cmd> Telescope projects <cr>"),
-                    dashboard.button("g", " " .. " Find text", "<cmd> Telescope live_grep <cr>"),
-                    dashboard.button("m", " " .. " Find modified file", "<cmd> Telescope git_status <cr>"),
-                    dashboard.button("x", " " .. " Lazy Extras", "<cmd> LazyExtras <cr>"),
-                    dashboard.button("l", "󰒲 " .. " Lazy", "<cmd> Lazy <cr>"),
-                    dashboard.button("c", " " .. " Config", "<cmd> lua require('lazyvim.util').telescope.config_files()() <cr>"),
-                    dashboard.button("s", " " .. " Restore Session", [[<cmd> lua require("persistence").load() <cr>]]),
-                    dashboard.button("h", " " .. " Check health", "<cmd> checkhealth <cr>"),
-                    dashboard.button("q", " " .. " Quit", "<cmd> qa <cr>"),
+                    dashboard.button("n", "  New file", "<cmd> ene <BAR> startinsert <cr>"),
+                    dashboard.button("f", "  Find file", "<cmd> Telescope find_files <cr>"),
+                    dashboard.button("p", "  Find project", "<cmd> Telescope projects <cr>"),
+                    dashboard.button("g", "  Find text", "<cmd> Telescope live_grep <cr>"),
+                    dashboard.button("m", "  Find modified file", "<cmd> Telescope git_status <cr>"),
+                    dashboard.button("l", "󰒲  Lazy", "<cmd> Lazy <cr>"),
+                    dashboard.button("u", "󱐥  Update plugins", "<cmd>Lazy sync<CR>"),
+                    dashboard.button("c", "  Config", "<cmd> lua require('lazyvim.util').telescope.config_files()() <cr>"),
+                    dashboard.button("s", "  Restore Session", [[<cmd> lua require("persistence").load() <cr>]]),
+                    dashboard.button("h", "  Check health", "<cmd> checkhealth <cr>"),
+                    dashboard.button("q", "  Quit", "<cmd> qa <cr>"),
                 },
                 position = "center",
             }
 
-            local stats = require("lazy").stats()
-            local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-            local footer_text = fortune()
-
-            table.insert(footer_text, "")
-            table.insert(footer_text, "⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms")
-
-            local section_footer = {
-                type = "group",
-                val = {
-                    {
-                        type = "text",
-                        val = footer_text,
-                        opts = { hl = "Constant", position = "center" },
-                    },
-                },
-            }
-
             dashboard.opts = {
                 layout = {
-                    { type = "padding", val = 1 }, section_header,
-                    { type = "padding", val = 1 }, section_mru,
-                    { type = "padding", val = 1 }, section_buttons,
-                    section_footer,
+                    { type = "padding", val = 1 }, header(),
+                    { type = "padding", val = 1 }, recents,
+                    { type = "padding", val = 1 }, buttons,
+                    { type = "padding", val = 1 }, footer(),
                 },
                 opts = { margin = 5 },
             }
@@ -233,6 +244,19 @@ return {
     -- https://github.com/akinsho/bufferline.nvim
     {
         'akinsho/bufferline.nvim',
+        keys = {
+            { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
+            { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
+            { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete Other Buffers" },
+            { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
+            { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
+            { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
+            { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+            { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
+            { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+            { "[B", "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer prev" },
+            { "]B", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
+        },
         opts = {
             options = {
                 always_show_bufferline = true,
@@ -251,12 +275,6 @@ return {
                 max_prefix_length = 30,
                 tab_size = 21,
                 diagnostics = "nvim_lsp",
-                diagnostics_indicator = function(_, _, diag)
-                    local icons = require("lazyvim.config").icons.diagnostics
-                    local ret = (diag.error and icons.Error .. diag.error .. " " or "")
-                    .. (diag.warning and icons.Warn .. diag.warning or "")
-                    return vim.trim(ret)
-                end,
                 offsets = {
                     {
                         filetype = "NvimTree",
@@ -281,92 +299,6 @@ return {
                     style = 'icon',
                 },
             },
-            highlights = {
-                fill = {
-                    fg = { attribute = "fg", highlight = "TabLineSel" },
-                    bg = { attribute = "bg", highlight = "TabLine" },
-                },
-                background = {
-                    fg = { attribute = "fg", highlight = "TabLine" },
-                    bg = { attribute = "bg", highlight = "TabLine" },
-                },
-                buffer_selected = {
-                    fg = {attribute='fg',highlight='TabLineSel'},
-                    bg = {attribute='bg',highlight='TabLine'},
-                    underline = false,
-                },
-                buffer_visible = {
-                    fg = { attribute = "fg", highlight = "TabLine" },
-                    bg = { attribute = "bg", highlight = "TabLine" },
-                },
-                close_button = {
-                    fg = { attribute = "fg", highlight = "TabLine" },
-                    bg = { attribute = "bg", highlight = "TabLine" },
-                },
-                close_button_visible = {
-                    fg = { attribute = "fg", highlight = "TabLine" },
-                    bg = { attribute = "bg", highlight = "TabLine" },
-                },
-                close_button_selected = {
-                    fg = {attribute='fg',highlight='TabLineSel'},
-                    bg ={attribute='bg',highlight='TabLineSel'}
-                },
-                tab_selected = {
-                    fg = { attribute = "fg", highlight = "Normal" },
-                    bg = { attribute = "bg", highlight = "Normal" },
-                },
-                tab = {
-                    fg = { attribute = "fg", highlight = "TabLine" },
-                    bg = { attribute = "bg", highlight = "TabLine" },
-                },
-                tab_close = {
-                    fg = { attribute = "fg", highlight = "TabLineSel" },
-                    bg = { attribute = "bg", highlight = "Normal" },
-                },
-                duplicate_selected = {
-                    fg = { attribute = "fg", highlight = "TabLineSel" },
-                    bg = { attribute = "bg", highlight = "TabLineSel" },
-                    italic = true,
-                },
-                duplicate_visible = {
-                    fg = { attribute = "fg", highlight = "TabLine" },
-                    bg = { attribute = "bg", highlight = "TabLine" },
-                    italic = true,
-                },
-                duplicate = {
-                    fg = { attribute = "fg", highlight = "TabLine" },
-                    bg = { attribute = "bg", highlight = "TabLine" },
-                    italic = true,
-                },
-                modified = {
-                    fg = { attribute = "fg", highlight = "TabLine" },
-                    bg = { attribute = "bg", highlight = "TabLine" },
-                },
-                modified_selected = {
-                    fg = { attribute = "fg", highlight = "Normal" },
-                    bg = { attribute = "bg", highlight = "Normal" },
-                },
-                modified_visible = {
-                    fg = { attribute = "fg", highlight = "TabLine" },
-                    bg = { attribute = "bg", highlight = "TabLine" },
-                },
-                separator = {
-                    fg = { attribute = "bg", highlight = "TabLine" },
-                    bg = { attribute = "bg", highlight = "TabLine" },
-                },
-                separator_selected = {
-                    fg = { attribute = "bg", highlight = "Normal" },
-                    bg = { attribute = "bg", highlight = "Normal" },
-                },
-                separator_visible = {
-                    fg = {attribute='bg',highlight='TabLine'},
-                    bg = {attribute='bg',highlight='TabLine'}
-                },
-                indicator_selected = {
-                    fg = { attribute = "fg", highlight = "LspDiagnosticsDefaultHint" },
-                    bg = { attribute = "bg", highlight = "Normal" },
-                },
-            },
         },
     },
 
@@ -381,20 +313,6 @@ return {
 
             vim.o.laststatus = vim.g.lualine_laststatus
 
-            local hide_in_width = function()
-                return vim.fn.winwidth(0) > 80
-            end
-
-            local diagnostics = {
-                "diagnostics",
-                sources = { "nvim_diagnostic" },
-                sections = { "warn", "error" },
-                symbols = { warn = " ", error = " " },
-                colored = true,
-                update_in_insert = false,
-                always_visible = true,
-            }
-
             local mode = {
                 "mode",
                 fmt = function(str)
@@ -408,6 +326,40 @@ return {
                 icon = "",
             }
 
+            local diff = {
+                "diff",
+                symbols = {
+                    added = " "  ,
+                    modified = " ",
+                    removed = " "  ,
+                },
+                source = function()
+                    local gitsigns = vim.b.gitsigns_status_dict
+                    if gitsigns then
+                        return {
+                            added = gitsigns.added,
+                            modified = gitsigns.changed,
+                            removed = gitsigns.removed,
+                        }
+                    end
+                end,
+            }
+
+            local diagnostics = {
+                "diagnostics",
+                sources = { "nvim_diagnostic" },
+                sections = { "warn", "error", "hint" },
+                symbols = {
+                    error = " "  ,
+                    warn = " "  ,
+                    hint = " "  ,
+                    info = " "  ,
+                },
+                colored = true,
+                update_in_insert = false,
+                always_visible = false,
+            }
+
             local date = {
                 "mode",
                 fmt = function()
@@ -419,41 +371,47 @@ return {
                 return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
             end
 
-            return {
+            local opts = {
                 options = {
                     icons_enabled = true,
-                    theme = "auto",
-                    disabled_filetypes = {
-                        statusline = {
-                            "dashboard",
-                            "alpha",
-                            "starter",
-                            "NvimTree",
-                            "Outline",
-                        }
-                    },
+                    theme = "ayu_dark",
+                    globalstatus = vim.o.laststatus == 3,
+                    disabled_filetypes = { statusline = { "dashboard", "alpha", "starter" } },
                     always_divide_middle = true,
-                    globalstatus = true,
                 },
                 sections = {
                     lualine_a = { mode },
-                    lualine_b = { branch, 'diff', diagnostics},
-                    lualine_c = { },
+                    lualine_b = { branch, diff },
+                    lualine_c = {
+                        LazyVim.lualine.root_dir(),
+                        diagnostics,
+                        { LazyVim.lualine.pretty_path() },
+                    },
                     lualine_x = {
+                        -- stylua: ignore
                         {
                             function() return require("noice").api.status.command.get() end,
                             cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
+                            color = function() return LazyVim.ui.fg("Statement") end,
                         },
+                        -- stylua: ignore
                         {
                             function() return require("noice").api.status.mode.get() end,
                             cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
+                            color = function() return LazyVim.ui.fg("Constant") end,
                         },
+                        -- stylua: ignore
+                        {
+                            function() return "  " .. require("dap").status() end,
+                            cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
+                            color = function() return LazyVim.ui.fg("Debug") end,
+                        },
+                        -- stylua: ignore
                         {
                             require("lazy.status").updates,
                             cond = require("lazy.status").has_updates,
+                            color = function() return LazyVim.ui.fg("Special") end,
                         },
-                        'filetype', spaces, 'encoding', 'fileformat'
-
                     },
                     lualine_y = {
                         {
@@ -465,11 +423,38 @@ return {
                             "location",
                             padding = { left = 0, right = 1 }
                         },
+                        {
+                            "filetype",
+                            icon_only = false,
+                            separator = "",
+                            padding = { left = 1, right = 0 }
+                        },
+                        spaces, 'encoding', 'fileformat',
                     },
                     lualine_z = { date },
                 },
                 extensions = { "neo-tree", "lazy" },
             }
+
+            -- do not add trouble symbols if aerial is enabled
+            if vim.g.trouble_lualine then
+                local trouble = require("trouble")
+                local symbols = trouble.statusline
+                and trouble.statusline({
+                    mode = "symbols",
+                    groups = {},
+                    title = false,
+                    filter = { range = true },
+                    format = "{kind_icon}{symbol.name:Normal}",
+                    hl_group = "lualine_c_normal",
+                })
+                table.insert(opts.sections.lualine_c, {
+                    symbols and symbols.get,
+                    cond = symbols and symbols.has,
+                })
+            end
+
+            return opts
         end,
     },
 
