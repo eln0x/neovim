@@ -14,46 +14,51 @@ return {
                 registers = false,
                 spelling = true
             },
-            window = {
-                border = "rounded",
-                position = "bottom",
-                margin = { 1, 0, 1, 0 },
-                padding = { 2, 2, 2, 2 },
-                winblend = 0,
-            },
             layout = {
                 spacing = 5,
                 align = "center",
             },
-            ignore_missing = false,
             defaults = {
                 mode = { "n", "v" },
-                ["g"] = { name = "+goto" },
-                ["gs"] = { name = "+surround" },
-                ["z"] = { name = "+fold" },
-                ["]"] = { name = "+next" },
-                ["["] = { name = "+prev" },
-                ["<leader>!"] = { "<cmd>vsplit<cr>", "Split Vertical" },
-                ["<leader>/"] = { "<cmd>split<cr>", "Split Horizontal" },
-                ["<leader><tab>"] = { name = "+tabs" },
-                ["<leader>b"] = { name = "+buffer" },
-                ["<leader>c"] = { name = "+code" },
-                ["<leader>f"] = { name = "+file/find" },
-                ["<leader>g"] = { name = "+git" },
-                ["<leader>gh"] = { name = "+hunks" },
-                ["<leader>q"] = { name = "+quit/session" },
-                ["<leader>s"] = { name = "+search" },
-                ["<leader>u"] = { name = "+ui" },
-                ["<leader>w"] = { name = "+windows" },
-                ["<leader>x"] = { name = "+diagnostics/quickfix" },
-                ["<leader>sn"] = { name = "+noice" },
+                { "<leader>!", "<cmd>vsplit<cr>", desc = "Split Vertical" },
+                { "<leader>/", "<cmd>split<cr>", desc = "Split Horizontal" },
+                { "<leader><tab>", group = "tabs" },
+                { "<leader>b", group = "buffer" },
+                { "<leader>c", group = "code" },
+                { "<leader>f", group = "file/find" },
+                { "<leader>g", group = "git" },
+                { "<leader>gh", group = "hunks" },
+                { "<leader>q", group = "quit/session" },
+                { "<leader>s", group = "search" },
+                { "<leader>sn", group = "noice" },
+                { "<leader>u", group = "ui" },
+                { "<leader>w", group = "windows" },
+                { "<leader>x", group = "diagnostics/quickfix" },
+                { "[", group = "prev" },
+                { "]", group = "next" },
+                { "g", group = "goto" },
+                { "gs", group = "surround" },
+                { "z", group = "fold" },
             },
         },
         config = function(_, opts)
             local wk = require("which-key")
             wk.setup(opts)
-            wk.register(opts.defaults)
+            wk.add(opts.defaults)
 
+            -- Terminal related mappings
+            local terminal = {
+                mode = { "n" },
+                { "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", desc = "Float", nowait = true, remap = false },
+                { "<leader>tg", "<cmd>lua GitToggle()<cr>", desc = "Lazygit", nowait = true, remap = false },
+                { "<leader>th", "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "Horizontal", nowait = true, remap = false },
+                { "<leader>tn", "<cmd>lua NodeToggle()<cr>", desc = "Node", nowait = true, remap = false },
+                { "<leader>tp", "<cmd>lua PythonToggle()<cr>", desc = "Python", nowait = true, remap = false },
+                { "<leader>tt", "<cmd>lua HtopToggle()<cr>", desc = "Htop", nowait = true, remap = false },
+                { "<leader>tu", "<cmd>lua NcduToggle()<cr>", desc = "Ncdu", nowait = true, remap = false },
+                { "<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<cr>", desc = "Vertical", nowait = true, remap = false },
+            }
+            wk.add(terminal)
             ---- Leader related mappings
             --local lead_mappings = {
             --    c = { "<cmd>bdelete<cr>", "Close Buffer" },
@@ -137,25 +142,6 @@ return {
             --    nowait = true,
             --})
 
-            -- Terminal related mappings
-            local t_map = {
-                g = { "<cmd>lua GitToggle()<cr>", "Lazygit" },
-                n = { "<cmd>lua NodeToggle()<cr>", "Node" },
-                u = { "<cmd>lua NcduToggle()<cr>", "Ncdu" },
-                t = { "<cmd>lua HtopToggle()<cr>", "Htop" },
-                p = { "<cmd>lua PythonToggle()<cr>", "Python" },
-                f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
-                h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
-                v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
-            }
-            wk.register(t_map, {
-                mode = "n",
-                prefix = "<leader>t",
-                buffer = nil,
-                silent = true,
-                noremap = true,
-                nowait = true,
-            })
         end,
     },
 
