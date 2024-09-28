@@ -668,6 +668,12 @@ return {
         'nvim-tree/nvim-web-devicons',
     },
 
+    -- Mini icons
+    -- https://github.com/echasnovski/mini.icons
+    {
+        'echasnovski/mini.icons',
+        lazy = true,
+    },
 }
 
 -- vim: ts=4 sts=4 sw=4 et
