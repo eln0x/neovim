@@ -46,6 +46,18 @@ return {
             wk.setup(opts)
             wk.add(opts.defaults)
 
+            -- Leader related mappings
+            --local leader = {
+            --    mode = { "n" },
+            --    { "<leader>b", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>", desc = "Find Buffer", nowait = true, remap = false },
+            --    { "<leader>c", "<cmd>bdelete<cr>", desc = "Close Buffer", nowait = true, remap = false },
+            --    { "<leader>h", "<cmd>nohlsearch<cr>", desc = "No Highlight", nowait = true, remap = false },
+            --    --{ "<leader>i", "<cmd>IndentBlanklineToggle<cr>", desc = "Indent Line", nowait = true, remap = false },
+            --    { "<leader>p", "<cmd>lua require('telescope').extensions.projects.projects(require('telescope.themes').get_dropdown{previewer = false})<cr>", desc = "Find Projects", nowait = true, remap = false },
+            --    { "<leader>s", "<cmd>w<cr>", desc = "Save Buffer", nowait = true, remap = false },
+            --}
+            --wk.add(leader)
+
             -- Terminal related mappings
             local terminal = {
                 mode = { "n" },
@@ -59,88 +71,53 @@ return {
                 { "<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<cr>", desc = "Vertical", nowait = true, remap = false },
             }
             wk.add(terminal)
-            ---- Leader related mappings
-            --local lead_mappings = {
-            --    c = { "<cmd>bdelete<cr>", "Close Buffer" },
-            --    h = { "<cmd>nohlsearch<cr>", "No Highlight" },
-            --    i = { "<cmd>IndentBlanklineToggle<cr>", "Indent Line" },
-            --    q = { "<cmd>q<cr>", "Quit Neovim" },
-            --    w = { "<cmd>w<cr>", "Save Buffer" },
-            --    x = { "<cmd>source %<cr>", "Reload Conf" },
-            --}
-            --wk.register(lead_mappings, {
-            --    moe = "n",
-            --    prefix = "<leader>",
-            --    buffer = nil,
-            --    silent = true,
-            --    noremap = true,
-            --    nowait = true,
-            --})
 
-            ---- Telescope related mappings
-            --local f_map = {
-            --    b = { "<cmd>Telescope buffers theme=ivy<cr>", "Buffers" },
-            --    c = { "<cmd>Telescope commands theme=ivy<cr>", "Commands" },
-            --    f = { "<cmd>Telescope find_files theme=ivy<cr>",  "Files" },
-            --    g = { "<cmd>Telescope live_grep theme=ivy<cr>", "Grep" },
-            --    k = { "<cmd>Telescope keymaps theme=ivy<cr>", "Keymaps" },
-            --    m = { "<cmd>Telescope man_pages theme=ivy<cr>", "Man Pages" },
-            --    n = { "<cmd>Telescope notify theme=ivy<cr>", "Notifications" },
-            --    o = { "<cmd>Telescope git_status theme=ivy<cr>", "Changed" },
-            --    s = { "<cmd>lua require('telescope.builtin').colorscheme(require('telescope.themes').get_dropdown{previewer = false})<cr>",  "Colorschemes" },
-            --    p = { "<cmd>lua require('telescope').extensions.projects.projects(require('telescope.themes').get_dropdown{previewer = false})<cr>", "Projects" },
+            -- Finder related mappings
+            --local finder = {
+            --    mode = { "n" },
+            --    { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers", nowait = true, remap = false },
+            --    { "<leader>fc", "<cmd>Telescope commands<cr>", desc = "Commands", nowait = true, remap = false },
+            --    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Files", nowait = true, remap = false },
+            --    { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Grep", nowait = true, remap = false },
+            --    { "<leader>fk", "<cmd>Telescope keymaps<cr>", desc = "Keymaps", nowait = true, remap = false },
+            --    { "<leader>fm", "<cmd>Telescope man_pages<cr>", desc = "Man Pages", nowait = true, remap = false },
+            --    { "<leader>fn", "<cmd>Telescope notify<cr>", desc = "Notifications", nowait = true, remap = false },
+            --    { "<leader>fo", "<cmd>Telescope git_status<cr>", desc = "Changed", nowait = true, remap = false },
+            --    { "<leader>fs", "<cmd>lua require('telescope.builtin').colorscheme(require('telescope.themes').get_dropdown{previewer = false})<cr>", desc = "Colorschemes", nowait = true, remap = false },
+            --    { "<leader>fp", "<cmd>lua require('telescope').extensions.projects.projects(require('telescope.themes').get_dropdown{previewer = false})<cr>", desc = "Projects", nowait = true, remap = false },
             --}
-            --wk.register( f_map, {
-            --    mode = "n",
-            --    prefix = "<leader>f",
-            --    buffer = nil,
-            --    silent = true,
-            --    noremap = true,
-            --    nowait = true,
-            --})
+            --wk.add(finder)
 
-            ---- Lsp related mappings
-            --local l_map = {
-            --    ["?"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover Doc" },
-            --    ["a"] = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-            --    ["d"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Goto Definition" },
-            --    ["D"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Goto Declaration" },
-            --    ["f"] = { "<cmd>lua vim.lsp.buf.format{async=true}<cr>", "Format" },
-            --    ["h"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature Help" },
-            --    ["i"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Goto Implementation" },
-            --    ["n"] = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "Diagnostic Goto Next" },
-            --    ["o"] = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Diagnostic Open" },
-            --    ["p"] = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Diagnostic Goto Prev" },
-            --    ["r"] = { "<cmd>lua vim.lsp.buf.references()<cr>", "References" },
-            --    ["s"] = { "<cmd>lua vim.lsp.buf.document_symbol()<cr>", "Document Symbols" },
-            --    ["S"] = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" },
-            --    ["t"] = { "<cmd>lua vim.lsp.buf.type_definition()<cr>", "Type definition" },
-            --    ["w"] = { "<cmd>Telescope diagnostics<cr>", "Workspace Diagnostics" },
+            -- Git related mappings
+            --local git = {
+            --    mode = { "n" },
+            --    { "<leader>gj", "<cmd>lua require 'gitsigns'.next_hunk()<cr>", desc = "Next Hunk", nowait = true, remap = false },
+            --    { "<leader>gk", "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", desc = "Prev Hunk", nowait = true, remap = false },
+            --    { "<leader>gl", "<cmd>lua require 'gitsigns'.blame_line()<cr>", desc = "Blame", nowait = true, remap = false },
+            --    { "<leader>gp", "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", desc = "Preview Hunk", nowait = true, remap = false },
             --}
-            --wk.register(l_map, {
-            --    mode = "n",
-            --    prefix = "<leader>l",
-            --    buffer = nil,
-            --    silent = true,
-            --    noremap = true,
-            --    nowait = true,
-            --})
+            --wk.add(git)
 
-            ---- Git related mappings
-            --local g_map = {
-            --    j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
-            --    k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
-            --    l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
-            --    p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
+            -- Code related mappings
+            --local code = {
+            --    mode = { "n" },
+            --    { "<leader>l?", "<cmd>lua vim.lsp.buf.hover()<cr>", desc = "Hover Doc", nowait = true, remap = false },
+            --    { "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code Action", nowait = true, remap = false },
+            --    { "<leader>ld", "<cmd>lua vim.lsp.buf.definition()<cr>", desc = "Goto Definition", nowait = true, remap = false },
+            --    { "<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<cr>", desc = "Goto Declaration", nowait = true, remap = false },
+            --    { "<leader>lf", "<cmd>lua vim.lsp.buf.format{async=true}<cr>", desc = "Format", nowait = true, remap = false },
+            --    { "<leader>lh", "<cmd>lua vim.lsp.buf.signature_help()<cr>", desc = "Signature Help", nowait = true, remap = false },
+            --    { "<leader>li", "<cmd>lua vim.lsp.buf.implementation()<cr>", desc = "Goto Implementation", nowait = true, remap = false },
+            --    { "<leader>ln", "<cmd>lua vim.diagnostic.goto_next()<cr>", desc = "Diagnostic Goto Next", nowait = true, remap = false },
+            --    { "<leader>lo", "<cmd>lua vim.diagnostic.open_float()<cr>", desc = "Diagnostic Open", nowait = true, remap = false },
+            --    { "<leader>lp", "<cmd>lua vim.diagnostic.goto_prev()<cr>", desc = "Diagnostic Goto Prev", nowait = true, remap = false },
+            --    { "<leader>lr", "<cmd>lua vim.lsp.buf.references()<cr>", desc = "References", nowait = true, remap = false },
+            --    { "<leader>ls", "<cmd>lua vim.lsp.buf.document_symbol()<cr>", desc = "Document Symbols", nowait = true, remap = false },
+            --    { "<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Workspace Symbols", nowait = true, remap = false },
+            --    { "<leader>lt", "<cmd>lua vim.lsp.buf.type_definition()<cr>", desc = "Type Definition", nowait = true, remap = false },
+            --    { "<leader>lw", "<cmd>Telescope diagnostics<cr>", desc = "Workspace Diagnostics", nowait = true, remap = false },
             --}
-            --wk.register(g_map, {
-            --    mode = "n",
-            --    prefix = "<leader>g",
-            --    buffer = nil,
-            --    silent = true,
-            --    noremap = true,
-            --    nowait = true,
-            --})
+            --wk.add(code)
 
         end,
     },
@@ -150,6 +127,8 @@ return {
     {
         'nvim-tree/nvim-tree.lua',
         opts = function()
+            local vim = vim
+
             -- disable netrw
             vim.g.loaded = 1
             vim.g.loaded_netrwPlugin = 1
