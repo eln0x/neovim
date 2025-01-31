@@ -13,7 +13,6 @@ if not path_ok then
     return
 end
 
-local fortune = require "alpha.fortune"
 local dashboard = require "alpha.themes.dashboard"
 local devicons = require "nvim-web-devicons"
 local cdir = vim.fn.getcwd()
@@ -99,9 +98,9 @@ local function mru(start, cwd, items_number, opts)
             short_fn = vim.fn.fnamemodify(fn, ":~")
         end
 
-        if(#short_fn > target_width) then
+        if #short_fn > target_width then
             short_fn = path.new(short_fn):shorten(1, {-2, -1})
-            if(#short_fn > target_width) then
+            if #short_fn > target_width then
                 short_fn = path.new(short_fn):shorten(1, {-1})
             end
         end
@@ -124,40 +123,7 @@ local function mru(start, cwd, items_number, opts)
     }
 end
 
-local logo = {
-    [[         ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡖⠁⠀⠀⠀⠀⠀⠀⠈⢲⣄⠀⠀⠀⠀⠀⠀⠀ ⠀         ⠀ ]],
-    [[         ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣧⠀⠀ ⠀⠀⠀⠀⠀         ⠀ ]],
-    [[         ⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣇⠀⠀ ⠀⠀⠀⠀         ⠀ ]],
-    [[         ⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⡇⠀⢀⣀⣤⣤⣤⣤⣀⡀⠀⢸⣿⣿⠀⠀⠀ ⠀⠀⠀         ⠀ ]],
-    [[         ⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣔⢿⡿⠟⠛⠛⠻⢿⡿⣢⣿⣿⡟⠀⠀⠀⠀ ⠀⠀         ⠀ ]],
-    [[         ⠀⠀⠀⠀⠀⠀⣀⣤⣶⣾⣿⣿⣿⣷⣤⣀⡀⢀⣀⣤⣾⣿⣿⣿⣷⣶⣤⡀⠀⠀⠀         ⠀ ]],
-    [[         ⠀⠀⠀⠀⢠⣾⣿⡿⠿⠿⠿⣿⣿⣿⣿⡿⠏⠻⢿⣿⣿⣿⣿⠿⠿⠿⢿⣿⣷⡀⠀         ⠀ ]],
-    [[          ⠀⠀⢠⡿⠋⠁⠀⠀⢸⣿⡇⠉⠻⣿⠇⠀⠀⠸⣿⡿⠋⢰⣿⡇⠀⠀⠈⠙⢿⡄         ⠀ ]],
-    [[         ⠀ ⠀⡿⠁⠀⠀⠀⠀⠘⣿⣷⡀⠀⠰⣿⣶⣶⣿⡎⠀⢀⣾⣿⠇⠀⠀⠀⠀⠈⢿         ⠀ ]],
-    [[         ⠀ ⠀⡇⠀⠀⠀⠀⠀⠀⠹⣿⣷⣄⠀⣿⣿⣿⣿⠀⣠⣾⣿⠏⠀⠀⠀⠀⠀⠀⢸         ⠀ ]],
-    [[         ⠀ ⠀⠁⠀⠀⠀⠀⠀⠀⠀⠈⠻⢿⢇⣿⣿⣿⣿⡸⣿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠈         ⠀ ]],
-    [[         ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀          ⠀ ]],
-    [[         ⠀⠀⠀⠀⠐⢤⣀⣀⢀⣀⣠⣴⣿⣿⠿⠋⠙⠿⣿⣿⣦⣄⣀⠀⠀⣀⡠⠂⠀⠀⠀           ]],
-    [[         ⠀⠀⠀⠀⠀⠀⠈⠉⠛⠛⠛⠛⠉⠀⠀⠀⠀⠀⠈⠉⠛⠛⠛⠛⠋⠁⠀⠀⠀⠀⠀           ]],
-    [[                             __                    ]],
-    [[      _____ _____    _______/  |_  ___________     ]],
-    [[     /     \\__  \  /  ___/\   __\/ __ \_  __ \    ]],
-    [[    |  Y Y  \/ __ \_\___ \  |  | \  ___/|  | \/    ]],
-    [[    |__|_|  (____  /____  > |__|  \___  >__|       ]],
-    [[          \/     \/     \/            \/           ]],
-}
-
-local section_header = {
-    type = "text",
-    val = logo,
-    opts = {
-        hl = "Operator",
-        shrink_margin = false,
-        position = "center",
-    }
-}
-
-local section_mru = {
+local recents = {
     type = "group",
     val = {
         {
@@ -180,45 +146,86 @@ local section_mru = {
     }
 }
 
-local section_buttons = {
+local function header()
+    local logo = {
+        [[         ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡖⠁⠀⠀⠀⠀⠀⠀⠈⢲⣄⠀⠀⠀⠀⠀⠀⠀ ⠀         ⠀ ]],
+        [[         ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣧⠀⠀ ⠀⠀⠀⠀⠀         ⠀ ]],
+        [[         ⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣇⠀⠀ ⠀⠀⠀⠀         ⠀ ]],
+        [[         ⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⡇⠀⢀⣀⣤⣤⣤⣤⣀⡀⠀⢸⣿⣿⠀⠀⠀ ⠀⠀⠀         ⠀ ]],
+        [[         ⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣔⢿⡿⠟⠛⠛⠻⢿⡿⣢⣿⣿⡟⠀⠀⠀⠀ ⠀⠀         ⠀ ]],
+        [[         ⠀⠀⠀⠀⠀⠀⣀⣤⣶⣾⣿⣿⣿⣷⣤⣀⡀⢀⣀⣤⣾⣿⣿⣿⣷⣶⣤⡀⠀⠀⠀         ⠀ ]],
+        [[         ⠀⠀⠀⠀⢠⣾⣿⡿⠿⠿⠿⣿⣿⣿⣿⡿⠏⠻⢿⣿⣿⣿⣿⠿⠿⠿⢿⣿⣷⡀⠀         ⠀ ]],
+        [[          ⠀⠀⢠⡿⠋⠁⠀⠀⢸⣿⡇⠉⠻⣿⠇⠀⠀⠸⣿⡿⠋⢰⣿⡇⠀⠀⠈⠙⢿⡄         ⠀ ]],
+        [[         ⠀ ⠀⡿⠁⠀⠀⠀⠀⠘⣿⣷⡀⠀⠰⣿⣶⣶⣿⡎⠀⢀⣾⣿⠇⠀⠀⠀⠀⠈⢿         ⠀ ]],
+        [[         ⠀ ⠀⡇⠀⠀⠀⠀⠀⠀⠹⣿⣷⣄⠀⣿⣿⣿⣿⠀⣠⣾⣿⠏⠀⠀⠀⠀⠀⠀⢸         ⠀ ]],
+        [[         ⠀ ⠀⠁⠀⠀⠀⠀⠀⠀⠀⠈⠻⢿⢇⣿⣿⣿⣿⡸⣿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠈         ⠀ ]],
+        [[         ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀          ⠀ ]],
+        [[         ⠀⠀⠀⠀⠐⢤⣀⣀⢀⣀⣠⣴⣿⣿⠿⠋⠙⠿⣿⣿⣦⣄⣀⠀⠀⣀⡠⠂⠀⠀⠀           ]],
+        [[         ⠀⠀⠀⠀⠀⠀⠈⠉⠛⠛⠛⠛⠉⠀⠀⠀⠀⠀⠈⠉⠛⠛⠛⠛⠋⠁⠀⠀⠀⠀⠀           ]],
+        [[                             __                    ]],
+        [[      _____ _____    _______/  |_  ___________     ]],
+        [[     /     \\__  \  /  ___/\   __\/ __ \_  __ \    ]],
+        [[    |  Y Y  \/ __ \_\___ \  |  | \  ___/|  | \/    ]],
+        [[    |__|_|  (____  /____  > |__|  \___  >__|       ]],
+        [[          \/     \/     \/            \/           ]],
+    }
+
+    return {
+        type = "text",
+        val = logo,
+        opts = {
+            hl = "Operator",
+            shrink_margin = false,
+            position = "center",
+        },
+    }
+end
+
+local buttons = {
     type = "group",
     val = {
         { type = "text", val = "Quick links", opts = { hl = "Constant", position = "center" } },
         { type = "padding", val = 1 },
-        dashboard.button("n", " " .. " New file", "<cmd> ene <BAR> startinsert <cr>"),
-        dashboard.button("f", " " .. " Find file", "<cmd> Telescope find_files <cr>"),
-        dashboard.button("p", " " .. " Find project", "<cmd> Telescope projects <cr>"),
-        dashboard.button("g", " " .. " Find text", "<cmd> Telescope live_grep <cr>"),
-        dashboard.button("m", " " .. " Find modified file", "<cmd> Telescope git_status <cr>"),
-        dashboard.button("u", " " .. " Sync plugins", "<cmd> PackerUpdate <cr>"),
-        dashboard.button("s", " " .. " Restore Session", [[<cmd> lua require("persistence").load() <cr>]]),
-        dashboard.button("h", " " .. " Check health", "<cmd> checkhealth <cr>"),
-        dashboard.button("q", " " .. " Quit", "<cmd> qa <cr>"),
+        dashboard.button("n", "  New file", "<cmd> ene <BAR> startinsert <cr>"),
+        dashboard.button("f", "  Find file", "<cmd> Telescope find_files <cr>"),
+        dashboard.button("p", "  Find project", "<cmd> Telescope projects <cr>"),
+        dashboard.button("g", "  Find text", "<cmd> Telescope live_grep <cr>"),
+        dashboard.button("m", "  Find modified file", "<cmd> Telescope git_status <cr>"),
+        dashboard.button("u", "󱐥  Update plugins", "<cmd> PackerUpdate <CR>"),
+        dashboard.button("s", "  Restore Session", [[<cmd> lua require("persistence").load() <cr>]]),
+        dashboard.button("h", "  Check health", "<cmd> checkhealth <cr>"),
+        dashboard.button("q", "  Quit", "<cmd> qa <cr>"),
     },
     position = "center",
 }
 
-local section_footer = {
-    type = "group",
-    val = {
-        {
-            type = "text",
-            val = fortune(),
-            opts = { hl = "Constant", position = "center" }
+local function footer()
+    local fortune   = require("alpha.fortune")
+    local footer_text = fortune()
+
+    table.insert(footer_text, "")
+    table.insert(footer_text, "⚡ Neovim loaded")
+
+    return {
+        type = "group",
+        val = {
+            {
+                type = "text",
+                val = footer_text,
+                opts = { hl = "Constant", position = "center" },
+            },
         },
     }
-}
+end
 
 local opts = {
     layout = {
-        { type = "padding", val = 1 }, section_header,
-        { type = "padding", val = 1 }, section_mru,
-        { type = "padding", val = 1 }, section_buttons,
-        section_footer,
+        { type = "padding", val = 1 }, header(),
+        { type = "padding", val = 1 }, recents,
+        { type = "padding", val = 1 }, buttons,
+        { type = "padding", val = 1 }, footer(),
     },
-    opts = {
-        margin = 5,
-    },
+    opts = { margin = 5 },
 }
 
 alpha.setup(opts)
