@@ -12,15 +12,7 @@ local hide_in_width = function()
     return vim.fn.winwidth(0) > 80
 end
 
-local diagnostics = {
-    "diagnostics",
-    sources = { "nvim_diagnostic" },
-    sections = { "warn", "error" },
-    symbols = { warn = " ", error = " " },
-    colored = true,
-    update_in_insert = false,
-    always_visible = true,
-}
+vim.o.laststatus = vim.g.lualine_laststatus
 
 local mode = {
     "mode",
@@ -33,6 +25,40 @@ local branch = {
     "branch",
     icons_enabled = true,
     icon = "",
+}
+
+local diff = {
+    "diff",
+    symbols = {
+        added = " "  ,
+        modified = " ",
+        removed = " "  ,
+    },
+    source = function()
+        local gitsigns = vim.b.gitsigns_status_dict
+        if gitsigns then
+            return {
+                added = gitsigns.added,
+                modified = gitsigns.changed,
+                removed = gitsigns.removed,
+            }
+        end
+    end,
+}
+
+local diagnostics = {
+    "diagnostics",
+    sources = { "nvim_diagnostic" },
+    sections = { "warn", "error", "hint" },
+    symbols = {
+        error = " "  ,
+        warn = " "  ,
+        hint = " "  ,
+        info = " "  ,
+    },
+    colored = true,
+    update_in_insert = false,
+    always_visible = false,
 }
 
 local date = {
@@ -49,28 +75,38 @@ end
 lualine.setup({
     options = {
         icons_enabled = true,
-        theme = "auto",
-        component_separators = { left = '', right = ''},
-        section_separators = { left = '', right = ''},
-        disabled_filetypes = { "alpha", "NvimTree", "Outline" },
+        theme = "ayu_dark",
+        globalstatus = vim.o.laststatus == 3,
+        disabled_filetypes = { statusline = { "dashboard", "alpha", "starter", "NvimTree" } },
         always_divide_middle = true,
-        globalstatus = true,
     },
     sections = {
         lualine_a = { mode },
-        lualine_b = { branch, 'diff', diagnostics},
-        lualine_c = { },
+        lualine_b = { branch, diff },
+        lualine_c = {
+            {
+                'filename',
+                file_status = true,
+                path = 1
+            },
+            diagnostics,
+        },
         lualine_x = {
+            -- stylua: ignore
             {
                 function() return require("noice").api.status.command.get() end,
                 cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
             },
+            -- stylua: ignore
             {
                 function() return require("noice").api.status.mode.get() end,
                 cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
             },
-            'filetype', spaces, 'encoding', 'fileformat'
-
+            -- stylua: ignore
+            {
+                function() return "  " .. require("dap").status() end,
+                cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
+            },
         },
         lualine_y = {
             {
@@ -82,17 +118,15 @@ lualine.setup({
                 "location",
                 padding = { left = 0, right = 1 }
             },
+            {
+                "filetype",
+                icon_only = false,
+                separator = "",
+                padding = { left = 1, right = 0 }
+            },
+            spaces, 'encoding', 'fileformat',
         },
         lualine_z = { date },
     },
-    inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = { "filename" },
-        lualine_x = { "location" },
-        lualine_y = {},
-        lualine_z = {},
-    },
-    tabline = {},
-    extensions = {},
+    extensions = { "neo-tree", "lazy" },
 })
