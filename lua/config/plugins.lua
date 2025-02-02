@@ -112,25 +112,22 @@ packer.startup(function(use)
     use 'nvim-treesitter/nvim-treesitter-textobjects'   -- Treesitter for textobjects
     use 'nvim-treesitter/nvim-treesitter-context'       -- Treesitter for context
 
+    -- lsp
+    use 'neovim/nvim-lspconfig'                         -- Lsp configuration
+    use 'williamboman/mason.nvim'                       -- Manage external editors
+    use 'williamboman/mason-lspconfig.nvim'             -- Bridge mason with lspconfig
+    use "ray-x/lsp_signature.nvim"                      -- Signature completion
+    use 'WhoIsSethDaniel/mason-tool-installer.nvim'     -- Install or upgrade 3rd party tools
+    use 'jose-elias-alvarez/null-ls.nvim'               -- Diagnostic and code injection
+    use 'mfussenegger/nvim-dap'                         -- Debug adapter protocol
+    use 'rcarriga/nvim-dap-ui'                          -- Dap ui
+    use 'nvim-neotest/nvim-nio'
+    use 'theHamsta/nvim-dap-virtual-text'               -- Virtual text support
+    -- use 'ravenxrz/DAPInstall.nvim'                   -- Dap installer
+
     -- tags
     use 'preservim/tagbar'                              -- Tags browser
     use 'ludovicchabant/vim-gutentags'                  -- Tags management
-
-    -- lsp
-    use 'williamboman/mason.nvim'                       -- Manage external editors
-    use 'williamboman/mason-lspconfig.nvim'             -- Bridge mason with lspconfig
-    use 'WhoIsSethDaniel/mason-tool-installer.nvim'     -- Install or upgrade 3rd party tools
-    use 'neovim/nvim-lspconfig'                         -- Lsp configuration
-    use 'jose-elias-alvarez/null-ls.nvim'               -- Diagnostic and code injection
-
-    -- completion
-    use "ray-x/lsp_signature.nvim"                      -- Signature completion
-
-    -- dap
-    use 'mfussenegger/nvim-dap'                         -- Debug adapter protocol
-    use 'rcarriga/nvim-dap-ui'                          -- Dap ui
-    use 'theHamsta/nvim-dap-virtual-text'               -- Virtual text support
-    -- use 'ravenxrz/DAPInstall.nvim'                   -- Dap installer
 
     -- git
     use 'tpope/vim-fugitive'                            -- Github Wrapper

@@ -8,7 +8,13 @@ if not dap_ok then
     return
 end
 
-vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
+vim.fn.sign_define(
+    "DapBreakpoint", {
+        text = "",
+        texthl = "DiagnosticSignError",
+        linehl = "",
+        numhl = ""
+    })
 
 --
 -- Dapui configuration
@@ -66,3 +72,5 @@ if not vtext_ok then
 end
 
 vtext.setup()
+
+-- vim: ts=4 sts=4 sw=4 et

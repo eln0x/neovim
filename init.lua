@@ -55,17 +55,18 @@ require 'code.golang'
 require 'code.syntax'
 require 'code.context'
 
+-- lsp
+require 'lsp.config'
+require 'lsp.mason'
+require 'lsp.null'
+require 'lsp.dap'
+require 'lsp.lint'
+
 -- utils
 require 'plug.tags'
 require 'plug.project'
 require 'plug.persistence'
 require 'plug.impatient'
-require 'plug.dap'
 require 'plug.hardtime'
-
--- lsp
-require 'lsp.config'
-require 'lsp.null'
-require 'lsp.lint'
 
 -- vim: ts=4 sts=4 sw=4 et
