@@ -63,3 +63,5 @@ require('illuminate').configure({
     -- case_insensitive_regex: sets regex case sensitivity
     case_insensitive_regex = false,
 })
+
+-- vim: ts=4 sts=4 sw=4 et

@@ -2,6 +2,8 @@
 -- Plugins installer
 --
 
+local vim = vim
+
 -- Bootstrapper
 local ensure_packer = function()
     local fn = vim.fn
@@ -53,6 +55,14 @@ packer.startup(function(use)
     -- packer
     use 'wbthomason/packer.nvim'
 
+    -- colorscheme
+    use 'rktjmp/lush.nvim'                              -- Theme creation helper
+    use 'rktjmp/shipwright.nvim'                        -- Build theme from lush
+    use 'metalelf0/jellybeans-nvim'                     -- Jellybeans port to lua
+    use 'folke/tokyonight.nvim'                         -- Tokyo theme
+    use 'lunarvim/darkplus.nvim'                        -- Lunar theme
+    use 'NvChad/nvim-colorizer.lua'                     -- Color highlighter
+
     -- ui
     use 'nvim-lua/plenary.nvim'                         -- Lua functions
     use 'goolord/alpha-nvim'                            -- Startup screen
@@ -68,20 +78,24 @@ packer.startup(function(use)
     use 'kyazdani42/nvim-web-devicons'                  -- File icons
     use 'echasnovski/mini.icons'
 
-    -- colorscheme
-    use 'rktjmp/lush.nvim'                              -- Theme creation helper
-    use 'rktjmp/shipwright.nvim'                        -- Build theme from lush
-    use 'metalelf0/jellybeans-nvim'                     -- Jellybeans port to lua
-    use 'folke/tokyonight.nvim'                         -- Tokyo theme
-    use 'lunarvim/darkplus.nvim'                        -- Lunar theme
-    use 'NvChad/nvim-colorizer.lua'                     -- Color highlighter
+    -- editor
+    use 'folke/which-key.nvim'                          -- Key binding completion
+    use 'kyazdani42/nvim-tree.lua'                      -- File explorer
+    use 'nvim-telescope/telescope.nvim'                 -- Fuzzy finder
+    use 'RRethy/vim-illuminate'                         -- Highlighting other uses of the word
+    use 'folke/todo-comments.nvim'                      -- Highlight todo comments
+    use 'lewis6991/gitsigns.nvim'                       -- Show modified lines for VCS files
+    use 'nvim-pack/nvim-spectre'                        -- Search and replace panel
+    use 'folke/flash.nvim'                              -- Navigate by search labels
+    use 'stevearc/aerial.nvim'                          -- Code outline and nav helper
+    use 'folke/trouble.nvim'                            -- List to show diag, ref, quickfix...
+    use 'akinsho/toggleterm.nvim'                       -- Toggle terminal
 
     -- tags
     use 'preservim/tagbar'                              -- Tags browser
     use 'ludovicchabant/vim-gutentags'                  -- Tags management
 
     -- telescope
-    use 'nvim-telescope/telescope.nvim'                 -- Fuzzy finder
     use 'ahmedkhalf/project.nvim'                       -- Project jumper
     use 'nvim-treesitter/nvim-treesitter'               -- Syntax highlightings
     use 'nvim-treesitter/nvim-treesitter-textobjects'   -- Treesitter for textobjects
@@ -94,7 +108,6 @@ packer.startup(function(use)
     use 'neovim/nvim-lspconfig'                         -- Lsp configuration
     use 'jose-elias-alvarez/null-ls.nvim'               -- Diagnostic and code injection
     use 'onsails/lspkind-nvim'                          -- Add pictograms to builtin lsp
-    use 'stevearc/aerial.nvim'                          -- Code outline and nav helper
 
     -- completion
     use 'hrsh7th/nvim-cmp'                              -- Nvim completion
@@ -113,23 +126,14 @@ packer.startup(function(use)
     -- use 'ravenxrz/DAPInstall.nvim'                   -- Dap installer
 
     -- git
-    use 'lewis6991/gitsigns.nvim'                       -- Show modified lines for VCS files
     use 'tpope/vim-fugitive'                            -- Github Wrapper
     use 'rhysd/git-messenger.vim'                       -- Show git hidden messages
 
     -- utils
     use 'dstein64/vim-startuptime'                      -- Startup time bench
-    use 'RRethy/vim-illuminate'                         -- Highlighting other uses of the word
-    use 'folke/todo-comments.nvim'                      -- Highlight todo comments
-    use 'folke/trouble.nvim'                            -- List to show diag, ref, quickfix...
     use 'mfussenegger/nvim-lint'                        -- Nvim linter
-    use 'folke/flash.nvim'                              -- Navigate by search labels
-    use 'nvim-pack/nvim-spectre'                        -- Search and replace panel
     use 'folke/persistence.nvim'                        -- Automated session management
     use 'lewis6991/impatient.nvim'                      -- Speedup startup time
-    use 'kyazdani42/nvim-tree.lua'                      -- File explorer
-    use 'folke/which-key.nvim'                          -- Key binding completion
-    use 'akinsho/toggleterm.nvim'                       -- Toggle terminal
     use 'numToStr/Comment.nvim'                         -- Comment helper
     use 'JoosepAlviste/nvim-ts-context-commentstring'   -- Comment string helper
     use 'Raimondi/delimitMate'                          -- Autoclose quotes, bracket etc...

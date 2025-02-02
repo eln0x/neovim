@@ -57,3 +57,5 @@ local python = Terminal:new({ cmd = "python", hidden = true })
 function PythonToggle()
     python:toggle()
 end
+
+-- vim: ts=4 sts=4 sw=4 et

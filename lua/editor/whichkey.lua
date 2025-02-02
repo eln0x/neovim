@@ -129,3 +129,5 @@ local code = {
     { "<leader>lw", "<cmd>Telescope diagnostics<cr>", desc = "Workspace Diagnostics", nowait = true, remap = false },
 }
 which_key.add(code)
+
+-- vim: ts=4 sts=4 sw=4 et
