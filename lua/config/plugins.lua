@@ -91,25 +91,7 @@ packer.startup(function(use)
     use 'folke/trouble.nvim'                            -- List to show diag, ref, quickfix...
     use 'akinsho/toggleterm.nvim'                       -- Toggle terminal
 
-    -- tags
-    use 'preservim/tagbar'                              -- Tags browser
-    use 'ludovicchabant/vim-gutentags'                  -- Tags management
-
-    -- telescope
-    use 'ahmedkhalf/project.nvim'                       -- Project jumper
-    use 'nvim-treesitter/nvim-treesitter'               -- Syntax highlightings
-    use 'nvim-treesitter/nvim-treesitter-textobjects'   -- Treesitter for textobjects
-    use 'nvim-treesitter/nvim-treesitter-context'       -- Treesitter for context
-
-    -- lsp
-    use 'williamboman/mason.nvim'                       -- Manage external editors
-    use 'williamboman/mason-lspconfig.nvim'             -- Bridge mason with lspconfig
-    use 'WhoIsSethDaniel/mason-tool-installer.nvim'     -- Install or upgrade 3rd party tools
-    use 'neovim/nvim-lspconfig'                         -- Lsp configuration
-    use 'jose-elias-alvarez/null-ls.nvim'               -- Diagnostic and code injection
-    use 'onsails/lspkind-nvim'                          -- Add pictograms to builtin lsp
-
-    -- completion
+    -- coding
     use 'hrsh7th/nvim-cmp'                              -- Nvim completion
     use 'hrsh7th/cmp-nvim-lsp'                          -- Lsp completion
     use 'hrsh7th/cmp-buffer'                            -- Buffer words
@@ -117,6 +99,31 @@ packer.startup(function(use)
     use 'hrsh7th/cmp-cmdline'                           -- Nvim's commandline
     use 'hrsh7th/cmp-calc'                              -- Math calculation
     use 'hrsh7th/cmp-nvim-lua'                          -- Complete lua api
+    use 'onsails/lspkind-nvim'                          -- Add pictograms to builtin lsp
+    use 'L3MON4D3/LuaSnip'                              -- Luasnip users
+    use 'saadparwaiz1/cmp_luasnip'                      -- Luasnip completion source
+    use 'rafamadriz/friendly-snippets'                  -- Snippets collection
+    use 'JoosepAlviste/nvim-ts-context-commentstring'   -- Comment string helper
+    use 'numToStr/Comment.nvim'                         -- Comment helper
+    use 'ray-x/go.nvim'                                 -- Golang neovim plugin
+
+    -- treesitter
+    use 'nvim-treesitter/nvim-treesitter'               -- Syntax highlightings
+    use 'nvim-treesitter/nvim-treesitter-textobjects'   -- Treesitter for textobjects
+    use 'nvim-treesitter/nvim-treesitter-context'       -- Treesitter for context
+
+    -- tags
+    use 'preservim/tagbar'                              -- Tags browser
+    use 'ludovicchabant/vim-gutentags'                  -- Tags management
+
+    -- lsp
+    use 'williamboman/mason.nvim'                       -- Manage external editors
+    use 'williamboman/mason-lspconfig.nvim'             -- Bridge mason with lspconfig
+    use 'WhoIsSethDaniel/mason-tool-installer.nvim'     -- Install or upgrade 3rd party tools
+    use 'neovim/nvim-lspconfig'                         -- Lsp configuration
+    use 'jose-elias-alvarez/null-ls.nvim'               -- Diagnostic and code injection
+
+    -- completion
     use "ray-x/lsp_signature.nvim"                      -- Signature completion
 
     -- dap
@@ -130,12 +137,11 @@ packer.startup(function(use)
     use 'rhysd/git-messenger.vim'                       -- Show git hidden messages
 
     -- utils
+    use 'ahmedkhalf/project.nvim'                       -- Project jumper
     use 'dstein64/vim-startuptime'                      -- Startup time bench
     use 'mfussenegger/nvim-lint'                        -- Nvim linter
     use 'folke/persistence.nvim'                        -- Automated session management
     use 'lewis6991/impatient.nvim'                      -- Speedup startup time
-    use 'numToStr/Comment.nvim'                         -- Comment helper
-    use 'JoosepAlviste/nvim-ts-context-commentstring'   -- Comment string helper
     use 'Raimondi/delimitMate'                          -- Autoclose quotes, bracket etc...
     use 'roxma/vim-paste-easy'                          -- Automatic paste mode
     use 'terryma/vim-multiple-cursors'                  -- Multiple cursors
@@ -145,13 +151,7 @@ packer.startup(function(use)
     use 'mhinz/vim-rfc'                                 -- Download RFC
     use 'm4xshen/hardtime.nvim'                         -- Best practice
 
-    -- snippets
-    use 'L3MON4D3/LuaSnip'                              -- Luasnip users
-    use 'saadparwaiz1/cmp_luasnip'                      -- Luasnip completion source
-    use 'rafamadriz/friendly-snippets'                  -- Snippets collection
-
     -- syntax
-    use 'ray-x/go.nvim'                                 -- Golang neovim plugin
     use 'Joorem/vim-haproxy'                            -- HAProxy syntax
     use 'chr4/nginx.vim'                                -- Nginx syntax
     use 'saltstack/salt-vim'                            -- Saltstack syntax

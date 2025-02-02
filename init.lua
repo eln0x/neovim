@@ -49,23 +49,22 @@ require 'editor.aerial'
 require 'editor.trouble'
 require 'editor.toggleterm'
 
--- tags
-require 'plug.tags'
-
--- telescope
-require 'plug.project'
-require 'plug.treesitter'
+-- coding
+require 'code.cmp'
+require 'code.comment'
+require 'code.golang'
+require 'code.syntax'
+require 'code.context'
 
 -- utils
+require 'plug.tags'
+require 'plug.project'
 require 'plug.persistence'
 require 'plug.impatient'
-require 'plug.comment'
-require 'plug.golang'
 require 'plug.dap'
 require 'plug.hardtime'
 
 -- lsp
-require 'lsp.cmp'
 require 'lsp.config'
 require 'lsp.null'
 require 'lsp.lint'

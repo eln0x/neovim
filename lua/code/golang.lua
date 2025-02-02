@@ -19,3 +19,5 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
   group = format_sync_grp,
 })
+
+-- vim: ts=4 sts=4 sw=4 et
