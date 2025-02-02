@@ -1,6 +1,7 @@
 --
--- Plugins installer
+-- Packer Bootstrap
 --
+-- https://github.com/wbthomason/packer.nvim
 
 local vim = vim
 
@@ -125,20 +126,16 @@ packer.startup(function(use)
     use 'theHamsta/nvim-dap-virtual-text'               -- Virtual text support
     -- use 'ravenxrz/DAPInstall.nvim'                   -- Dap installer
 
-    -- tags
-    use 'preservim/tagbar'                              -- Tags browser
-    use 'ludovicchabant/vim-gutentags'                  -- Tags management
-
     -- git
     use 'tpope/vim-fugitive'                            -- Github Wrapper
     use 'rhysd/git-messenger.vim'                       -- Show git hidden messages
 
     -- utils
     use 'ahmedkhalf/project.nvim'                       -- Project jumper
+    use 'lewis6991/impatient.nvim'                      -- Speedup startup time
+    use 'folke/persistence.nvim'                        -- Automated session management
     use 'dstein64/vim-startuptime'                      -- Startup time bench
     use 'mfussenegger/nvim-lint'                        -- Nvim linter
-    use 'folke/persistence.nvim'                        -- Automated session management
-    use 'lewis6991/impatient.nvim'                      -- Speedup startup time
     use 'Raimondi/delimitMate'                          -- Autoclose quotes, bracket etc...
     use 'roxma/vim-paste-easy'                          -- Automatic paste mode
     use 'terryma/vim-multiple-cursors'                  -- Multiple cursors
@@ -146,7 +143,6 @@ packer.startup(function(use)
     use 'troydm/zoomwintab.vim'                         -- Simple tab zoomer
     use 'yuttie/comfortable-motion.vim'                 -- Vim Scroller
     use 'mhinz/vim-rfc'                                 -- Download RFC
-    use 'm4xshen/hardtime.nvim'                         -- Best practice
 
     -- syntax
     use 'Joorem/vim-haproxy'                            -- HAProxy syntax

@@ -18,17 +18,14 @@ vim.g.mapleader = " "
 -- Toggles
 map("n", "<F1>", "<cmd>Alpha<cr>", opts)
 map("n", "<F2>", "<cmd>NvimTreeToggl<cr>", opts)
-map("n", "<F3>", "<cmd>TagbarToggle<cr>", opts)
-map("n", "<F4>", "<cmd>AerialToggle<cr>", opts)
-map("n", "<F5>", "<cmd>Mason<cr>", opts)
-map("n", "<F6>", "<cmd>NullLsInfo<cr>", opts)
+map("n", "<F3>", "<cmd>AerialToggle<cr>", opts)
+map("n", "<F4>", "<cmd>Mason<cr>", opts)
+map("n", "<F5>", "<cmd>NullLsInfo<cr>", opts)
 
 -- Cmotion
 vim.g.comfortable_motion_no_default_key_mappings = 1
 map('n', '<C-Down>', '<cmd>call comfortable_motion#flick(100)<cr>', { desc = "Scroll Down", silent = true } )
 map('n', '<C-Up>', '<cmd>call comfortable_motion#flick(-100)<cr>', { desc = "Scroll Up", silent = true } )
-map('n', '<C-f>', '<cmd>call comfortable_motion#flick(200)<cr>', opts)
-map('n', '<C-b>', '<cmd>call comfortable_motion#flick(-200)<cr>', opts)
 
 -- Navigate windows
 map("n", "<C-w><Up>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window", remap = true } )

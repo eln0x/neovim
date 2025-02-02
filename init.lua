@@ -63,10 +63,8 @@ require 'lsp.dap'
 require 'lsp.lint'
 
 -- utils
-require 'plug.tags'
-require 'plug.project'
-require 'plug.persistence'
-require 'plug.impatient'
-require 'plug.hardtime'
+require 'utils.project'
+require 'utils.persistence'
+require 'utils.impatient'
 
 -- vim: ts=4 sts=4 sw=4 et
