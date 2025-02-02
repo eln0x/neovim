@@ -2,6 +2,9 @@
 -- Neovim lua configuration
 --
 
+-- reduce lua diagnostic noise
+local vim = vim
+
 -- encoding written to a file
 vim.opt.fileencoding = 'utf-8'
 
@@ -14,13 +17,12 @@ vim.cmd [[
     endif
 ]]
 
--- plugins
-require 'config.packer'
-
 -- settings
+require 'config.keymaps'
 require 'config.autocmds'
 require 'config.options'
-require 'config.keymaps'
+require 'config.plugins'
+require 'config.colors'
 
 -- library
 require 'plug.guihua'
@@ -67,3 +69,5 @@ require 'lsp.config'
 require 'lsp.aerial'
 require 'lsp.null'
 require 'lsp.lint'
+
+-- vim: ts=4 sts=4 sw=4 et

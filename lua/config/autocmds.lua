@@ -3,11 +3,24 @@
 --
 -- Add any additional autocmds here
 
+local vim = vim
+
+local function augroup(name)
+    return vim.api.nvim_create_augroup("_" .. name, { clear = true })
+end
+
+-- highlight on yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = augroup("highlight_yank"),
+  callback = function()
+    vim.highlight.on_yank({higroup = 'Visual', timeout = 200})
+  end,
+})
+
 vim.cmd [[
     augroup _general_settings
         autocmd!
         autocmd FileType qf,help,man,lspinfo nnoremap <silent> <buffer> q :close<CR>
-        autocmd TextYankPost * silent!lua require('vim.highlight').on_yank({higroup = 'Visual', timeout = 200})
         autocmd BufWinEnter * :set formatoptions-=cro
         autocmd BufWritePre * :%s/\s\+$//e
         autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -36,3 +49,5 @@ vim.cmd [[
         au BufWinEnter ?* silent! loadview 1
     augroup END
 ]]
+
+-- vim: ts=4 sts=4 sw=4 et
