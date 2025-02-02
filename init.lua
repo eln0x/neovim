@@ -25,7 +25,6 @@ require 'config.plugins'
 require 'config.colors'
 
 -- ui
-require 'ui.colors'
 require 'ui.alpha'
 require 'ui.bufferline'
 require 'ui.lualine'
