@@ -68,7 +68,6 @@ local leader = {
 }
 which_key.add(leader)
 
-
 -- Terminal related mappings
 local terminal = {
     mode = { "n" },

@@ -3,6 +3,8 @@
 --
 -- https://github.com/nvim-lualine/lualine.nvim
 
+local vim = vim
+
 local lual_ok, lualine = pcall(require, "lualine")
 if not lual_ok then
     return

@@ -3,19 +3,17 @@
 --
 -- https://github.com/goolord/alpha-nvim
 
+local vim = vim
+
 local alpha_ok, alpha = pcall(require, "alpha")
 if not alpha_ok then
-    return
-end
-
-local path_ok, path = pcall(require, "plenary.path")
-if not path_ok then
     return
 end
 
 local dashboard = require "alpha.themes.dashboard"
 local devicons = require "nvim-web-devicons"
 local cdir = vim.fn.getcwd()
+local path = require("plenary.path")
 
 local function get_extension(fn)
     local match = fn:match("^.+(%..+)$")
@@ -60,8 +58,8 @@ end
 local default_mru_ignore = { "gitcommit" }
 
 local mru_opts = {
-    ignore = function(path, ext)
-        return (string.find(path, "COMMIT_EDITMSG")) or (vim.tbl_contains(default_mru_ignore, ext))
+    ignore = function(_path, ext)
+        return (string.find(_path, "COMMIT_EDITMSG")) or (vim.tbl_contains(default_mru_ignore, ext))
     end,
 }
 
@@ -181,24 +179,6 @@ local function header()
     }
 end
 
-local buttons = {
-    type = "group",
-    val = {
-        { type = "text", val = "Quick links", opts = { hl = "Constant", position = "center" } },
-        { type = "padding", val = 1 },
-        dashboard.button("n", "  New file", "<cmd> ene <BAR> startinsert <cr>"),
-        dashboard.button("f", "  Find file", "<cmd> Telescope find_files <cr>"),
-        dashboard.button("p", "  Find project", "<cmd> Telescope projects <cr>"),
-        dashboard.button("g", "  Find text", "<cmd> Telescope live_grep <cr>"),
-        dashboard.button("m", "  Find modified file", "<cmd> Telescope git_status <cr>"),
-        dashboard.button("u", "󱐥  Update plugins", "<cmd> PackerUpdate <CR>"),
-        dashboard.button("s", "  Restore Session", [[<cmd> lua require("persistence").load() <cr>]]),
-        dashboard.button("h", "  Check health", "<cmd> checkhealth <cr>"),
-        dashboard.button("q", "  Quit", "<cmd> qa <cr>"),
-    },
-    position = "center",
-}
-
 local function footer()
     local fortune   = require("alpha.fortune")
     local footer_text = fortune()
@@ -217,6 +197,24 @@ local function footer()
         },
     }
 end
+
+local buttons = {
+    type = "group",
+    val = {
+        { type = "text", val = "Quick links", opts = { hl = "Constant", position = "center" } },
+        { type = "padding", val = 1 },
+        dashboard.button("n", "  New file", "<cmd> ene <BAR> startinsert <cr>"),
+        dashboard.button("f", "  Find file", "<cmd> Telescope find_files <cr>"),
+        dashboard.button("p", "  Find project", "<cmd> Telescope projects <cr>"),
+        dashboard.button("g", "  Find text", "<cmd> Telescope live_grep <cr>"),
+        dashboard.button("m", "  Find modified file", "<cmd> Telescope git_status <cr>"),
+        dashboard.button("u", "󱐥  Update plugins", "<cmd> PackerUpdate <CR>"),
+        dashboard.button("s", "  Restore Session", [[<cmd> lua require("persistence").load() <cr>]]),
+        dashboard.button("h", "  Check health", "<cmd> checkhealth <cr>"),
+        dashboard.button("q", "  Quit", "<cmd> qa <cr>"),
+    },
+    position = "center",
+}
 
 local opts = {
     layout = {
