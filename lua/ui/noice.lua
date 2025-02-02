@@ -30,3 +30,5 @@ noice.setup({
         lsp_doc_border = false,         -- add a border to hover docs and signature help
     },
 })
+
+-- vim: ts=4 sts=4 sw=4 et

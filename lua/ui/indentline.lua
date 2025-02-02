@@ -78,3 +78,5 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.b.miniindentscope_disable = true
     end,
 })
+
+-- vim: ts=4 sts=4 sw=4 et

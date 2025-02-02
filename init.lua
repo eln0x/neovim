@@ -24,16 +24,18 @@ require 'config.options'
 require 'config.plugins'
 require 'config.colors'
 
--- library
-require 'plug.guihua'
+-- ui
+require 'ui.colors'
+require 'ui.alpha'
+require 'ui.bufferline'
+require 'ui.lualine'
+require 'ui.indentline'
+require 'ui.indentscope'
+require 'ui.notify'
+require 'ui.noice'
+require 'ui.dressing'
+require 'ui.guihua'
 
--- theme
-require 'theme.alpha'
-require 'theme.lualine'
-require 'theme.bufferline'
-require 'theme.noice'
-require 'theme.notify'
-require 'theme.colors'
 require 'theme.illuminate'
 
 -- tags
@@ -54,7 +56,6 @@ require 'plug.nvtree'
 require 'plug.whichkey'
 require 'plug.toggleterm'
 require 'plug.comment'
-require 'plug.indentline'
 require 'plug.golang'
 require 'plug.dap'
 require 'plug.todos'

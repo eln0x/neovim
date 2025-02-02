@@ -53,19 +53,20 @@ packer.startup(function(use)
     -- packer
     use 'wbthomason/packer.nvim'
 
-    -- library
+    -- ui
     use 'nvim-lua/plenary.nvim'                         -- Lua functions
-    use 'ray-x/guihua.lua'                              -- Lua Gui and utils
-    use 'MunifTanjim/nui.nvim'                          -- UI component library
-
-    -- theme
     use 'goolord/alpha-nvim'                            -- Startup screen
-    use 'nvim-lualine/lualine.nvim'                     -- Statusline
     use 'akinsho/bufferline.nvim'                       -- Bufferline
-    use 'kyazdani42/nvim-web-devicons'                  -- File icons
-    use 'folke/noice.nvim'                              -- Experimental UI replacement
+    use 'nvim-lualine/lualine.nvim'                     -- Statusline
+    use 'lukas-reineke/indent-blankline.nvim'           -- Show indentation when no tab
+    use 'echasnovski/mini.indentscope'                  -- Visualize and work with indent scope
     use 'rcarriga/nvim-notify'                          -- Notification manager
+    use 'folke/noice.nvim'                              -- Experimental UI replacement
     use 'stevearc/dressing.nvim'                        -- Ui improvements
+    use 'MunifTanjim/nui.nvim'                          -- UI component library
+    use 'ray-x/guihua.lua'                              -- Lua Gui and utils
+    use 'kyazdani42/nvim-web-devicons'                  -- File icons
+    use 'echasnovski/mini.icons'
 
     -- colorscheme
     use 'rktjmp/lush.nvim'                              -- Theme creation helper
@@ -130,8 +131,6 @@ packer.startup(function(use)
     use 'folke/which-key.nvim'                          -- Key binding completion
     use 'akinsho/toggleterm.nvim'                       -- Toggle terminal
     use 'numToStr/Comment.nvim'                         -- Comment helper
-    use 'lukas-reineke/indent-blankline.nvim'           -- Show indentation when no tab
-    use 'echasnovski/mini.indentscope'                  -- Visualize and work with indent scope
     use 'JoosepAlviste/nvim-ts-context-commentstring'   -- Comment string helper
     use 'Raimondi/delimitMate'                          -- Autoclose quotes, bracket etc...
     use 'roxma/vim-paste-easy'                          -- Automatic paste mode
@@ -160,3 +159,5 @@ packer.startup(function(use)
         packer.sync()
     end
 end)
+
+-- vim: ts=4 sts=4 sw=4 et
