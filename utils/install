@@ -92,7 +92,7 @@ function deploy() {
     TMPDIR=$(mktemp -d --tmpdir="$HOME" -t neovim-XXXXXXXXXX)
 
     # install latest REL from appImage
-    wget "$URL/$REL/nvim.appimage" -O "$TMPDIR/nvim.appimage" 2>/dev/null ||
+    wget "$URL/$REL/nvim-linux-x86_64.appimage" -O "$TMPDIR/nvim.appimage" 2>/dev/null ||
         cp nvim/nvim.appimage "$TMPDIR"
             chmod +x "$TMPDIR/nvim.appimage"
 
