@@ -129,7 +129,7 @@ function config() {
         git fetch origin && git checkout legacy
         nvim +PlugInstall +qall
 
-        # master / lazy
+    # master / lazy / ...
     else
         if which node >/dev/null; then
             echo "- Setup configuration $FLAVOR"
