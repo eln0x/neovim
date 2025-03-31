@@ -21,7 +21,7 @@ FLAVORS=(
 
 function usage() {
     printf "usage: %s [options]\n\noptions:
-    --release   <stable || nightly || v0.9.5>
+    --release   <stable || nightly || v0.10.3>
     --config    <init || master || lazy || legacy || devel>
     --bakup     <bakup name>
     --restore   <bakup name>" "$0"
@@ -70,7 +70,7 @@ function restore() {
 }
 
 function deploy() {
-    if [[ $REL =~ ^v[0-9]\.[0-9]\.[0-9]$ ]]; then
+    if [[ $REL =~ ^v[0-9]\.[0-9]+\.[0-9]$ ]]; then
         echo "- Install neovim from tag $REL"
     elif test "$REL" != "stable" && test "$REL" != "nightly"; then
         usage
@@ -92,7 +92,7 @@ function deploy() {
     TMPDIR=$(mktemp -d --tmpdir="$HOME" -t neovim-XXXXXXXXXX)
 
     # install latest REL from appImage
-    wget "$URL/$REL/nvim.appimage" -O "$TMPDIR/nvim.appimage" 2>/dev/null ||
+    wget "$URL/$REL/nvim-linux-x86_64.appimage" -O "$TMPDIR/nvim.appimage" 2>/dev/null ||
         cp nvim/nvim.appimage "$TMPDIR"
             chmod +x "$TMPDIR/nvim.appimage"
 
@@ -129,7 +129,7 @@ function config() {
         git fetch origin && git checkout legacy
         nvim +PlugInstall +qall
 
-        # master / lazy
+    # master / lazy / ...
     else
         if which node >/dev/null; then
             echo "- Setup configuration $FLAVOR"
