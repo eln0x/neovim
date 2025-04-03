@@ -4,7 +4,7 @@
 
 local vim = vim
 
--- completion
+-- completion menu a
 vim.cmd([[
     hi! Pmenu                       guibg=#22252A   guifg=#C5CDD9
     hi! PmenuSel                    guibg=#282C34   guifg=NONE
@@ -16,6 +16,7 @@ vim.cmd([[
     hi! CmpItemAbbrMatchFuzzy       guibg=NONE      guifg=#569CD6   gui=bold
 ]])
 
+-- completion menu b
 vim.cmd([[
     hi! Pmenu                       guibg=#22252A   guifg=#C5CDD9
     hi! PmenuSel                    guibg=#282C34   guifg=NONE
@@ -27,6 +28,7 @@ vim.cmd([[
     hi! CmpItemAbbrMatchFuzzy       guibg=NONE      guifg=#82AAFF   gui=bold
 ]])
 
+-- completion items menu
 vim.cmd([[
     hi! CmpItemMenu                 guibg=NONE      guifg=#C792EA   gui=italic
     hi! CmpItemKindField            guibg=#B5585F   guifg=#EED8DA
