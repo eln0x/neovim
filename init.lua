@@ -17,10 +17,11 @@ vim.cmd [[
     endif
 ]]
 
--- plugins
-require 'config.plugins'
-
--- colors
+-- settings
+require 'config.keymaps'
+require 'config.autocmds'
+require 'config.lazy'
+require 'config.options'
 require 'config.colors'
 
 -- vim: ts=4 sts=4 sw=4 et
