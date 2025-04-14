@@ -17,6 +17,7 @@ FLAVORS=(
     "lazy"
     "legacy"
     "devel"
+    "local"
 )
 
 function usage() {
@@ -112,8 +113,10 @@ function config() {
 
     # cleanup existing config
     [ -d ~/.config/nvim ] && rm -rf ~/.config/nvim
-    [ -d ~/.cache/nvim ] && rm -rf ~/.cache/nvim
-    [ -d ~/.local/share/nvim ] && rm -rf ~/.local/share/nvim
+    if [[ "$FLAVOR" != "local" ]]; then
+        [ -d ~/.cache/nvim ] && rm -rf ~/.cache/nvim
+        [ -d ~/.local/share/nvim ] && rm -rf ~/.local/share/nvim
+    fi
 
     # init
     [[ "$FLAVOR" == "init" ]] && return 0
@@ -139,10 +142,14 @@ function config() {
             echo "! curl -sL https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.0/install.sh | $SHELL"
             [ -z "$1" ] && exit 0
         fi
-        git clone https://gitlab.com/elnox/neovim.git ~/.config/nvim -q
-        cd ~/.config/nvim || exit
-        git fetch origin && git checkout "$FLAVOR"
-        nvim
+        if [[ "$FLAVOR" == "local" ]]; then
+            [[ -d "../nvim" ]] && cp -rf ../nvim ~/.config/
+        else
+            git clone https://gitlab.com/elnox/neovim.git ~/.config/nvim -q
+            cd ~/.config/nvim || exit
+            git fetch origin && git checkout "$FLAVOR"
+            nvim
+        fi
     fi
 }
 
