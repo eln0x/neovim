@@ -55,21 +55,19 @@ return {
     -- https://github.com/neovim/nvim-lspconfig
     {
         "neovim/nvim-lspconfig",
-        event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+        event = "LazyFile",
         dependencies = {
             "mason.nvim",
             "williamboman/mason-lspconfig.nvim",
         },
         opts = function()
             -- define capabilities
-            local vim = vim
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             local cmp_ok, cmp = pcall(require, 'cmp_nvim_lsp')
             if cmp_ok then
                 capabilities = cmp.default_capabilities(capabilities)
             end
-
-            return {
+            local ret = {
                 flags = {
                     debounce_text_changes = 150,
                 },
@@ -158,9 +156,9 @@ return {
                     end
                 end
             }
+            return ret
         end,
         config = function(_, opts)
-            local vim = vim
             local lspconf = require("lspconfig")
             -- Merge lsp defaults with global configuration
             lspconf.util.default_config = vim.tbl_deep_extend(
@@ -219,6 +217,7 @@ return {
     {
         'williamboman/mason.nvim',
         cmd = "Mason",
+        keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
         build = ":MasonUpdate",
         opts = {
             ui = {
@@ -263,35 +262,13 @@ return {
             local mlsp = require("mason-lspconfig")
             local lspconf = require("lspconfig")
             mlsp.setup(opts)
-
-            mlsp.setup_handlers({
-                function(server_name)
-                    lspconf[server_name].setup {}
-                end,
-                ["lua_ls"] = function()
-                    lspconf.lua_ls.setup {
-                        settings = {
-                            Lua = {
-                                diagnostics = {
-                                    globals = { "vim" }
-                                },
-                            }
-                        }
-                    }
-                end,
-                ["salt_ls"] = function()
-                    lspconf.salt_ls.setup {
-                        cmd = { "salt-lsp" }
-                    }
-                end,
-            })
         end,
     },
 
     -- Diagnostic and code injection
-    -- https://github.com/jose-elias-alvarez/null-ls.nvim
+    -- https://github.com/nvimtools/none-ls.nvim
     {
-        'https://github.com/jose-elias-alvarez/null-ls.nvim',
+        'https://github.com/nvimtools/none-ls.nvim',
         config = function()
             local null_ok, null = pcall(require, "null-ls")
             if not null_ok then
@@ -332,18 +309,18 @@ return {
                     }),
 
                     -- linter
-                    diag.shellcheck.with({
-                        filetypes = { "sh" },
-                        diagnostic_config = { underline = false },
-                    }),
+                    --diag.shellcheck.with({
+                    --    filetypes = { "sh" },
+                    --    diagnostic_config = { underline = false },
+                    --}),
 
                     diag.selene.with({
                         filetypes = { "lua" },
                     }),
 
-                    diag.flake8.with({
-                        filetypes = { "python" },
-                    }),
+                    --diag.flake8.with({
+                    --    filetypes = { "python" },
+                    --}),
 
                     diag.golangci_lint.with({
                         filetypes = { "go" },
@@ -426,11 +403,6 @@ return {
     },
 
     -- 'ravenxrz/DAPInstall.nvim',                   -- Dap installer
-
-    -- Nvim linter
-    -- https://github.com/mfussenegger/nvim-lint
-    'mfussenegger/nvim-lint',
-
 }
 
 -- vim: ts=4 sts=4 sw=4 et

@@ -3,7 +3,6 @@
 --if true then return {} end
 
 return {
-
     -- Theme creation helper
     -- https://github.com/rktjmp/lush.nvim
     {
@@ -27,8 +26,9 @@ return {
     },
 
     -- Tokyonight
+    -- https://github.com/folke/tokyonight.nvim
     {
-        'folke/tokyonight.nvim',
+        "folke/tokyonight.nvim",
         lazy = false,
         opts = { style = "moon" },
     },
@@ -95,7 +95,7 @@ return {
     -- Color highlighter
     -- https://github.com/norcalli/nvim-colorizer.lua
     {
-        'NvChad/nvim-colorizer.lua',
+        'norcalli/nvim-colorizer.lua',
         init = function()
             require 'colorizer'.setup()
         end
