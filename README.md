@@ -35,22 +35,26 @@ apt install ripgrep fd-find xclip ncdu universal-ctags
 ### Installation
 
 Backup:
+
 ```bash
 bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --bakup
 ```
 
 Install:
+
 ```bash
 bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) \
     --release stable --config lazy
 ```
 
 Cleanup:
+
 ```bash
 rm -rf ~/.config/nvim ~/.cache/nvim ~/.local/nvim ~/.local/share/nvim ~/.local/state/nvim
 ```
 
 Restore:
+
 ```bash
 bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --restore
 ```
