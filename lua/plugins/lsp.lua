@@ -1,6 +1,6 @@
----- Lsp
----- stylua: ignore
-----if true then return {} end
+-- Lsp
+-- stylua: ignore
+--if true then return {} end
 
 return {
     -- Install or upgrade 3rd party tools
