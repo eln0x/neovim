@@ -3,12 +3,10 @@
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
-local delkey = vim.keymap.del
 local map = vim.keymap.set
-local opts = { silent = true }
 
 -- Remap space as leader key
-map("", "<Space>", "<Nop>", opts)
+map("", "<Space>", "<Nop>", { silent = true } )
 vim.g.mapleader = " "
 
 --
@@ -16,11 +14,9 @@ vim.g.mapleader = " "
 --
 
 -- Toggles
-map("n", "<F1>", "<cmd>Alpha<cr>", opts)
-map("n", "<F2>", "<cmd>NvimTreeToggl<cr>", opts)
-map("n", "<F3>", "<cmd>AerialToggle<cr>", opts)
-map("n", "<F4>", "<cmd>Mason<cr>", opts)
-map("n", "<F5>", "<cmd>NullLsInfo<cr>", opts)
+map("n", "<F2>", "<cmd>Alpha<cr>", { silent = true } )
+map("n", "<F3>", "<cmd>Mason<cr>", { silent = true } )
+map("n", "<F4>", "<cmd>NullLsInfo<cr>", { silent = true } )
 
 -- Cmotion
 vim.g.comfortable_motion_no_default_key_mappings = 1
@@ -32,12 +28,6 @@ map("n", "<C-w><Up>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window", remap 
 map("n", "<C-w><Down>", "<cmd>wincmd j<cr>", { desc = "Go to Lower Window", remap = true } )
 map("n", "<C-w><Right>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window", remap = true } )
 map("n", "<C-w><Left>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window", remap = true } )
-
--- Resize window using <ctrl> arrow keys
-map("n", "<C-k>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
-map("n", "<C-j>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
-map("n", "<C-l>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
-map("n", "<C-h>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
 -- Navigate tabs
 map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
@@ -52,12 +42,8 @@ map("n", "<leader>n", "<cmd>enew<cr>", { desc = "New File", silent = true } )
 map("n", "<leader><Right>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "<leader><Left>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 
--- Navigate line
-map("n", "<C-a>", "^", opts)
-map("n", "<C-e>", "$", opts)
-
 -- Copy whole file
-map("n", "<C-c>", "<cmd> %y+ <cr>", opts)
+map("n", "<C-c>", "<cmd> %y+ <cr>", { silent = true } )
 
 -- Save file
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
@@ -65,26 +51,8 @@ map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
 
--- Move text up and down
-map("n", "<A-k>", "<Esc>:m .-2<cr>==gi", { desc = "Move Up", silent = true } )
-map("n", "<A-j>", "<Esc>:m .+1<cr>==gi", { desc = "Move Down", silent = true } )
-
---
 -- Visual_mode = "v",
---
-
--- Move text up and down
-map("v", "<A-j>", ":m .+1<cr>==", { desc = "Move Up", silent = true } )
-map("v", "<A-k>", ":m .-2<cr>==", { desc = "Move Down", silent = true } )
-
---
 -- Visual_block_mode = "x",
---
-
--- Move text up and down
-map("x", "<A-j>", ":move '>+1<cr>gv-gv", { desc = "Move Up", silent = true } )
-map("x", "<A-k>", ":move '<-2<cr>gv-gv", { desc = "Move Down", silent = true } )
-
 -- Insert_mode = "i",
 -- Term_mode = "t",
 -- Command_mode = "c",

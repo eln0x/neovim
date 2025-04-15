@@ -263,35 +263,13 @@ return {
             local mlsp = require("mason-lspconfig")
             local lspconf = require("lspconfig")
             mlsp.setup(opts)
-
-            mlsp.setup_handlers({
-                function(server_name)
-                    lspconf[server_name].setup {}
-                end,
-                ["lua_ls"] = function()
-                    lspconf.lua_ls.setup {
-                        settings = {
-                            Lua = {
-                                diagnostics = {
-                                    globals = { "vim" }
-                                },
-                            }
-                        }
-                    }
-                end,
-                ["salt_ls"] = function()
-                    lspconf.salt_ls.setup {
-                        cmd = { "salt-lsp" }
-                    }
-                end,
-            })
         end,
     },
 
     -- Diagnostic and code injection
-    -- https://github.com/jose-elias-alvarez/null-ls.nvim
+    -- https://github.com/nvimtools/none-ls.nvim
     {
-        'https://github.com/jose-elias-alvarez/null-ls.nvim',
+        'https://github.com/nvimtools/none-ls.nvim',
         config = function()
             local null_ok, null = pcall(require, "null-ls")
             if not null_ok then
@@ -332,18 +310,18 @@ return {
                     }),
 
                     -- linter
-                    diag.shellcheck.with({
-                        filetypes = { "sh" },
-                        diagnostic_config = { underline = false },
-                    }),
+                    --diag.shellcheck.with({
+                    --    filetypes = { "sh" },
+                    --    diagnostic_config = { underline = false },
+                    --}),
 
                     diag.selene.with({
                         filetypes = { "lua" },
                     }),
 
-                    diag.flake8.with({
-                        filetypes = { "python" },
-                    }),
+                    --diag.flake8.with({
+                    --    filetypes = { "python" },
+                    --}),
 
                     diag.golangci_lint.with({
                         filetypes = { "go" },
@@ -426,11 +404,6 @@ return {
     },
 
     -- 'ravenxrz/DAPInstall.nvim',                   -- Dap installer
-
-    -- Nvim linter
-    -- https://github.com/mfussenegger/nvim-lint
-    'mfussenegger/nvim-lint',
-
 }
 
 -- vim: ts=4 sts=4 sw=4 et

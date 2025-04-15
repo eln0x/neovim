@@ -20,8 +20,8 @@ vim.cmd [[
 -- settings
 require 'config.keymaps'
 require 'config.autocmds'
+require 'config.lazy'
 require 'config.options'
-require 'config.plugins'
 require 'config.colors'
 
 -- vim: ts=4 sts=4 sw=4 et
