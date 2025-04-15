@@ -2,6 +2,8 @@
 -- stylua: ignore
 --if true then return {} end
 
+local vim = vim
+
 return {
     -- Install or upgrade 3rd party tools
     -- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
@@ -11,34 +13,39 @@ return {
             -- define wanted servers
             local SERVERS = {
                 -- language server protocol
-                "ansible-language-server",
                 "bash-language-server",
-                "clangd",
-                "dockerfile-language-server",
-                "gopls",
-                "json-lsp",
                 "lua-language-server",
-                "perlnavigator",
-                "python-lsp-server",
-                "rust-analyzer",
-                --"salt-lsp",
-                "texlab",
                 "vim-language-server",
+                "gopls",
+                "clangd",
+                "python-lsp-server",
+                "perlnavigator",
+                "rust-analyzer",
+                "puppet-editor-services",
+                "dockerfile-language-server",
+                "terraform-ls",
+                "ansible-language-server",
                 "yaml-language-server",
+                "json-lsp",
                 "marksman",
 
                 -- formatter
                 "shfmt",
                 "stylua",
-                "black",
                 "goimports",
+                "clang-format",
+                "black",
+                "yamlfmt",
                 "prettier",
 
                 -- linter
                 "shellcheck",
                 "selene",
-                "flake8",
                 "golangci-lint",
+                "cpplint",
+                "flake8",
+                "ansible-lint",
+                "yamllint",
             }
             return {
                 ensure_installed = SERVERS,
@@ -55,25 +62,53 @@ return {
     -- https://github.com/neovim/nvim-lspconfig
     {
         "neovim/nvim-lspconfig",
-        event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+        event = "LazyFile",
         dependencies = {
             "mason.nvim",
             "williamboman/mason-lspconfig.nvim",
         },
         opts = function()
             -- define capabilities
-            local vim = vim
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             local cmp_ok, cmp = pcall(require, 'cmp_nvim_lsp')
             if cmp_ok then
                 capabilities = cmp.default_capabilities(capabilities)
             end
-
-            return {
+            local ret = {
+                capabilities = capabilities,
+                -- Configure diagnostics
+                diagnostics = {
+                    virtual_text = {
+                        spacing = 2,
+                        source = "if_many",
+                        prefix = "●",
+                    },
+                    float = {
+                        border = 'rounded',
+                        source = "if_many",
+                    },
+                    severity_sort = true,
+                    signs = {
+                        text = {
+                            [vim.diagnostic.severity.ERROR] = '✘',
+                            [vim.diagnostic.severity.WARN] = '▲',
+                            [vim.diagnostic.severity.HINT] = '',
+                            [vim.diagnostic.severity.INFO] = '',
+                        },
+                    },
+                },
                 flags = {
                     debounce_text_changes = 150,
                 },
-                capabilities = capabilities,
+                -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
+                inlay_hints = {
+                    enabled = true,
+                    exclude = { "vue" }, -- filetypes for which you don't want to enable inlay hints
+                },
+                -- Enable this to enable the builtin LSP code lenses on Neovim >= 0.10.0
+                codelens = {
+                    enabled = false,
+                },
                 on_attach = function(client, bufnr)
                     -- Enable completion triggered by <c-x><c-o>
                     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -145,22 +180,11 @@ return {
                             }
                         }, bufnr)
                     end
-
-                    -- Notify setup
-                    local notify_ok, notify = pcall(require, 'notify')
-                    if notify_ok then
-                        notify(
-                            string.format("%s", client.name),
-                            "info",
-                            { title = "[lsp] active" },
-                            true
-                        )
-                    end
                 end
             }
+            return ret
         end,
         config = function(_, opts)
-            local vim = vim
             local lspconf = require("lspconfig")
             -- Merge lsp defaults with global configuration
             lspconf.util.default_config = vim.tbl_deep_extend(
@@ -182,43 +206,22 @@ return {
             )
 
             -- Diagnostic customization
-            local sign = function(args)
-                vim.fn.sign_define(
-                    args.name, { texthl = args.name, text = args.text, numhl = '' }
-                )
+            for severity, icon in pairs(opts.diagnostics.signs.text) do
+                local name = vim.diagnostic.severity[severity]:lower():gsub("^%l", string.upper)
+                name = "DiagnosticSign" .. name
+                vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
             end
-            sign({ name = 'DiagnosticSignError', text = '✘' })
-            sign({ name = 'DiagnosticSignWarn', text = '▲' })
-            sign({ name = 'DiagnosticSignHint', text = '⚑' })
-            sign({ name = 'DiagnosticSignInfo', text = '' })
+            vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
-            vim.diagnostic.config({
-                virtual_text = {
-                    source = 'always',
-                    prefix = '●', -- Could be '■', '▎', 'x'
-                },
-                float = {
-                    border = 'rounded',
-                    source = 'always',
-                },
-            })
-
-            vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-                vim.lsp.diagnostic.on_publish_diagnostics,
-                {
-                    signs = true,
-                    underline = false,
-                    severity_sort = true,
-                }
-            )
         end,
     },
 
     -- Manage external editors
-    -- https://github.com/williamboman/mason.nvim
+    -- https://github.com/mason-org/mason.nvim
     {
-        'williamboman/mason.nvim',
+        'mason-org/mason.nvim',
         cmd = "Mason",
+        keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
         build = ":MasonUpdate",
         opts = {
             ui = {
@@ -263,35 +266,13 @@ return {
             local mlsp = require("mason-lspconfig")
             local lspconf = require("lspconfig")
             mlsp.setup(opts)
-
-            mlsp.setup_handlers({
-                function(server_name)
-                    lspconf[server_name].setup {}
-                end,
-                ["lua_ls"] = function()
-                    lspconf.lua_ls.setup {
-                        settings = {
-                            Lua = {
-                                diagnostics = {
-                                    globals = { "vim" }
-                                },
-                            }
-                        }
-                    }
-                end,
-                ["salt_ls"] = function()
-                    lspconf.salt_ls.setup {
-                        cmd = { "salt-lsp" }
-                    }
-                end,
-            })
         end,
     },
 
     -- Diagnostic and code injection
-    -- https://github.com/jose-elias-alvarez/null-ls.nvim
+    -- https://github.com/nvimtools/none-ls.nvim
     {
-        'https://github.com/jose-elias-alvarez/null-ls.nvim',
+        'https://github.com/nvimtools/none-ls.nvim',
         config = function()
             local null_ok, null = pcall(require, "null-ls")
             if not null_ok then
@@ -332,18 +313,18 @@ return {
                     }),
 
                     -- linter
-                    diag.shellcheck.with({
-                        filetypes = { "sh" },
-                        diagnostic_config = { underline = false },
-                    }),
+                    --diag.shellcheck.with({
+                    --    filetypes = { "sh" },
+                    --    diagnostic_config = { underline = false },
+                    --}),
 
                     diag.selene.with({
                         filetypes = { "lua" },
                     }),
 
-                    diag.flake8.with({
-                        filetypes = { "python" },
-                    }),
+                    --diag.flake8.with({
+                    --    filetypes = { "python" },
+                    --}),
 
                     diag.golangci_lint.with({
                         filetypes = { "go" },
@@ -426,11 +407,6 @@ return {
     },
 
     -- 'ravenxrz/DAPInstall.nvim',                   -- Dap installer
-
-    -- Nvim linter
-    -- https://github.com/mfussenegger/nvim-lint
-    'mfussenegger/nvim-lint',
-
 }
 
 -- vim: ts=4 sts=4 sw=4 et

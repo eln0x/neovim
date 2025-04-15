@@ -3,6 +3,7 @@
 --
 -- https://github.com/folke/lazy.nvim.git
 
+local vim = vim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
@@ -14,16 +15,18 @@ if not vim.loop.fs_stat(lazypath) then
         lazypath,
     })
 end
+
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
+vim.g.lazyvim_check_order = false
 
 require('lazy').setup({
     spec = {
         -- add LazyVim don't import its plugins
-        --{ "LazyVim/LazyVim", import = "lazyvim.plugins" },
         { "LazyVim/LazyVim" },
 
-        -- import plugins to `lua/plugins/*.lua`
-        { import = "plugins" },
+        -- import plugins
+        { import = "base" },        -- setup basic editor
+        { import = "plugins" },     -- setup advanced plugins
     },
 
     -- lazy config
