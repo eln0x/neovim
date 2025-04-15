@@ -14,19 +14,18 @@
 
 ### Requirements
 
-- Neovim (version >= 0.9.0), run `nvim -v` to check neovim version.
+- Neovim (version >= 0.10.0), run `nvim -v` to check neovim version.
 - Python3 / Nodejs / Npm / Ripgrep / Fd-find / Xclip
 - Exuberant Ctags or Universal Ctags.
 - Ncdu / Htop / Lazygit
 
 ```bash
 # Nodejs & npm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 nvm install node
 
-# Python3 & pynvim
-apt install python3-venv
-pip3 install pynvim
+# Pynvim
+apt install python3-pynvim
 
 # Utils
 apt install ripgrep fd-find xclip ncdu universal-ctags
@@ -35,22 +34,26 @@ apt install ripgrep fd-find xclip ncdu universal-ctags
 ### Installation
 
 Backup:
+
 ```bash
 bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --bakup
 ```
 
 Install:
+
 ```bash
 bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) \
     --release stable --config lazy
 ```
 
 Cleanup:
+
 ```bash
 rm -rf ~/.config/nvim ~/.cache/nvim ~/.local/nvim ~/.local/share/nvim ~/.local/state/nvim
 ```
 
 Restore:
+
 ```bash
 bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --restore
 ```
