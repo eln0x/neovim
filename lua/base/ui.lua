@@ -6,7 +6,7 @@ return {
     -- Buffer line
     -- https://github.com/akinsho/bufferline.nvim
     {
-        'akinsho/bufferline.nvim',
+        "akinsho/bufferline.nvim",
         event = "VeryLazy",
         keys = {
             { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
@@ -23,7 +23,9 @@ return {
         },
         opts = {
             options = {
+                -- stylua: ignore
                 close_command = function(n) Snacks.bufdelete(n) end,
+                -- stylua: ignore
                 right_mouse_command = function(n) Snacks.bufdelete(n) end,
                 diagnostics = "nvim_lsp",
                 always_show_bufferline = true,
@@ -33,6 +35,15 @@ return {
                     .. (diag.warning and icons.Warn .. diag.warning or "")
                     return vim.trim(ret)
                 end,
+                enforce_regular_tabs = true,
+                max_name_length = 30,
+                max_prefix_length = 30,
+                tab_size = 21,
+                separator_style = "thin",
+                indicator = {
+                    icon = '',
+                    style = 'icon',
+                },
                 offsets = {
                     {
                         filetype = "neo-tree",
@@ -65,7 +76,7 @@ return {
     -- Status line
     -- https://github.com/nvim-lualine/lualine.nvim
     {
-        'nvim-lualine/lualine.nvim',
+        "nvim-lualine/lualine.nvim",
         event = "VeryLazy",
         init = function()
             vim.g.lualine_laststatus = vim.o.laststatus
@@ -120,17 +131,17 @@ return {
 
             local diagnostics = {
                 "diagnostics",
-                sources = { "nvim_diagnostic" },
-                sections = { "warn", "error", "hint" },
+                --sources = { "nvim_diagnostic" },
+                --sections = { "warn", "error", "hint" },
                 symbols = {
                     error = icons.diagnostics.Error,
                     warn = icons.diagnostics.Warn,
                     info = icons.diagnostics.Info,
                     hint = icons.diagnostics.Hint,
                 },
-                colored = true,
-                update_in_insert = false,
-                always_visible = false,
+                --colored = true,
+                --update_in_insert = false,
+                --always_visible = false,
             }
 
             local date = {
@@ -146,20 +157,19 @@ return {
 
             local opts = {
                 options = {
-                    theme = "auto",
+                    icons_enabled = true,
+                    theme = "auto",                         -- "ayu_dark"
                     globalstatus = vim.o.laststatus == 3,
                     disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter", "snacks_dashboard" } },
+                    always_divide_middle = true,
                 },
                 sections = {
                     lualine_a = { mode },
                     lualine_b = { branch, diff },
                     lualine_c = {
-                        {
-                            'filename',
-                            file_status = true,
-                            path = 1
-                        },
+                        LazyVim.lualine.root_dir(),
                         diagnostics,
+                        { LazyVim.lualine.pretty_path() },
                     },
                     lualine_x = {
                         Snacks.profiler.status(),
@@ -230,8 +240,6 @@ return {
         event = "VeryLazy",
         opts = {
             lsp = {
-            },
-            lsp = {
                 -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
                 override = {
                     ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -261,7 +269,7 @@ return {
                 command_palette = true,         -- position the cmdline and popupmenu together
                 long_message_to_split = true,   -- long messages will be sent to a split
                 inc_rename = true,              -- enables an input dialog for inc-rename.nvim
-                lsp_doc_border = false,         -- add a border to hover docs and signature help
+                lsp_doc_border = true,          -- add a border to hover docs and signature help
             },
         },
         -- stylua: ignore
@@ -321,14 +329,19 @@ return {
     {
         "snacks.nvim",
         opts = {
-            indent = { enabled = true },
+            dashboard = { enabled = false, preset = { keys = {} } },    -- alpha
+            bigfile = { enabled = true },
+            quickfile = { enabled = true },
+            indent = { enabled = false },
+            picker = { enabled = true },
             input = { enabled = true },
             notifier = { enabled = true },
             scope = { enabled = true },
-            scroll = { enabled = false },
-            statuscolumn = { enabled = false }, -- we set this in options.lua
+            scroll = { enabled = false },                               -- comfortable-motion
+            statuscolumn = { enabled = false },                         -- set in options.lua
             toggle = { map = LazyVim.safe_keymap_set },
-            words = { enabled = true },
+            words = { enabled = false },                                -- vim-illuminate
+            explorer = { enabled = true },
         },
         -- stylua: ignore
         keys = {
@@ -340,7 +353,33 @@ return {
                 end
             end, desc = "Notification History" },
             { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
+            { "<leader>ux", function() Snacks.picker() end, desc = "Show Snacks pickers" },
+            {
+                "<leader>fe",
+                function()
+                    Snacks.explorer({ cwd = LazyVim.root() })
+                end,
+                desc = "Explorer Snacks (root dir)",
+            },
+            {
+                "<leader>fE",
+                function()
+                    Snacks.explorer()
+                end,
+                desc = "Explorer Snacks (cwd)",
+            },
+            { "<leader>e", "<leader>fe", desc = "Explorer Snacks (root dir)", remap = true },
+            { "<leader>E", "<leader>fE", desc = "Explorer Snacks (cwd)", remap = true },
         },
+    },
+
+    -- FIXME: End LazyVim default --
+
+    -- Dev icons
+    -- https://github.com/nvim-tree/nvim-web-devicons
+    {
+        'nvim-tree/nvim-web-devicons',
+        lazy = true,
     },
 
     -- Startup screen
@@ -551,11 +590,11 @@ return {
                     { type = "text", val = "Quick links", opts = { hl = "Constant", position = "center" } },
                     { type = "padding", val = 1 },
                     dashboard.button("n", "  New file", "<cmd> ene <BAR> startinsert <cr>"),
-                    dashboard.button("f", "  Find file", "<cmd> Telescope find_files <cr>"),
-                    dashboard.button("p", "  Find project", "<cmd> Telescope projects <cr>"),
-                    dashboard.button("g", "  Find text", "<cmd> Telescope live_grep <cr>"),
-                    dashboard.button("m", "  Find modified file", "<cmd> Telescope git_status <cr>"),
-                    dashboard.button("c", "  Config", "<cmd> lua LazyVim.pick.config_files()() <cr>"),
+                    dashboard.button("f", "  Find file", "<cmd> lua Snacks.picker.files() <cr>"),
+                    dashboard.button("p", "  Find project", "<cmd> lua Snacks.picker.projects() <cr>"),
+                    dashboard.button("g", "  Grep text", "<cmd> lua LazyVim.pick('live_grep')() <cr>"),
+                    dashboard.button("m", "  Find modified file", "<cmd> lua Snacks.picker.git_files() <cr>"),
+                    dashboard.button("c", "  Config", "<cmd> lua Snacks.picker.files({ cwd = vim.fn.stdpath('config') }) <cr>"),
                     dashboard.button("l", "󰒲  Lazy", "<cmd> Lazy <cr>"),
                     dashboard.button("u", "󱐥  Update plugins", "<cmd>Lazy sync<CR>"),
                     dashboard.button("s", "  Restore Session", [[<cmd> lua require("persistence").load() <cr>]]),
@@ -593,228 +632,72 @@ return {
         end,
     },
 
-    -- Show indentation when no tab
-    -- https://github.com/lukas-reineke/indent-blankline.nvim
-    --{
-    --    'lukas-reineke/indent-blankline.nvim',
-    --    opts = {
-    --        indent = {
-    --            char = "┊",
-    --            tab_char = "│",
-    --        },
-    --        exclude = {
-    --            buftypes = {
-    --                "terminal",
-    --                "nofile"
-    --            },
-    --            filetypes = {
-    --                "help",
-    --                "alpha",
-    --                "dashboard",
-    --                "NvimTree",
-    --                "neo-tree",
-    --                "Trouble",
-    --                "trouble",
-    --                "packer",
-    --                "lazy",
-    --                "mason",
-    --                "notify",
-    --                "toggleterm",
-    --                "lazyterm",
-    --            },
-    --        },
-    --        whitespace = {
-    --            remove_blankline_trail = false,
-    --        },
-    --        scope = { enabled = true },
-    --    },
-    --    init = function()
-    --        local hooks = require "ibl.hooks"
-    --        hooks.register(
-    --            hooks.type.WHITESPACE,
-    --            hooks.builtin.hide_first_space_indent_level
-    --        )
-    --        hooks.register(
-    --            hooks.type.WHITESPACE,
-    --            hooks.builtin.hide_first_tab_indent_level
-    --        )
-    --    end,
-    --    main = "ibl",
-    --},
-
-    -- Visualize and work with indent scope
+    -- Active indent guide and indent text objects. When you're browsing
+    -- code, this highlights the current level of indentation, and animates
+    -- the highlighting.
     -- https://github.com/echasnovski/mini.indentscope
-    --{
-    --    'echasnovski/mini.indentscope',
-    --    event = { "BufReadPost", "BufWritePost", "BufNewFile" },
-    --    opts = {
-    --        draw = {
-    --            delay = 100,
-    --            priority = 2,
-    --        },
-    --        mappings = {
-    --            object_scope = 'ii',
-    --            object_scope_with_border = 'ai',
-    --            goto_top = '[i',
-    --            goto_bottom = ']i',
-    --        },
-    --        options = {
-    --            border = 'both',
-    --            indent_at_cursor = true,
-    --            try_as_border = true,
-    --        },
-    --        symbol = '┊',
-    --    },
-    --    init = function()
-    --        vim.api.nvim_create_autocmd("FileType", {
-    --            pattern = {
-    --                "help",
-    --                "alpha",
-    --                "dashboard",
-    --                "neo-tree",
-    --                "Trouble",
-    --                "trouble",
-    --                "packer",
-    --                "lazy",
-    --                "mason",
-    --                "notify",
-    --                "toggleterm",
-    --                "lazyterm",
-    --            },
-    --            callback = function()
-    --                vim.b.miniindentscope_disable = true
-    --            end,
-    --        })
-    --    end,
-    --},
+    {
+        "echasnovski/mini.indentscope",
+        version = false, -- wait till new 0.7.0 release to put it back on semver
+        event = "LazyFile",
+        opts = {
+            draw = {
+                delay = 100,
+                priority = 2,
+            },
+            mappings = {
+                object_scope = 'ii',
+                object_scope_with_border = 'ai',
+                goto_top = '[i',
+                goto_bottom = ']i',
+            },
+            options = {
+                border = 'both',
+                indent_at_cursor = true,
+                try_as_border = true,
+            },
+            symbol = '┊',
+        },
+        init = function()
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = {
+                    "Trouble",
+                    "alpha",
+                    "dashboard",
+                    "fzf",
+                    "help",
+                    "lazy",
+                    "mason",
+                    "neo-tree",
+                    "notify",
+                    "snacks_dashboard",
+                    "snacks_notif",
+                    "snacks_terminal",
+                    "snacks_win",
+                    "toggleterm",
+                    "trouble",
+                },
+                callback = function()
+                    vim.b.miniindentscope_disable = true
+                end,
+            })
 
-    -- Notification manager
-    -- https://github.com/rcarriga/nvim-notify
-    --{
-    --    'rcarriga/nvim-notify',
-    --    keys = {
-    --        {
-    --            "<leader>un",
-    --            function()
-    --                require("notify").dismiss({ silent = true, pending = true })
-    --            end,
-    --            desc = "Dismiss All Notifications",
-    --        },
-    --    },
-    --    opts = {
-    --        stages = 'slide',
-    --        timeout = 3000,
-    --        max_height = function()
-    --            return math.floor(vim.o.lines * 0.75)
-    --        end,
-    --        max_width = function()
-    --            return math.floor(vim.o.columns * 0.75)
-    --        end,
-    --        on_open = function(win)
-    --            vim.api.nvim_win_set_config(win, { zindex = 100 })
-    --        end,
-    --    },
-    --    init = function()
-    --        local noice_ok, notify = pcall(require, "noice")
-    --        if not noice_ok then
-    --            vim.notify = require("notify")
-    --        end
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "SnacksDashboardOpened",
+                callback = function(data)
+                    vim.b[data.buf].miniindentscope_disable = true
+                end,
+            })
+        end,
+    },
 
-    --        -- Lsp notification customization
-    --        vim.lsp.handlers['window/showMessage'] = function(_, result, ctx)
-    --            local client = vim.lsp.get_client_by_id(ctx.client_id)
-    --            local level = ({
-    --                'ERROR',
-    --                'WARN',
-    --                'INFO',
-    --                'DEBUG',
-    --            })[result.type]
-    --            notify(
-    --                { result.message },
-    --                level,
-    --                {
-    --                    title = '[lsp] | ' .. client.name,
-    --                    keep = function()
-    --                        return level == 'ERROR' or level == 'WARN'
-    --                    end,
-    --                }
-    --            )
-    --        end
+    -- FIXME: End LazyVim extra --
 
-    --        vim.lsp.buf.rename = function()
-    --            local position_params = vim.lsp.util.make_position_params()
-    --            position_params.oldName = vim.fn.expand("<cword>")
-    --            position_params.newName = vim.fn.input("Rename To> ", position_params.oldName)
-    --            vim.lsp.buf_request(0, "textDocument/rename", position_params, function(err, result, ...)
-    --                if not result or not result.changes then
-    --                    notify(
-    --                        string.format('could not perform rename'),
-    --                        'error',
-    --                        {
-    --                            title = string.format(
-    --                                '[lsp] rename: %s -> %s',
-    --                                position_params.oldName,
-    --                                position_params.newName
-    --                            ),
-    --                            timeout = 2500
-    --                        })
-    --                    return
-    --                end
-
-    --                vim.lsp.handlers["textDocument/rename"](err, result, ...)
-    --                local notification, entries = '', {}
-    --                local num_files, num_updates = 0, 0
-    --                for uri, edits in pairs(result.changes) do
-    --                    num_files = num_files + 1
-    --                    local bufnr = vim.uri_to_bufnr(uri)
-    --                    for _, edit in ipairs(edits) do
-    --                        local start_line = edit.range.start.line + 1
-    --                        local line = vim.api.nvim_buf_get_lines(bufnr, start_line - 1, start_line, false)[1]
-    --                        num_updates = num_updates + 1
-    --                        table.insert(entries, {
-    --                            bufnr = bufnr,
-    --                            lnum = start_line,
-    --                            col = edit.range.start.character + 1,
-    --                            text = line
-    --                        })
-    --                    end
-    --                    local short_uri = string.sub(vim.uri_to_fname(uri), #vim.fn.getcwd() + 2)
-    --                    notification = notification .. string.format('made %d change(s) in %s', #edits, short_uri)
-    --                end
-    --                notify(
-    --                    notification,
-    --                    'info',
-    --                    {
-    --                        title = string.format(
-    --                            '[lsp] rename: %s -> %s',
-    --                            position_params.oldName,
-    --                            position_params.newName
-    --                        ),
-    --                        timeout = 2000
-    --                    })
-    --            end)
-    --        end
-    --    end,
-    --},
-
-    -- UI improvements
-    -- https://github.com/stevearc/dressing.nvim
-    --{
-    --    'stevearc/dressing.nvim',
-    --    lazy = true,
-    --    init = function()
-    --        ---@diagnostic disable-next-line: duplicate-set-field
-    --        vim.ui.select = function(...)
-    --            require("lazy").load({ plugins = { "dressing.nvim" } })
-    --            return vim.ui.select(...)
-    --        end
-    --        ---@diagnostic disable-next-line: duplicate-set-field
-    --        vim.ui.input = function(...)
-    --            require("lazy").load({ plugins = { "dressing.nvim" } })
-    --            return vim.ui.input(...)
-    --        end
-    --    end,
-    --},
+    -- Vim Scroller
+    -- https://github.com/yuttie/comfortable-motion.vim
+    {
+        'yuttie/comfortable-motion.vim',
+    },
 
     -- Lua Gui and utils
     -- https://github.com/ray-x/guihua.lua
@@ -839,14 +722,6 @@ return {
     --        }
     --    }
     --},
-
-    -- Dev icons
-    -- https://github.com/nvim-tree/nvim-web-devicons
-    {
-        'nvim-tree/nvim-web-devicons',
-        lazy = true,
-    },
-
 }
 
 -- vim: ts=4 sts=4 sw=4 et
