@@ -5,6 +5,8 @@
 BAK="$HOME/bakup/neovim"
 BIN="$HOME/.local/bin"
 URL="https://github.com/neovim/neovim/releases/download"
+GITLAB="https://gitlab.com/elnox/neovim.git"
+NVMVERS="v0.40.1"
 NVIMDIR=(
     ".local/nvim"
     ".cache/nvim"
@@ -95,10 +97,10 @@ function deploy() {
     # install latest REL from appImage
     wget "$URL/$REL/nvim-linux-x86_64.appimage" -O "$TMPDIR/nvim.appimage" 2>/dev/null ||
         cp nvim/nvim.appimage "$TMPDIR"
-            chmod +x "$TMPDIR/nvim.appimage"
+    chmod +x "$TMPDIR/nvim.appimage"
 
-            cd "$TMPDIR/" && ./nvim.appimage --appimage-extract &>/dev/null
-            mv "$TMPDIR/squashfs-root" "$HOME/.local/nvim"
+    cd "$TMPDIR/" && ./nvim.appimage --appimage-extract &>/dev/null
+    mv "$TMPDIR/squashfs-root" "$HOME/.local/nvim"
 
     # cleanup temp
     cd ~/ && rm -rf "$TMPDIR"
@@ -124,7 +126,7 @@ function config() {
     # legacy
     if [[ "$FLAVOR" == "legacy" ]]; then
         echo "- Setup configuration legacy"
-        git clone https://gitlab.com/elnox/neovim.git ~/.config/nvim -q
+        git clone $GITLAB ~/.config/nvim -q
         sh -c 'curl -fLo ~/.local/share/nvim/site/autoload/plug.vim \
             --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
@@ -139,13 +141,13 @@ function config() {
         else
             echo "! nodejs not found, either run one of these commands"
             echo "! apt install npm nodejs --no-install-recommends"
-            echo "! curl -sL https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.0/install.sh | $SHELL"
+            echo "! curl -sL https://raw.githubusercontent.com/nvm-sh/nvm/$NVMVERS/install.sh | $SHELL"
             [ -z "$1" ] && exit 0
         fi
         if [[ "$FLAVOR" == "local" ]]; then
             [[ -d "../nvim" ]] && cp -rf ../nvim ~/.config/
         else
-            git clone https://gitlab.com/elnox/neovim.git ~/.config/nvim -q
+            git clone $GITLAB ~/.config/nvim -q
             cd ~/.config/nvim || exit
             git fetch origin && git checkout "$FLAVOR"
             nvim
@@ -162,24 +164,24 @@ function main() {
         arg="$1"
         shift
         case "$arg" in
-            --bakup)
-                BAKUP=$1
-                shift
-                ;;
-            --restore)
-                RESTORE=$1
-                shift
-                ;;
-            --release)
-                REL=$1
-                shift
-                ;;
-            --config)
-                FLAVOR=$1
-                shift
-                ;;
-            --help) usage ;;
-            *) [[ $arg =~ \-+.* ]] && usage "$arg unknown" ;;
+        --bakup)
+            BAKUP=$1
+            shift
+            ;;
+        --restore)
+            RESTORE=$1
+            shift
+            ;;
+        --release)
+            REL=$1
+            shift
+            ;;
+        --config)
+            FLAVOR=$1
+            shift
+            ;;
+        --help) usage ;;
+        *) [[ $arg =~ \-+.* ]] && usage "$arg unknown" ;;
         esac
     done
 

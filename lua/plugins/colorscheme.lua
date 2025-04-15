@@ -4,40 +4,27 @@
 
 return {
 
-    -- Theme creation helper
-    -- https://github.com/rktjmp/lush.nvim
-    {
-        'rktjmp/lush.nvim',
-    },
+    -- INFO: LazyVim default --
 
-    -- Jellybeans port to lua
-    -- https://github.com/nanotech/jellybeans.vim
+    -- 🎨 Set the preferred colorscheme
     {
-        'metalelf0/jellybeans-nvim',
-        lazy = false,
-        priority = 1000,
-        dependencies = {
-            'rktjmp/shipwright.nvim',
+        "LazyVim/LazyVim",
+        opts = {
+            colorscheme = "jellybeans-nvim",
         },
-        config = function()
-            vim.opt.termguicolors = true
-            vim.opt.background = "dark"
-            vim.cmd([[colorscheme jellybeans-nvim]])
-        end,
     },
 
-    -- Tokyonight
+    -- 🌌 Tokyonight: Dark theme with multiple styles
+    -- https://github.com/folke/tokyonight.nvim
     {
-        'folke/tokyonight.nvim',
-        lazy = false,
-        opts = { style = "moon" },
+        "folke/tokyonight.nvim",
+        opts = { style = "night" },
     },
 
-    -- Catppuccin
+    -- ☕ Catppuccin: Soft pastel theme with deep plugin integrations
     -- https://github.com/catppuccin/nvim
     {
         "catppuccin/nvim",
-        lazy = false,
         name = "catppuccin",
         opts = {
             integrations = {
@@ -92,14 +79,48 @@ return {
         },
     },
 
-    -- Color highlighter
+    -- TEST: External plugins --
+
+    -- 🛠️ Create your own colorschemes
+    -- https://github.com/rktjmp/lush.nvim
+    {
+        'rktjmp/lush.nvim',
+    },
+
+    -- 🟢 Jellybeans Lua port
+    -- https://github.com/nanotech/jellybeans.vim
+    {
+        'metalelf0/jellybeans-nvim',
+        dependencies = {
+            'rktjmp/shipwright.nvim',
+        },
+    },
+
+    -- 🌈 Highlight color codes in buffers
     -- https://github.com/norcalli/nvim-colorizer.lua
     {
-        'NvChad/nvim-colorizer.lua',
+        'norcalli/nvim-colorizer.lua',
         init = function()
             require 'colorizer'.setup()
         end
     },
+
+    -- 🎛️ Dynamically manage and switch themes
+    -- https://github.com/vague2k/huez.nvim
+    {
+        "vague2k/huez.nvim",
+        dependencies = { 'nvim-telescope/telescope.nvim' },
+        -- if you want registry related features, uncomment this
+        import = "huez-manager.import",
+        branch = "stable",
+        event = "UIEnter",
+        config = function()
+            require("huez").setup({
+                fallback = "jellybeans-nvim",
+                suppress_messages = false,
+            })
+        end,
+    }
 }
 
 -- vim: ts=4 sts=4 sw=4 et

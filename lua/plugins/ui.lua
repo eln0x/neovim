@@ -3,85 +3,36 @@
 --if true then return {} end
 
 return {
-    -- Buffer line
+
+    -- INFO: LazyVim default --
+
+    -- 🗂 Buffer line (tabs & buffers)
     -- https://github.com/akinsho/bufferline.nvim
     {
-        'akinsho/bufferline.nvim',
-        event = "VeryLazy",
-        keys = {
-            { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
-            { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
-            { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete Other Buffers" },
-            { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
-            { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
-            { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
-            { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
-            { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
-            { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
-            { "[B", "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer prev" },
-            { "]B", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
-        },
+        "akinsho/bufferline.nvim",
+        enabled = true,
         opts = {
             options = {
-                close_command = function(n) Snacks.bufdelete(n) end,
-                right_mouse_command = function(n) Snacks.bufdelete(n) end,
-                diagnostics = "nvim_lsp",
                 always_show_bufferline = true,
-                diagnostics_indicator = function(_, _, diag)
-                    local icons = LazyVim.config.icons.diagnostics
-                    local ret = (diag.error and icons.Error .. diag.error .. " " or "")
-                    .. (diag.warning and icons.Warn .. diag.warning or "")
-                    return vim.trim(ret)
-                end,
-                offsets = {
-                    {
-                        filetype = "neo-tree",
-                        text = "Neo-tree",
-                        highlight = "Directory",
-                        text_align = "left",
-                    },
-                    {
-                        filetype = "snacks_layout_box",
-                    },
+                enforce_regular_tabs = true,
+                max_name_length = 30,
+                max_prefix_length = 30,
+                tab_size = 21,
+                separator_style = "thin",
+                indicator = {
+                    icon = '',
+                    style = 'icon',
                 },
-                get_element_icon = function(opts)
-                    return LazyVim.config.icons.ft[opts.filetype]
-                end,
             },
         },
-        config = function(_, opts)
-            require("bufferline").setup(opts)
-            -- Fix bufferline when restoring a session
-            vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
-                callback = function()
-                    vim.schedule(function()
-                        pcall(nvim_bufferline)
-                    end)
-                end,
-            })
-        end,
     },
 
-    -- Status line
+    -- 📊 Status line
     -- https://github.com/nvim-lualine/lualine.nvim
     {
-        'nvim-lualine/lualine.nvim',
-        event = "VeryLazy",
-        init = function()
-            vim.g.lualine_laststatus = vim.o.laststatus
-            if vim.fn.argc(-1) > 0 then
-                -- set an empty statusline till lualine loads
-                vim.o.statusline = " "
-            else
-                -- hide the statusline on the starter page
-                vim.o.laststatus = 0
-            end
-        end,
+        "nvim-lualine/lualine.nvim",
+        enabled = true,
         opts = function()
-            -- PERF: we don't need this lualine require madness 🤷
-            local lualine_require = require("lualine_require")
-            lualine_require.require = require
-
             local icons = LazyVim.config.icons
 
             vim.o.laststatus = vim.g.lualine_laststatus
@@ -89,7 +40,7 @@ return {
             local mode = {
                 "mode",
                 fmt = function(str)
-                    return "-- " .. str .. " --"
+                    return " " .. str .. " -"
                 end,
             }
 
@@ -97,6 +48,16 @@ return {
                 "branch",
                 icons_enabled = true,
                 icon = "",
+            }
+
+            local diagnostics = {
+                "diagnostics",
+                symbols = {
+                    error = icons.diagnostics.Error,
+                    warn = icons.diagnostics.Warn,
+                    info = icons.diagnostics.Info,
+                    hint = icons.diagnostics.Hint,
+                },
             }
 
             local diff = {
@@ -118,30 +79,23 @@ return {
                 end,
             }
 
-            local diagnostics = {
-                "diagnostics",
-                sources = { "nvim_diagnostic" },
-                sections = { "warn", "error", "hint" },
-                symbols = {
-                    error = icons.diagnostics.Error,
-                    warn = icons.diagnostics.Warn,
-                    info = icons.diagnostics.Info,
-                    hint = icons.diagnostics.Hint,
-                },
-                colored = true,
-                update_in_insert = false,
-                always_visible = false,
-            }
-
             local date = {
                 "mode",
                 fmt = function()
-                    return " " .. os.date("%R")
+                    return " " .. os.date("%R") .. " "
                 end,
             }
 
             local spaces = function()
                 return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
+            end
+
+            local linter = function()
+                local linters = require("lint").get_running()
+                if #linters == 0 then
+                    return "󰦕"
+                end
+                return "󱉶 " .. table.concat(linters, ", ")
             end
 
             local opts = {
@@ -154,12 +108,11 @@ return {
                     lualine_a = { mode },
                     lualine_b = { branch, diff },
                     lualine_c = {
-                        {
-                            'filename',
-                            file_status = true,
-                            path = 1
-                        },
+                        LazyVim.lualine.root_dir(),
                         diagnostics,
+                        { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+                        { LazyVim.lualine.pretty_path() },
+                        { linter },
                     },
                     lualine_x = {
                         Snacks.profiler.status(),
@@ -191,7 +144,6 @@ return {
                     lualine_y = {
                         { "progress", separator = " ", padding = { left = 1, right = 0 } },
                         { "location", padding = { left = 0, right = 1 } },
-                        { "filetype", icon_only = false, separator = "", padding = { left = 1, right = 0 } },
                         spaces, 'encoding', 'fileformat',
                     },
                     lualine_z = { date },
@@ -199,38 +151,16 @@ return {
                 extensions = { "neo-tree", "lazy", "fzf" },
             }
 
-            -- do not add trouble symbols if aerial is enabled
-            -- And allow it to be overriden for some buffer types (see autocmds)
-            if vim.g.trouble_lualine and LazyVim.has("trouble.nvim") then
-                local trouble = require("trouble")
-                local symbols = trouble.statusline({
-                    mode = "symbols",
-                    groups = {},
-                    title = false,
-                    filter = { range = true },
-                    format = "{kind_icon}{symbol.name:Normal}",
-                    hl_group = "lualine_c_normal",
-                })
-                table.insert(opts.sections.lualine_c, {
-                    symbols and symbols.get,
-                    cond = function()
-                        return vim.b.trouble_lualine ~= false and symbols.has()
-                    end,
-                })
-            end
-
             return opts
         end,
     },
 
-    -- UI for messages, cmdline and the popupmenu.
+    -- 💬 UI for messages, cmdline & popupmenu
     -- https://github.com/folke/noice.nvim
     {
         "folke/noice.nvim",
-        event = "VeryLazy",
+        enabled = true,
         opts = {
-            lsp = {
-            },
             lsp = {
                 -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
                 override = {
@@ -261,37 +191,16 @@ return {
                 command_palette = true,         -- position the cmdline and popupmenu together
                 long_message_to_split = true,   -- long messages will be sent to a split
                 inc_rename = true,              -- enables an input dialog for inc-rename.nvim
-                lsp_doc_border = false,         -- add a border to hover docs and signature help
+                lsp_doc_border = true,          -- add a border to hover docs and signature help
             },
         },
-        -- stylua: ignore
-        keys = {
-            { "<leader>sn", "", desc = "+noice"},
-            { "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect Cmdline" },
-            { "<leader>snl", function() require("noice").cmd("last") end, desc = "Noice Last Message" },
-            { "<leader>snh", function() require("noice").cmd("history") end, desc = "Noice History" },
-            { "<leader>sna", function() require("noice").cmd("all") end, desc = "Noice All" },
-            { "<leader>snd", function() require("noice").cmd("dismiss") end, desc = "Dismiss All" },
-            { "<leader>snt", function() require("noice").cmd("pick") end, desc = "Noice Picker (Telescope/FzfLua)" },
-            { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll Forward", mode = {"i", "n", "s"} },
-            { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll Backward", mode = {"i", "n", "s"}},
-        },
-        config = function(_, opts)
-            -- HACK: noice shows messages from before it was enabled,
-            -- but this is not ideal when Lazy is installing plugins,
-            -- so clear the messages in this case.
-            if vim.o.filetype == "lazy" then
-                vim.cmd([[messages clear]])
-            end
-            require("noice").setup(opts)
-        end,
     },
 
-    -- Mini icons provider
-    -- https://github.com/echasnovski/mini.icons
+    -- 🖼 Icons for files & filetypes
+    -- https://github.com/nvim-mini/mini.icons
     {
-        "echasnovski/mini.icons",
-        lazy = true,
+        "nvim-mini/mini.icons",
+        enabled = true,
         opts = {
             file = {
                 [".keep"] = { glyph = "󰊢", hl = "MiniIconsGrey" },
@@ -301,59 +210,41 @@ return {
                 dotenv = { glyph = "", hl = "MiniIconsYellow" },
             },
         },
-        init = function()
-            package.preload["nvim-web-devicons"] = function()
-                require("mini.icons").mock_nvim_web_devicons()
-                return package.loaded["nvim-web-devicons"]
-            end
-        end,
     },
 
-    -- UI components library
+    -- 🧩 UI components library
     -- https://github.com/MunifTanjim/nui.nvim
     {
         'MunifTanjim/nui.nvim',
-        lazy = true,
+        enabled = true,
     },
 
-    -- Snacks UI
+    -- 🥪 Snacks UI helpers
     -- https://github.com/folke/snacks.nvim
     {
-        "snacks.nvim",
+        "folke/snacks.nvim",
         opts = {
+            dashboard = { enabled = false },    -- alpha
+            bigfile = { enabled = true },
             indent = { enabled = true },
             input = { enabled = true },
             notifier = { enabled = true },
+            quickfile = { enabled = true },
             scope = { enabled = true },
-            scroll = { enabled = false },
-            statuscolumn = { enabled = false }, -- we set this in options.lua
+            scroll = { enabled = false },                   -- use comfortable-motion instead
+            statuscolumn = { enabled = false },             -- we set this in options.lua
             toggle = { map = LazyVim.safe_keymap_set },
             words = { enabled = true },
-        },
-        -- stylua: ignore
-        keys = {
-            { "<leader>n", function()
-                if Snacks.config.picker and Snacks.config.picker.enabled then
-                    Snacks.picker.notifications()
-                else
-                    Snacks.notifier.show_history()
-                end
-            end, desc = "Notification History" },
-            { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
+            explorer = { enabled = true },
         },
     },
 
-    -- Startup screen
+    -- INFO: LazyVim extra --
+
+    -- 🚀 Startup screen/dashboard
     -- https://github.com/goolord/alpha-nvim
     {
         'goolord/alpha-nvim',
-        event = "VimEnter",
-        dependencies = {
-            'nvim-tree/nvim-web-devicons',
-            'nvim-lua/plenary.nvim',
-        },
-        enabled = true,
-        init = false,
         opts = function()
             local dashboard = require("alpha.themes.dashboard")
             local devicons  = require("nvim-web-devicons")
@@ -471,7 +362,7 @@ return {
                 val = {
                     {
                         type = "text",
-                        val = "Recent files",
+                        val = " Recent files ",
                         opts = {
                             hl = "Constant",
                             shrink_margin = false,
@@ -548,23 +439,24 @@ return {
             local buttons = {
                 type = "group",
                 val = {
-                    { type = "text", val = "Quick links", opts = { hl = "Constant", position = "center" } },
+                    { type = "text", val = " Quick links ", opts = { hl = "Constant", position = "center" } },
                     { type = "padding", val = 1 },
                     dashboard.button("n", "  New file", "<cmd> ene <BAR> startinsert <cr>"),
-                    dashboard.button("f", "  Find file", "<cmd> Telescope find_files <cr>"),
-                    dashboard.button("p", "  Find project", "<cmd> Telescope projects <cr>"),
-                    dashboard.button("g", "  Find text", "<cmd> Telescope live_grep <cr>"),
-                    dashboard.button("m", "  Find modified file", "<cmd> Telescope git_status <cr>"),
-                    dashboard.button("c", "  Config", "<cmd> lua LazyVim.pick.config_files()() <cr>"),
+                    dashboard.button("f", "  Find file", "<cmd> lua Snacks.picker.files() <cr>"),
+                    dashboard.button("p", "  Find project", "<cmd> lua Snacks.picker.projects() <cr>"),
+                    dashboard.button("g", "  Grep text", "<cmd> lua Snacks.picker.grep() <cr>"),
+                    dashboard.button("m", "  Git Files", "<cmd> lua Snacks.picker.git_files() <cr>"),
+                    dashboard.button("b", "  Browse Repo", "<cmd> lua Snacks.gitbrowse() <cr>"),
+                    dashboard.button("c", "  Config", "<cmd> lua Snacks.picker.files({ cwd = vim.fn.stdpath('config') }) <cr>"),
                     dashboard.button("l", "󰒲  Lazy", "<cmd> Lazy <cr>"),
-                    dashboard.button("u", "󱐥  Update plugins", "<cmd>Lazy sync<CR>"),
+                    dashboard.button("u", "󱐥  Sync plugins", "<cmd>Lazy sync<CR>"),
+                    dashboard.button("x", "  Lazy Extras", "<cmd> LazyExtras <cr>"),
                     dashboard.button("s", "  Restore Session", [[<cmd> lua require("persistence").load() <cr>]]),
-                    dashboard.button("h", "  Check health", "<cmd> checkhealth <cr>"),
+                    dashboard.button("h", "  Check health", "<cmd> checkhealth <cr>"),
                     dashboard.button("q", "  Quit", "<cmd> qa <cr>"),
                 },
                 position = "center",
             }
-
             dashboard.opts = {
                 layout = {
                     { type = "padding", val = 1 }, header(),
@@ -576,277 +468,15 @@ return {
             }
             return dashboard
         end,
-        config = function(_, dashboard)
-            -- close Lazy and re-open when the dashboard is ready
-            if vim.o.filetype == "lazy" then
-                vim.cmd.close()
-                vim.api.nvim_create_autocmd("User", {
-                    once = true,
-                    pattern = "AlphaReady",
-                    callback = function()
-                        require("lazy").show()
-                    end,
-                })
-            end
-
-            require("alpha").setup(dashboard.opts)
-        end,
     },
 
-    -- Show indentation when no tab
-    -- https://github.com/lukas-reineke/indent-blankline.nvim
-    --{
-    --    'lukas-reineke/indent-blankline.nvim',
-    --    opts = {
-    --        indent = {
-    --            char = "┊",
-    --            tab_char = "│",
-    --        },
-    --        exclude = {
-    --            buftypes = {
-    --                "terminal",
-    --                "nofile"
-    --            },
-    --            filetypes = {
-    --                "help",
-    --                "alpha",
-    --                "dashboard",
-    --                "NvimTree",
-    --                "neo-tree",
-    --                "Trouble",
-    --                "trouble",
-    --                "packer",
-    --                "lazy",
-    --                "mason",
-    --                "notify",
-    --                "toggleterm",
-    --                "lazyterm",
-    --            },
-    --        },
-    --        whitespace = {
-    --            remove_blankline_trail = false,
-    --        },
-    --        scope = { enabled = true },
-    --    },
-    --    init = function()
-    --        local hooks = require "ibl.hooks"
-    --        hooks.register(
-    --            hooks.type.WHITESPACE,
-    --            hooks.builtin.hide_first_space_indent_level
-    --        )
-    --        hooks.register(
-    --            hooks.type.WHITESPACE,
-    --            hooks.builtin.hide_first_tab_indent_level
-    --        )
-    --    end,
-    --    main = "ibl",
-    --},
+    -- TEST: External plugins --
 
-    -- Visualize and work with indent scope
-    -- https://github.com/echasnovski/mini.indentscope
-    --{
-    --    'echasnovski/mini.indentscope',
-    --    event = { "BufReadPost", "BufWritePost", "BufNewFile" },
-    --    opts = {
-    --        draw = {
-    --            delay = 100,
-    --            priority = 2,
-    --        },
-    --        mappings = {
-    --            object_scope = 'ii',
-    --            object_scope_with_border = 'ai',
-    --            goto_top = '[i',
-    --            goto_bottom = ']i',
-    --        },
-    --        options = {
-    --            border = 'both',
-    --            indent_at_cursor = true,
-    --            try_as_border = true,
-    --        },
-    --        symbol = '┊',
-    --    },
-    --    init = function()
-    --        vim.api.nvim_create_autocmd("FileType", {
-    --            pattern = {
-    --                "help",
-    --                "alpha",
-    --                "dashboard",
-    --                "neo-tree",
-    --                "Trouble",
-    --                "trouble",
-    --                "packer",
-    --                "lazy",
-    --                "mason",
-    --                "notify",
-    --                "toggleterm",
-    --                "lazyterm",
-    --            },
-    --            callback = function()
-    --                vim.b.miniindentscope_disable = true
-    --            end,
-    --        })
-    --    end,
-    --},
-
-    -- Notification manager
-    -- https://github.com/rcarriga/nvim-notify
-    --{
-    --    'rcarriga/nvim-notify',
-    --    keys = {
-    --        {
-    --            "<leader>un",
-    --            function()
-    --                require("notify").dismiss({ silent = true, pending = true })
-    --            end,
-    --            desc = "Dismiss All Notifications",
-    --        },
-    --    },
-    --    opts = {
-    --        stages = 'slide',
-    --        timeout = 3000,
-    --        max_height = function()
-    --            return math.floor(vim.o.lines * 0.75)
-    --        end,
-    --        max_width = function()
-    --            return math.floor(vim.o.columns * 0.75)
-    --        end,
-    --        on_open = function(win)
-    --            vim.api.nvim_win_set_config(win, { zindex = 100 })
-    --        end,
-    --    },
-    --    init = function()
-    --        local noice_ok, notify = pcall(require, "noice")
-    --        if not noice_ok then
-    --            vim.notify = require("notify")
-    --        end
-
-    --        -- Lsp notification customization
-    --        vim.lsp.handlers['window/showMessage'] = function(_, result, ctx)
-    --            local client = vim.lsp.get_client_by_id(ctx.client_id)
-    --            local level = ({
-    --                'ERROR',
-    --                'WARN',
-    --                'INFO',
-    --                'DEBUG',
-    --            })[result.type]
-    --            notify(
-    --                { result.message },
-    --                level,
-    --                {
-    --                    title = '[lsp] | ' .. client.name,
-    --                    keep = function()
-    --                        return level == 'ERROR' or level == 'WARN'
-    --                    end,
-    --                }
-    --            )
-    --        end
-
-    --        vim.lsp.buf.rename = function()
-    --            local position_params = vim.lsp.util.make_position_params()
-    --            position_params.oldName = vim.fn.expand("<cword>")
-    --            position_params.newName = vim.fn.input("Rename To> ", position_params.oldName)
-    --            vim.lsp.buf_request(0, "textDocument/rename", position_params, function(err, result, ...)
-    --                if not result or not result.changes then
-    --                    notify(
-    --                        string.format('could not perform rename'),
-    --                        'error',
-    --                        {
-    --                            title = string.format(
-    --                                '[lsp] rename: %s -> %s',
-    --                                position_params.oldName,
-    --                                position_params.newName
-    --                            ),
-    --                            timeout = 2500
-    --                        })
-    --                    return
-    --                end
-
-    --                vim.lsp.handlers["textDocument/rename"](err, result, ...)
-    --                local notification, entries = '', {}
-    --                local num_files, num_updates = 0, 0
-    --                for uri, edits in pairs(result.changes) do
-    --                    num_files = num_files + 1
-    --                    local bufnr = vim.uri_to_bufnr(uri)
-    --                    for _, edit in ipairs(edits) do
-    --                        local start_line = edit.range.start.line + 1
-    --                        local line = vim.api.nvim_buf_get_lines(bufnr, start_line - 1, start_line, false)[1]
-    --                        num_updates = num_updates + 1
-    --                        table.insert(entries, {
-    --                            bufnr = bufnr,
-    --                            lnum = start_line,
-    --                            col = edit.range.start.character + 1,
-    --                            text = line
-    --                        })
-    --                    end
-    --                    local short_uri = string.sub(vim.uri_to_fname(uri), #vim.fn.getcwd() + 2)
-    --                    notification = notification .. string.format('made %d change(s) in %s', #edits, short_uri)
-    --                end
-    --                notify(
-    --                    notification,
-    --                    'info',
-    --                    {
-    --                        title = string.format(
-    --                            '[lsp] rename: %s -> %s',
-    --                            position_params.oldName,
-    --                            position_params.newName
-    --                        ),
-    --                        timeout = 2000
-    --                    })
-    --            end)
-    --        end
-    --    end,
-    --},
-
-    -- UI improvements
-    -- https://github.com/stevearc/dressing.nvim
-    --{
-    --    'stevearc/dressing.nvim',
-    --    lazy = true,
-    --    init = function()
-    --        ---@diagnostic disable-next-line: duplicate-set-field
-    --        vim.ui.select = function(...)
-    --            require("lazy").load({ plugins = { "dressing.nvim" } })
-    --            return vim.ui.select(...)
-    --        end
-    --        ---@diagnostic disable-next-line: duplicate-set-field
-    --        vim.ui.input = function(...)
-    --            require("lazy").load({ plugins = { "dressing.nvim" } })
-    --            return vim.ui.input(...)
-    --        end
-    --    end,
-    --},
-
-    -- Lua Gui and utils
-    -- https://github.com/ray-x/guihua.lua
-    --{
-    --    'ray-x/guihua.lua',
-    --    lazy = true,
-    --    opts = {
-    --        maps = {
-    --            close_view = '<C-e>',
-    --            send_qf = '<C-q>',
-    --            save = '<C-s>',
-    --            jump_to_list = '<C-w>k',
-    --            jump_to_preview = '<C-w>j',
-    --            prev = '<C-p>',
-    --            next = '<C-n>',
-    --            pageup = '<C-b>',
-    --            pagedown = '<C-f>',
-    --            confirm = '<C-o>',
-    --            split = '<C-s>',
-    --            vsplit = '<C-v>',
-    --            tabnew = '<C-t>',
-    --        }
-    --    }
-    --},
-
-    -- Dev icons
-    -- https://github.com/nvim-tree/nvim-web-devicons
+    -- 🌀 Smooth scrolling
+    -- https://github.com/yuttie/comfortable-motion.vim
     {
-        'nvim-tree/nvim-web-devicons',
-        lazy = true,
+        'yuttie/comfortable-motion.vim',
     },
-
 }
 
 -- vim: ts=4 sts=4 sw=4 et
