@@ -1,7 +1,7 @@
----- Coding
----- stylua: ignore
-----if true then return {} end
---
+-- Coding
+-- stylua: ignore
+--if true then return {} end
+
 return {
     -- Auto completion
     -- https://github.com/hrsh7th/nvim-cmp
