@@ -3,7 +3,7 @@
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
-local vim = vim
+local delkey = vim.keymap.del
 local map = vim.keymap.set
 local opts = { silent = true }
 

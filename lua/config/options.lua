@@ -3,7 +3,25 @@
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
-local vim = vim
+-- Disable LazyVim auto format
+vim.g.autoformat = false
+
+vim.g.lazyvim_picker = "snacks"
+
+-- Snacks animations
+-- Set to `false` to globally disable all snacks animations
+vim.g.snacks_animate = true
+
+-- Hide deprecation warnings
+vim.g.deprecation_warnings = false
+
+-- Show the current document symbols location from Trouble in lualine
+-- You can disable this for a buffer by setting `vim.b.trouble_lualine = false`
+vim.g.trouble_lualine = true
+
+-- Fix markdown indentation settings
+vim.g.markdown_recommended_style = 0
+
 local opt = vim.opt
 local undodir = os.getenv( "HOME" ) .. '/.cache/nvim/undo'
 
@@ -31,7 +49,7 @@ opt.completeopt = "menu,menuone,preview"        -- Vim popup menu behavior
 opt.conceallevel = 0                            -- So that `` is visible in markdown files
 opt.expandtab = true                            -- Convert tabs to spaces
 opt.ignorecase = true                           -- Do case insensitive matching
-opt.laststatus = 2                              -- Always print status line
+opt.laststatus = 3                              -- Always print status line
 opt.smartcase = true                            -- Do smart case matching
 opt.smartindent = true                          -- Make indenting smarter again
 opt.tabstop = 4                                 -- Insert 4 spaces for a tab
@@ -56,18 +74,35 @@ opt.updatetime = 100                            -- Reduce update time for async 
 opt.wildmenu = true                             -- Activate wildmenu
 opt.wildmode = "longest:full,full"              -- Vim bar autocomplete, alt: longest,list,full
 opt.winminwidth = 5                             -- Minimum window width
-opt.foldlevel = 0                               -- Folding
-opt.foldmethod = "expr"                         -- Use syntax based folding method
-opt.foldexpr = "nvim_treesitter#foldexpr()"     -- Use Treesitter folding
-opt.formatoptions = "tcqjrol"                   -- Auto format options, default: tcqj
+opt.formatoptions = "jcroqlnt"                  -- Auto format options, default: tcqj
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
-opt.shortmess:append({ W = true, c = true, C = true })
+opt.shortmess:append({ W = true, I = true, c = true, C = true })
 opt.spelllang = { "en" }                        -- List of spell lang
+opt.autowrite = false                           -- Disable auto write (default)
+opt.termguicolors = true                        -- True color support
+opt.timeoutlen = vim.g.vscode and 1000 or 300   -- Lower than default (1000) to quickly trigger which-key
+opt.wrap = false                                -- Disable line wrap
+opt.linebreak = true                            -- Wrap lines at convenient points
 
 -- Lazy only
 --opt.grepformat = "%f:%l:%c:%m"
 --opt.grepprg = "rg --vimgrep"
 --opt.splitkeep = "screen"
+
+-- Break first install
+--opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
+
+-- Folding
+opt.foldlevel = 99                              -- Folding
+--opt.foldexpr = "nvim_treesitter#foldexpr()"     -- Use Treesitter folding
+--if vim.fn.has("nvim-0.10") == 1 then
+--    opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
+--    opt.foldmethod = "expr"
+--    opt.foldtext = ""
+--else
+--    opt.foldmethod = "indent"
+--    opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
+--end
 
 -- Custom
 opt.compatible = false                          -- Set compatibility to Vim only.
