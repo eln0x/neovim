@@ -1,28 +1,10 @@
---
 -- NeoVim colorscheme
---
--- https://github.com/nanotech/jellybeans.vim
+-- stylua: ignore
+--if true then return {} end
 
 local vim = vim
 
-local colorscheme = "jellybeans-nvim"    -- Preferred color scheme
-
-local scheme_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
-if not scheme_ok then
-    return
-    end
-
-local clz_ok, clz = pcall(require, "colorizer")
-if clz_ok then
-    clz.setup()
-end
-
--- options
-local opt = vim.opt
-opt.termguicolors = true            -- Set term gui colors
-opt.background = "dark"             -- Select dark background
-
--- completion
+-- completion menu a
 vim.cmd([[
     hi! Pmenu                       guibg=#22252A   guifg=#C5CDD9
     hi! PmenuSel                    guibg=#282C34   guifg=NONE
@@ -34,6 +16,7 @@ vim.cmd([[
     hi! CmpItemAbbrMatchFuzzy       guibg=NONE      guifg=#569CD6   gui=bold
 ]])
 
+-- completion menu b
 vim.cmd([[
     hi! Pmenu                       guibg=#22252A   guifg=#C5CDD9
     hi! PmenuSel                    guibg=#282C34   guifg=NONE
@@ -45,6 +28,7 @@ vim.cmd([[
     hi! CmpItemAbbrMatchFuzzy       guibg=NONE      guifg=#82AAFF   gui=bold
 ]])
 
+-- completion items menu
 vim.cmd([[
     hi! CmpItemMenu                 guibg=NONE      guifg=#C792EA   gui=italic
     hi! CmpItemKindField            guibg=#B5585F   guifg=#EED8DA
