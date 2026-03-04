@@ -104,3 +104,12 @@ bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --res
 | 🛠️   | `folke/lazydev.nvim`     | Lua development library for Neovim config.                                              |
 | 📝   | `danymat/neogen`         | Generate docstrings and annotations automatically for multiple languages.               |
 
+#### Syntax
+
+| Icon | Plugin                                        | Description                                                         |
+| ---- | --------------------------------------------- | ------------------------------------------------------------------- |
+| 🌳   | `nvim-treesitter/nvim-treesitter`             | Syntax highlighting, parsing, indentation, and supported languages. |
+| 🧩   | `nvim-treesitter/nvim-treesitter-textobjects` | Advanced text objects powered by Treesitter.                        |
+| 🔖   | `windwp/nvim-ts-autotag`                      | Auto-closing tags for HTML, JSX, and similar filetypes.             |
+| 📜   | `nvim-treesitter/nvim-treesitter-context`     | Shows current function/block context at the top of the window.      |
+
