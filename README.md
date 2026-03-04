@@ -7,6 +7,7 @@
 - [Screenshot](#screenshot)
 - [Requirements](#requirements)
 - [Installation](#installation)
+- [Features](#features)
 
 ### Screenshot
 
@@ -55,3 +56,19 @@ Restore:
 
 ```bash
 bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --restore master
+```
+
+### Features
+
+#### Core UI
+
+| Icon | Plugin                          | Description                                                                     |
+| ---- | ------------------------------- | ------------------------------------------------------------------------------- |
+| 🗂   | `akinsho/bufferline.nvim`       | Tab & buffer line management with icons and separators.                         |
+| 📊   | `nvim-lualine/lualine.nvim`     | Customizable statusline, with git, diagnostics, mode, date, and DAP info.       |
+| 💬   | `folke/noice.nvim`              | Enhanced Neovim UI for messages, cmdline, and popupmenu.                        |
+| 🖼   | `nvim-mini/mini.icons`          | Filetype and filename icons for buffers, tabs, and dashboard.                   |
+| 🧩   | `MunifTanjim/nui.nvim`          | UI component library for building popup menus, layouts, and custom UI elements. |
+| 🥪   | `folke/snacks.nvim`             | A collection of QOL plugins like file explorer, notifications and more.         |
+| 🌅   | `goolord/alpha-nvim`            | Startup screen / dashboard with recent files, quick links, and stats.           |
+| 🌀   | `yuttie/comfortable-motion.vim` | Smooth scrolling for a more visually comfortable experience.                    |
