@@ -117,5 +117,7 @@ bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --res
 
 | Icon | Plugin                         | Description                                                                   |
 | ---- | ------------------------------ | ----------------------------------------------------------------------------- |
+| 🖥️   | `neovim/nvim-lspconfig`        | Core LSP setup for Neovim with diagnostics, inlay hints, folding, and more... |
+| 🛠️   | `mason-org/mason.nvim`         | Manages installation of LSP servers, linters, and formatters.                 |
 | 🩺   | `mfussenegger/nvim-lint`       | Lightweight, configurable code linting engine supporting multiple linters.    |
 | 🧹   | `stevearc/conform.nvim`        | Code formatting manager for multiple filetypes.                               |
