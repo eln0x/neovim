@@ -113,3 +113,9 @@ bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --res
 | 🔖   | `windwp/nvim-ts-autotag`                      | Auto-closing tags for HTML, JSX, and similar filetypes.             |
 | 📜   | `nvim-treesitter/nvim-treesitter-context`     | Shows current function/block context at the top of the window.      |
 
+#### Development
+
+| Icon | Plugin                         | Description                                                                   |
+| ---- | ------------------------------ | ----------------------------------------------------------------------------- |
+| 🩺   | `mfussenegger/nvim-lint`       | Lightweight, configurable code linting engine supporting multiple linters.    |
+| 🧹   | `stevearc/conform.nvim`        | Code formatting manager for multiple filetypes.                               |
