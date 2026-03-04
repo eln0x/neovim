@@ -35,4 +35,12 @@ set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 -- Clear search with <esc>
 set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
 
+-- Comfortable motion
+vim.g.comfortable_motion_no_default_key_mappings = 1
+del("n", "<leader>uS")
+del("n", "<C-Down>")
+set("n", "<C-Down>", "<cmd>call comfortable_motion#flick(100)<cr>", { desc = "Scroll Down", silent = true })
+del("n", "<C-Up>")
+set("n", "<C-Up>", "<cmd>call comfortable_motion#flick(-100)<cr>", { desc = "Scroll Up", silent = true })
+
 -- vim: ts=4 sts=4 sw=4 et
