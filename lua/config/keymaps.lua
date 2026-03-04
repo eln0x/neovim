@@ -10,6 +10,7 @@ local del = vim.keymap.del
 
 -- Toggles
 set("n", "<F2>", "<cmd>Alpha<cr>", { silent = true })
+set("n", "<F6>", "<cmd>HuezFavorites<cr>", { silent = true })
 
 -- Split windows
 del("n", "<leader>-")
