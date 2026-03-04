@@ -11,6 +11,7 @@ return {
     {
         "folke/snacks.nvim",
         opts = {
+            dashboard = { enabled = false },        -- alpha
             scroll = { enabled = false },           -- use comfortable-motion instead
         },
     },

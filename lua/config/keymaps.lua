@@ -8,6 +8,9 @@ local vim = vim
 local set = vim.keymap.set
 local del = vim.keymap.del
 
+-- Toggles
+set("n", "<F2>", "<cmd>Alpha<cr>", { silent = true })
+
 -- Split windows
 del("n", "<leader>-")
 set("n", "<leader>§", "<C-W>s", { desc = "Split Window Below", remap = true })
