@@ -85,3 +85,12 @@ bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --res
 | 🛠️   | `folke/todo-comments.nvim` | Highlights TODO/FIX/HACK/NOTE/PERF comments with icons and colors.           |
 | 🔌   | `akinsho/toggleterm.nvim`  | Integrated floating terminal with multiple terminal toggles.                 |
 
+#### Completion
+
+| Icon | Plugin                         | Description                                                      |
+| ---- | ------------------------------ | ---------------------------------------------------------------- |
+| ⚡   | `saghen/blink.cmp`             | Autocompletion engine with LSP, path, snippet, buffer sources.   |
+| 🖥️   | `folke/lazydev.nvim`           | Completion provider for Blink                                    |
+| 📦   | `rafamadriz/friendly-snippets` | Collection of ready-to-use code snippets for multiple languages. |
+| 🎨   | `catppuccin`                   | Theme integration for Blink completion menus.                    |
+
