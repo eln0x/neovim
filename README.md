@@ -94,3 +94,13 @@ bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --res
 | 📦   | `rafamadriz/friendly-snippets` | Collection of ready-to-use code snippets for multiple languages. |
 | 🎨   | `catppuccin`                   | Theme integration for Blink completion menus.                    |
 
+#### Coding
+
+| Icon | Plugin                   | Description                                                                             |
+| ---- | ------------------------ | --------------------------------------------------------------------------------------- |
+| 🧩   | `nvim-mini/mini.pairs`   | Automatically inserts matching brackets, quotes, etc...                                 |
+| 💬   | `folke/ts-comments.nvim` | Advanced commenting using Treesitter for smarter context-aware comments.                |
+| ✂️   | `nvim-mini/mini.ai`      | Enhances text objects for motions, selections, and editing with more precise operators. |
+| 🛠️   | `folke/lazydev.nvim`     | Lua development library for Neovim config.                                              |
+| 📝   | `danymat/neogen`         | Generate docstrings and annotations automatically for multiple languages.               |
+
