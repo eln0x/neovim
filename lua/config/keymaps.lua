@@ -3,4 +3,36 @@
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+local vim = vim
+
+local set = vim.keymap.set
+local del = vim.keymap.del
+
+-- Split windows
+del("n", "<leader>-")
+set("n", "<leader>§", "<C-W>s", { desc = "Split Window Below", remap = true })
+del("n", "<leader>|")
+set("n", "<leader>!", "<C-W>v", { desc = "Split Window Right", remap = true })
+
+-- Navigate windows
+set("n", "<C-w><Up>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window", remap = true })
+set("n", "<C-w><Down>", "<cmd>wincmd j<cr>", { desc = "Go to Lower Window", remap = true })
+set("n", "<C-w><Right>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window", remap = true })
+set("n", "<C-w><Left>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window", remap = true })
+
+-- Navigate buffers
+set("n", "<leader><Right>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+set("n", "<leader><Left>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+set("n", "<leader>$", "<cmd>bdelete<cr>", { desc = "Del Buffer" })
+
+-- Copy whole file
+set("n", "<C-c>", "<cmd> %y+ <cr>", { silent = true })
+set("n", "<C-a>", "ggVG", { noremap = true, silent = true })
+
+-- Save file
+set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+
+-- Clear search with <esc>
+set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
+
 -- vim: ts=4 sts=4 sw=4 et
