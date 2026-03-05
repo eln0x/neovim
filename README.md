@@ -22,6 +22,7 @@
     * [Lua](#lua)
     * [Markdown](#markdown)
     * [Yaml](#yaml)
+    * [Json](#json)
 
 <!-- tocstop -->
 
@@ -187,3 +188,12 @@ bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --res
 | ✨   | `yamlfix`              | Formatter | Alternative YAML formatter.                    |
 | 🧹   | `yamllint`             | Linter    | Checks YAML for syntax and style issues.       |
 | 📦   | `SchemaStore.nvim`     | Schema    | Provides YAML schema definitions.              |
+
+#### Json
+
+| Icon | Tool               | Type      | Purpose                                   |
+| ---- | ------------------ | --------- | ----------------------------------------- |
+| 🧠   | `json-lsp`         | LSP       | JSON validation, completion, and schemas. |
+| ✨   | `prettier`         | Formatter | Formats JSON with Prettier parser.        |
+| 🧹   | `jsonlint`         | Linter    | Checks JSON for syntax errors.            |
+| 📦   | `SchemaStore.nvim` | Schema    | Provides JSON schema definitions.         |
