@@ -152,7 +152,6 @@ return {
                 if branch == "" then return nil end
                 return branch
             end
-
             local function get_config_git_status()
                 local config_path = vim.fn.stdpath("config")
                 local status = vim.fn.system("git -C " .. config_path .. " status --porcelain | wc -l")
@@ -165,11 +164,22 @@ return {
                 commit = commit:gsub("\n", "")
                 return commit ~= "" and commit or nil
             end
-
             local function get_config_git_last_author()
                 local config_path = vim.fn.stdpath("config")
                 local author = vim.fn.system("git -C " .. config_path .. " log -1 --pretty=format:'%an, %ar'")
                 author = author:gsub("\n", "")
+                local name, time = author:match("^([^,]+),%s*(.+)$")
+                if name and time then
+                    -- Normalize time: e.g., "7 hours ago" -> "7 h ago"
+                    time = time:gsub("([0-9]+) years?", "%1 y")
+                        :gsub("([0-9]+) months?", "%1 mo")
+                        :gsub("([0-9]+) weeks?", "%1 w")
+                        :gsub("([0-9]+) days?", "%1 d")
+                        :gsub("([0-9]+) hours?", "%1 h")
+                        :gsub("([0-9]+) minutes?", "%1 m")
+                        :gsub("([0-9]+) seconds?", "%1 s")
+                    return string.format("%s, %s", name, time)
+                end
                 return author ~= "" and author or nil
             end
 
@@ -192,17 +202,28 @@ return {
                 }
 
                 -- Prepare git info
-                local branch  = get_config_git_branch()
-                local commit  = get_config_git_last_commit()
-                local author  = get_config_git_last_author()
-                local changes = get_config_git_status()
+                local branch  = get_config_git_branch()   or ""
+                local commit  = get_config_git_last_commit() or ""
+                local author  = get_config_git_last_author() or ""
+                local changes = get_config_git_status()   or 0
 
                 -- Add a blank line after ASCII art
                 table.insert(header_text, "")
 
-                -- Append git info lines
-                if branch then
-                    table.insert(header_text, "     " .. branch .. "   " .. commit .. "   " .. author .. "   " .. changes)
+                -- Truncate/pad fields for alignment
+                branch  = string.format("%-8s", branch:sub(1, 8))
+                commit  = string.format("%-8s", commit:sub(1, 8))
+                changes = string.format("%-3d", changes)
+
+                -- Compose left and right parts
+                local left = string.format("  %s  %s   %s", branch, commit, changes)
+                local total_width = 59
+                local right = string.format("%" .. (total_width - #left) .. "s", " " .. author)
+                local line = left .. right
+
+                -- Append git info line
+                if branch:match("%S") then
+                    table.insert(header_text, line)
                 end
                 return {
                     type = "text",
