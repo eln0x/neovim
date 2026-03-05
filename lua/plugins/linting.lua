@@ -14,6 +14,8 @@ return {
         opts = {
             events = { "BufWritePost", "BufReadPost", "InsertLeave" },
             linters_by_ft = {
+                ["_"] = { "codespell" },    -- Fallback: runs on filetypes without a specific linter
+                ["*"] = { "typos" },        -- Global: runs on all filetypes
             },
             -- LazyVim extension to easily override linter options
             -- or add custom linters.
