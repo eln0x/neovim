@@ -146,3 +146,11 @@ bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --res
 | 🧹   | `shellcheck`           | Linter    | Detects shell script issues.               |
 | 🐞   | `bash-debug-adapter`   | Debugger  | Enables DAP debugging for Bash.            |
 
+#### Lua
+
+| Icon | Tool                  | Type      | Purpose                                                           |
+| ---- | --------------------- | --------- | ----------------------------------------------------------------- |
+| 🧠   | `lua-language-server` | LSP       | Provides Lua diagnostics, completion, and workspace intelligence. |
+| ✨   | `stylua`              | Formatter | Formats Lua code consistently.                                    |
+| 🧹   | `luacheck`            | Linter    | Detects code issues and unused variables.                         |
+
