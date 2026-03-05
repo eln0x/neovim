@@ -124,3 +124,12 @@ bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --res
 | 🐞   | `mfussenegger/nvim-dap`        | Debug Adapter Protocol support for multiple languages.                        |
 | 🖥️   | `rcarriga/nvim-dap-ui`         | Provides a fancy UI for DAP with widgets, REPL, and interactive evaluation.   |
 | 🔧   | `jay-babu/mason-nvim-dap.nvim` | Automatically installs and configures DAP adapters.                           |
+
+#### Copilot
+
+| Icon | Plugin                                      | Description                                      |
+| ---- | ------------------------------------------- | ------------------------------------------------ |
+| 🤖   | `zbirenbaum/copilot.lua`                    | AI pair programmer for inline suggestions.       |
+| 🤖   | `CopilotC-Nvim/CopilotChat.nvim`            | AI chat assistant.                               |
+| 📝   | `MeanderingProgrammer/render-markdown.nvim` | Enhanced markdown UI with copilot-chat support.  |
+| ⚡   | `giuxtaposition/blink-cmp-copilot`          | Blink completion support for copilot.            |
