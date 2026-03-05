@@ -121,3 +121,6 @@ bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --res
 | 🛠️   | `mason-org/mason.nvim`         | Manages installation of LSP servers, linters, and formatters.                 |
 | 🩺   | `mfussenegger/nvim-lint`       | Lightweight, configurable code linting engine supporting multiple linters.    |
 | 🧹   | `stevearc/conform.nvim`        | Code formatting manager for multiple filetypes.                               |
+| 🐞   | `mfussenegger/nvim-dap`        | Debug Adapter Protocol support for multiple languages.                        |
+| 🖥️   | `rcarriga/nvim-dap-ui`         | Provides a fancy UI for DAP with widgets, REPL, and interactive evaluation.   |
+| 🔧   | `jay-babu/mason-nvim-dap.nvim` | Automatically installs and configures DAP adapters.                           |
