@@ -8,6 +8,7 @@
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Features](#features)
+- [Languages](#languages)
 
 ### Screenshot
 
@@ -133,3 +134,15 @@ bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --res
 | 🤖   | `CopilotC-Nvim/CopilotChat.nvim`            | AI chat assistant.                               |
 | 📝   | `MeanderingProgrammer/render-markdown.nvim` | Enhanced markdown UI with copilot-chat support.  |
 | ⚡   | `giuxtaposition/blink-cmp-copilot`          | Blink completion support for copilot.            |
+
+### Languages
+
+#### Bash
+
+| Icon | Tool                   | Type      | Purpose                                    |
+| ---- | ---------------------- | --------- | ------------------------------------------ |
+| 🧠   | `bash-language-server` | LSP       | Provides Bash diagnostics and completions. |
+| ✨   | `shfmt`                | Formatter | Formats shell scripts.                     |
+| 🧹   | `shellcheck`           | Linter    | Detects shell script issues.               |
+| 🐞   | `bash-debug-adapter`   | Debugger  | Enables DAP debugging for Bash.            |
+
