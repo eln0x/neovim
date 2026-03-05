@@ -4,11 +4,25 @@
 
 ## Contents
 
+<!-- toc -->
+
 - [Screenshot](#screenshot)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Features](#features)
+    * [Core UI](#core-ui)
+    * [Core Editor](#core-editor)
+    * [Completion](#completion)
+    * [Coding](#coding)
+    * [Syntax](#syntax)
+    * [Development](#development)
+    * [Copilot](#copilot)
 - [Languages](#languages)
+    * [Bash](#bash)
+    * [Lua](#lua)
+    * [Markdown](#markdown)
+
+<!-- tocstop -->
 
 ### Screenshot
 
@@ -128,12 +142,12 @@ bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --res
 
 #### Copilot
 
-| Icon | Plugin                                      | Description                                      |
-| ---- | ------------------------------------------- | ------------------------------------------------ |
-| 🤖   | `zbirenbaum/copilot.lua`                    | AI pair programmer for inline suggestions.       |
-| 🤖   | `CopilotC-Nvim/CopilotChat.nvim`            | AI chat assistant.                               |
-| 📝   | `MeanderingProgrammer/render-markdown.nvim` | Enhanced markdown UI with copilot-chat support.  |
-| ⚡   | `giuxtaposition/blink-cmp-copilot`          | Blink completion support for copilot.            |
+| Icon | Plugin                                      | Description                                     |
+| ---- | ------------------------------------------- | ----------------------------------------------- |
+| 🤖   | `zbirenbaum/copilot.lua`                    | AI pair programmer for inline suggestions.      |
+| 🤖   | `CopilotC-Nvim/CopilotChat.nvim`            | AI chat assistant.                              |
+| 📝   | `MeanderingProgrammer/render-markdown.nvim` | Enhanced markdown UI with copilot-chat support. |
+| ⚡   | `giuxtaposition/blink-cmp-copilot`          | Blink completion support for copilot.           |
 
 ### Languages
 
@@ -154,3 +168,11 @@ bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --res
 | ✨   | `stylua`              | Formatter | Formats Lua code consistently.                                    |
 | 🧹   | `luacheck`            | Linter    | Detects code issues and unused variables.                         |
 
+#### Markdown
+
+| Icon | Tool                | Type      | Purpose                                                 |
+| ---- | ------------------- | --------- | ------------------------------------------------------- |
+| 🧠   | `marksman`          | LSP       | Language server for diagnostics, completion, and links. |
+| ✨   | `prettier`          | Formatter | Formats Markdown files.                                 |
+| 🪄   | `markdown-toc`      | Formatter | Generates a table of contents.                          |
+| 🧹   | `markdownlint-cli2` | Linter    | Enforces Markdown style rules.                          |
