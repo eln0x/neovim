@@ -21,6 +21,7 @@
     * [Bash](#bash)
     * [Lua](#lua)
     * [Markdown](#markdown)
+    * [Yaml](#yaml)
 
 <!-- tocstop -->
 
@@ -176,3 +177,13 @@ bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --res
 | ✨   | `prettier`          | Formatter | Formats Markdown files.                                 |
 | 🪄   | `markdown-toc`      | Formatter | Generates a table of contents.                          |
 | 🧹   | `markdownlint-cli2` | Linter    | Enforces Markdown style rules.                          |
+
+#### Yaml
+
+| Icon | Tool                   | Type      | Purpose                                        |
+| ---- | ---------------------- | --------- | ---------------------------------------------- |
+| 🧠   | `yaml-language-server` | LSP       | YAML diagnostics, validation, and completions. |
+| ✨   | `yamlfmt`              | Formatter | Formats YAML files consistently.               |
+| ✨   | `yamlfix`              | Formatter | Alternative YAML formatter.                    |
+| 🧹   | `yamllint`             | Linter    | Checks YAML for syntax and style issues.       |
+| 📦   | `SchemaStore.nvim`     | Schema    | Provides YAML schema definitions.              |
