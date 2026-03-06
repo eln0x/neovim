@@ -23,6 +23,7 @@
     * [Markdown](#markdown)
     * [Yaml](#yaml)
     * [Json](#json)
+    * [Python](#python)
 
 <!-- tocstop -->
 
@@ -197,3 +198,13 @@ bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --res
 | ✨   | `prettier`         | Formatter | Formats JSON with Prettier parser.        |
 | 🧹   | `jsonlint`         | Linter    | Checks JSON for syntax errors.            |
 | 📦   | `SchemaStore.nvim` | Schema    | Provides JSON schema definitions.         |
+
+#### Python
+
+| Icon | Tool                 | Type      | Purpose                                                 |
+| ---- | -------------------- | --------- | ------------------------------------------------------- |
+| 🧠   | `basedpyright`       | LSP       | Python language server for completions and diagnostics. |
+| ✨   | `black`              | Formatter | Formats Python code according to Black style.           |
+| 🧹   | `ruff`               | Linter    | Checks for errors and enforces style; can auto-fix.     |
+| 🧹   | `mypy`               | Linter    | Performs static type checking on Python code.           |
+| 🐍   | `venv-selector.nvim` | Tool      | Select and activate Python virtual environments.        |
