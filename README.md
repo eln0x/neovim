@@ -24,6 +24,7 @@
     * [Yaml](#yaml)
     * [Json](#json)
     * [Python](#python)
+    * [Golang](#golang)
 
 <!-- tocstop -->
 
@@ -208,3 +209,14 @@ bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --res
 | 🧹   | `ruff`               | Linter    | Checks for errors and enforces style; can auto-fix.     |
 | 🧹   | `mypy`               | Linter    | Performs static type checking on Python code.           |
 | 🐍   | `venv-selector.nvim` | Tool      | Select and activate Python virtual environments.        |
+
+#### Golang
+
+| Icon | Tool            | Type      | Purpose                                                             |
+| ---- | --------------- | --------- | ------------------------------------------------------------------- |
+| 🧠   | `gopls`         | LSP       | Go language server for completions, diagnostics, and code analysis. |
+| ✨   | `goimports`     | Formatter | Formats code and manages imports automatically.                     |
+| ✨   | `gofumpt`       | Formatter | Strict Go code formatting with canonical style.                     |
+| ✨   | `golines`       | Formatter | Formats long lines to a specified max length (100).                 |
+| 🧹   | `golangci-lint` | Linter    | Runs multiple Go linters for code quality.                          |
+| 🛠️   | `impl`          | Helper    | Generates Go interface method stubs.                                |
