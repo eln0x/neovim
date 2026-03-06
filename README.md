@@ -25,6 +25,7 @@
     * [Json](#json)
     * [Python](#python)
     * [Golang](#golang)
+    * [Terraform](#terraform)
 
 <!-- tocstop -->
 
@@ -220,3 +221,13 @@ bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --res
 | ✨   | `golines`       | Formatter | Formats long lines to a specified max length (100).                 |
 | 🧹   | `golangci-lint` | Linter    | Runs multiple Go linters for code quality.                          |
 | 🛠️   | `impl`          | Helper    | Generates Go interface method stubs.                                |
+
+#### Terraform
+
+| Icon | Tool                           | Type      | Purpose                                                              |
+| ---- | ------------------------------ | --------- | -------------------------------------------------------------------- |
+| 🧠   | `terraform-ls`                 | LSP       | Provides diagnostics, code completion, and validation for Terraform. |
+| ✨   | `terraform`                    | Formatter | Runs `terraform fmt` for code formatting.                            |
+| 🧹   | `tflint`                       | Linter    | Detects issues and enforces best practices in Terraform code.        |
+| 🔎   | `telescope-terraform-doc.nvim` | Docs      | Browse Terraform provider docs via Telescope.                        |
+| 📘   | `telescope-terraform.nvim`     | Search    | Search Terraform modules and resources.                              |
