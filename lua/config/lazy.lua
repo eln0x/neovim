@@ -37,6 +37,7 @@ require("lazy").setup({
 			--commit = "a65d5d5",
 		},
 		-- import/override with your plugins
+		{ import = "plugins" },
 	},
 	defaults = {
 		lazy = false,

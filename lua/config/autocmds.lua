@@ -3,4 +3,26 @@
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
 
+local vim = vim
+
+-- Remove trailing white spaces
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+	pattern = { "*" },
+	callback = function()
+		local save_cursor = vim.fn.getpos(".")
+		pcall(function()
+			vim.cmd([[%s/\s\+$//e]])
+		end)
+		vim.fn.setpos(".", save_cursor)
+	end,
+})
+
+-- Always open files with folds closed
+--vim.api.nvim_create_autocmd("BufReadPost", {
+--    pattern = "*",
+--    callback = function()
+--        vim.cmd("normal! zM")
+--    end,
+--})
+
 -- vim: ts=4 sts=4 sw=4 et
