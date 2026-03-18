@@ -55,3 +55,4 @@ Restore:
 
 ```bash
 bash <(curl -s https://gitlab.com/elnox/neovim/-/raw/master/utils/install) --restore master
+```
