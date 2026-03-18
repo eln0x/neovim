@@ -55,9 +55,15 @@ return {
         optional = true,
         opts = {
             formatters_by_ft = {
-                markdown = { "prettier", "markdown-toc" },
+                markdown = { "injected", "prettier", "markdownlint-cli2", "markdown-toc" },
             },
             formatters = {
+                ["prettier"] = {
+                    args = {
+                        "--stdin-filepath",
+                        "$FILENAME",
+                    },
+                },
                 ["markdown-toc"] = {
                     condition = function(_, ctx)
                         for _, line in ipairs(vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, false)) do
