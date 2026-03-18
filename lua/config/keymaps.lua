@@ -8,6 +8,13 @@ local vim = vim
 local set = vim.keymap.set
 local del = vim.keymap.del
 
+-- Scroll inside terminal
+local function term_scroll(direction, count)
+    count = count or 5
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, true, true), "n", false)
+    vim.cmd("normal! " .. count .. direction)
+end
+
 -- Toggles
 set("n", "<F2>", "<cmd>Alpha<cr>", { silent = true })
 set("n", "<F3>", "<cmd>Mason<cr>", { silent = true })
@@ -30,6 +37,20 @@ set("n", "<C-w><Left>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window", remap
 set("n", "<leader><Right>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 set("n", "<leader><Left>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 set("n", "<leader>$", "<cmd>bdelete<cr>", { desc = "Del Buffer" })
+
+-- Navigate terminal
+set("t", "<C-w><Left>", [[<C-\><C-n><C-w>h]], { desc = "Go to Left Terminal", remap = true })
+set("t", "<C-w><Right>", [[<C-\><C-n><C-w>l]], { desc = "Go to Right Terminal", remap = true })
+set("t", "<C-w><Up>", [[<C-\><C-n><C-w>k]], { desc = "Go to Upper Terminal", remap = true })
+set("t", "<C-w><Down>", [[<C-\><C-n><C-w>j]], { desc = "Go to Lower Terminal", remap = true })
+
+-- Exit terminal
+set("t", "<C-Left>", "<C-\\><C-n>", { noremap = true, silent = true, desc = "Exit terminal mode" })
+set("t", "<C-Right>", "<C-\\><C-n>", { noremap = true, silent = true, desc = "Exit terminal mode" })
+
+-- Scroll terminal
+set("t", "<C-Up>", function() term_scroll("k", 5) end, { remap = true, silent = true, desc = "Scroll up 5 lines" })
+set("t", "<C-Down>", function() term_scroll("j", 5) end, { remap = true, silent = true, desc = "Scroll down 5 lines" })
 
 -- Copy whole file
 set("n", "<C-c>", "<cmd> %y+ <cr>", { silent = true })

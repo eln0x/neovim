@@ -44,18 +44,14 @@ return {
         config = function(_, opts)
             local wk = require("which-key")
             wk.setup(opts)
-            local terminal = {
-                mode = { "n" },
-                { "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", desc = "Float", nowait = true, remap = false },
-                { "<leader>tg", "<cmd>lua GitToggle()<cr>", desc = "Lazygit", nowait = true, remap = false },
-                { "<leader>th", "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "Horizontal", nowait = true, remap = false },
-                { "<leader>tn", "<cmd>lua NodeToggle()<cr>", desc = "Node", nowait = true, remap = false },
-                { "<leader>tp", "<cmd>lua PythonToggle()<cr>", desc = "Python", nowait = true, remap = false },
-                { "<leader>tt", "<cmd>lua HtopToggle()<cr>", desc = "Htop", nowait = true, remap = false },
-                { "<leader>tu", "<cmd>lua NcduToggle()<cr>", desc = "Ncdu", nowait = true, remap = false },
-                { "<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<cr>", desc = "Vertical", nowait = true, remap = false },
-            }
-            wk.add(terminal)
+            --local terminal = {
+            --    mode = { "n" },
+            --    { "<leader>tg", "<cmd>lua GitToggle()<cr>", desc = "Lazygit", nowait = true, remap = false },
+            --    { "<leader>tn", "<cmd>lua NodeToggle()<cr>", desc = "Node", nowait = true, remap = false },
+            --    { "<leader>tp", "<cmd>lua PythonToggle()<cr>", desc = "Python", nowait = true, remap = false },
+            --    { "<leader>tu", "<cmd>lua NcduToggle()<cr>", desc = "Ncdu", nowait = true, remap = false },
+            --}
+            --wk.add(terminal)
         end,
     },
 
@@ -145,54 +141,6 @@ return {
     -- INFO: LazyVim extra --
 
     -- TEST: External plugins --
-
-    -- 🖥️ Toggle terminal integration
-    -- https://github.com/akinsho/toggleterm.nvim
-    {
-        'akinsho/toggleterm.nvim',
-        opts = {
-            size = 20,
-            open_mapping = [[<c-\>]],
-            hide_numbers = true,
-            shade_terminals = true,
-            shading_factor = 2,
-            start_in_insert = true,
-            insert_mappings = true,
-            persist_size = true,
-            direction = "float",
-            close_on_exit = true,
-            shell = vim.o.shell,
-            float_opts = { border = "curved" },
-        },
-        config = function(_, opts)
-            require("toggleterm").setup(opts)
-
-            function _G.set_terminal_keymaps()
-                local opts = {noremap = true}
-                vim.api.nvim_buf_set_keymap(0, 't', '<leader><Up>', [[<cmd>wincmd k<cr>]], opts)
-                vim.api.nvim_buf_set_keymap(0, 't', '<leader><Left>', [[<cmd>wincmd h<cr>]], opts)
-            end
-
-            vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
-
-            local Terminal = require("toggleterm.terminal").Terminal
-
-            local git = Terminal:new({ cmd = "lazygit", hidden = true })
-            function GitToggle() git:toggle() end
-
-            local node = Terminal:new({ cmd = "node", hidden = true })
-            function NodeToggle() node:toggle() end
-
-            local ncdu = Terminal:new({ cmd = "ncdu", hidden = true })
-            function NcduToggle() ncdu:toggle() end
-
-            local htop = Terminal:new({ cmd = "htop", hidden = true })
-            function HtopToggle() htop:toggle() end
-
-            local python = Terminal:new({ cmd = "python", hidden = true })
-            function PythonToggle() python:toggle() end
-        end,
-    },
 }
 
 -- vim: ts=4 sts=4 sw=4 et
