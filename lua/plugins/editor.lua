@@ -34,6 +34,7 @@ return {
                 registers = true,       -- trigger by "
                 spelling = true         -- trigger by zm
             },
+            delay = 200,
             spec = {
                 {
                     mode = { "n", "v" },
@@ -44,14 +45,6 @@ return {
         config = function(_, opts)
             local wk = require("which-key")
             wk.setup(opts)
-            --local terminal = {
-            --    mode = { "n" },
-            --    { "<leader>tg", "<cmd>lua GitToggle()<cr>", desc = "Lazygit", nowait = true, remap = false },
-            --    { "<leader>tn", "<cmd>lua NodeToggle()<cr>", desc = "Node", nowait = true, remap = false },
-            --    { "<leader>tp", "<cmd>lua PythonToggle()<cr>", desc = "Python", nowait = true, remap = false },
-            --    { "<leader>tu", "<cmd>lua NcduToggle()<cr>", desc = "Ncdu", nowait = true, remap = false },
-            --}
-            --wk.add(terminal)
         end,
     },
 
