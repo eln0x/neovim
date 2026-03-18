@@ -1,6 +1,6 @@
 # Neovim
 
-<!-- markdownlint-disable MD013 -->
+<!-- markdownlint-disable MD013 MD007 MD004 -->
 
 ## Contents
 
