@@ -1,6 +1,8 @@
 -- Neovim Ai
 -- stylua: ignore
---if true then return {} end
+if vim.env.AI_ENABLED ~= "1" then
+  return {}
+end
 
 return {
 
