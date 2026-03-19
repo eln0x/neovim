@@ -144,6 +144,21 @@ return {
             end,
         },
     },
+    -- 🐞 DAP for Golang
+    {
+        "mfussenegger/nvim-dap",
+        optional = true,
+        dependencies = {
+            {
+                "mason-org/mason.nvim",
+                opts = { ensure_installed = { "delve" } },
+            },
+            {
+                "leoluz/nvim-dap-go",
+                opts = {},
+            },
+        },
+    },
     -- 🌍 Icons: Go-related files
     {
         "nvim-mini/mini.icons",

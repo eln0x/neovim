@@ -122,30 +122,17 @@ return {
     -- 🐞 DAP for Python
     {
         "mfussenegger/nvim-dap",
-        ft = { "python" },
-        config = function()
-            local dap = require("dap")
-            local mason_path = vim.fn.stdpath("data") .. "/mason/packages/debugpy"
-
-            dap.adapters.python = {
-                type = "executable",
-                command = mason_path .. '/venv/bin/python',
-                args = { "-m", "debugpy.adapter" },
-            }
-
-            dap.configurations.python = {
-                {
-                    type = "python",
-                    request = "launch",
-                    name = "Launch file",
-                    program = "${file}",
-                    pythonPath = function()
-                        return "python"
-                    end,
-                }
-            }
-
-        end,
+        dependencies = {
+            "mfussenegger/nvim-dap-python",
+            -- stylua: ignore
+            keys = {
+                { "<leader>dPt", function() require('dap-python').test_method() end, desc = "Debug Method", ft = "python" },
+                { "<leader>dPc", function() require('dap-python').test_class() end, desc = "Debug Class", ft = "python" },
+            },
+            config = function()
+                require("dap-python").setup("debugpy-adapter")
+            end,
+        },
     },
     -- 🌍 Icons for Python-related files
     {
