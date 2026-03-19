@@ -17,6 +17,8 @@ end
 set("n", "<F2>", "<cmd>Alpha<cr>", { silent = true })
 set("n", "<F3>", "<cmd>Mason<cr>", { silent = true })
 set("n", "<F4>", "<cmd>LspInfo<cr>", { silent = true })
+set("n", "<F5>", "<cmd>ConformInfo<cr>", { silent = true })
+set("n", "<F6>", "<cmd>HuezFavorites<cr>", { silent = true })
 
 -- Split windows
 del("n", "<leader>-")
