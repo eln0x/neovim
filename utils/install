@@ -132,6 +132,8 @@ function config() {
         git clone $GITLAB ~/.config/nvim -q
         cd ~/.config/nvim || exit
         git fetch origin && git checkout "$FLAVOR"
+        [ ! -d ~/.local/share/nvim ] && mkdir ~/.local/share/nvim
+        cp -rf ~/.config/nvim/huez ~/.local/share/nvim/
         nvim
     fi
 }
