@@ -1,0 +1,87 @@
+-- Neovim Svelte
+-- stylua: ignore
+--if true then return {} end
+
+return {
+    -- 🧩 Recommended conditional loading (only when needed)
+    recommended = function()
+        return LazyVim.extras.wants({
+            ft = "svelte",
+            root = {
+                "svelte.config.js",
+                "svelte.config.mjs",
+                "svelte.config.cjs",
+            },
+        })
+    end,
+    -- 🌳 Treesitter: Syntax highlighting & parsing
+    {
+        "nvim-treesitter/nvim-treesitter",
+        opts = { ensure_installed = { "svelte", "typescript" } },
+    },
+    -- 🔧 Mason: Tool installation manager
+    {
+        "mason-org/mason.nvim",
+        optional = true,
+        opts = function(_, opts)
+            local new = {
+                "svelte-language-server",   -- language server protocol
+                "prettierd",                -- formatter
+            }
+            for _, tool in ipairs(new) do
+                if not vim.tbl_contains(opts.ensure_installed, tool) then
+                    table.insert(opts.ensure_installed, tool)
+                end
+            end
+        end,
+    },
+    -- 🧹 Linting: Code quality checks
+    --{
+    --    "mfussenegger/nvim-lint",
+    --    optional = true,
+    --    opts = {
+    --        linters_by_ft = {
+    --        },
+    --        linters = {
+    --        },
+    --    },
+    --},
+    -- ✨ Conform: Formatting
+    {
+        "stevearc/conform.nvim",
+        optional = true,
+        opts = {
+            formatters_by_ft = {
+                svelte = { "prettierd" },
+            },
+            formatters = {
+                prettierd = {
+                    command = "prettierd",
+                    stdin = true,
+                },
+            },
+        }
+    },
+    -- 🧠 LSP: Language server configuration
+    {
+        "neovim/nvim-lspconfig",
+        optional = true,
+        opts = {
+            servers = {
+                svelte = {},
+            },
+        },
+    },
+    -- 🌍 Icons for Terraform-related files
+    {
+        "nvim-mini/mini.icons",
+        optional = true,
+        opts = {
+            filetype = {
+                svelte = { glyph = "", hl = "MiniIconsRed" },
+            },
+        },
+    },
+}
+
+-- vim: ts=4 sts=4 sw=4 et
