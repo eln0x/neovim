@@ -268,6 +268,7 @@ return {
                     dashboard.button("g", "  Grep text", "<cmd> lua Snacks.picker.grep() <cr>"),
                     dashboard.button("m", "  Git Files", "<cmd> lua Snacks.picker.git_files() <cr>"),
                     dashboard.button("b", "  Browse Repo", "<cmd> lua Snacks.gitbrowse() <cr>"),
+                    dashboard.button("k", "󰖟  Kulala requests", "<cmd> lua require('library.kulala').open() <cr>" ),
                     dashboard.button("c", "  Config", "<cmd> lua Snacks.picker.files({ cwd = vim.fn.stdpath('config') }) <cr>"),
                     dashboard.button("l", "󰒲  Lazy", "<cmd> Lazy <cr>"),
                     dashboard.button("u", "󱐥  Sync plugins", "<cmd>Lazy sync<CR>"),
