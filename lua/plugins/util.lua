@@ -51,13 +51,11 @@ return {
         "mistweaverco/kulala.nvim",
         ft = "http",
         keys = {
-            { "<leader>r", "", desc = "Rest" },
             { "<leader>rb", "<cmd>lua require('kulala').scratchpad()<cr>", desc = "Open scratchpad" },
             { "<leader>rc", "<cmd>lua require('kulala').copy()<cr>", desc = "Copy as cURL", ft = "http" },
             { "<leader>rC", "<cmd>lua require('kulala').from_curl()<cr>", desc = "Paste from curl", ft = "http" },
             { "<leader>re", "<cmd>lua require('kulala').set_selected_env()<cr>", desc = "Set environment", ft = "http" },
             { "<leader>rg", "<cmd>lua require('kulala').download_graphql_schema()<cr>", desc = "GraphQL schema", ft = "http" },
-            { "<leader>rl", function() require("library.kulala").open() end, desc = "List requests", },
             { "<leader>ri", "<cmd>lua require('kulala').inspect()<cr>", desc = "Inspect current request", ft = "http" },
             { "<leader>rn", "<cmd>lua require('kulala').jump_next()<cr>", desc = "Jump to next request", ft = "http" },
             { "<leader>rp", "<cmd>lua require('kulala').jump_prev()<cr>", desc = "Jump to previous request", ft = "http" },
@@ -69,6 +67,18 @@ return {
         },
         opts = {
             additional_curl_options = { "--insecure" },
+        },
+    },
+    {
+        "folke/which-key.nvim",
+        opts = {
+            spec = {
+                {
+                    "<leader>r",
+                    group = "Rest",
+                    icon = { icon = "", color = "green" },
+                },
+            },
         },
     },
 
