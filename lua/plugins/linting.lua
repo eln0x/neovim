@@ -21,6 +21,23 @@ return {
             -- or add custom linters.
             linters = {},
         },
+        config = function(_, opts)
+            local lint = require("lint")
+            lint.linters_by_ft = opts.linters_by_ft
+
+            for name, linter in pairs(opts.linters or {}) do
+                lint.linters[name] = linter
+            end
+
+            vim.api.nvim_create_autocmd(opts.events, {
+                callback = function()
+                    if vim.bo.filetype == "alpha" then
+                        return
+                    end
+                    lint.try_lint()
+                end,
+            })
+        end,
     },
 
     -- INFO: LazyVim extra --
