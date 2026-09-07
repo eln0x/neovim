@@ -127,7 +127,7 @@ return {
                 val = {
                     {
                         type = "text",
-                        val = " Recent files ",
+                        val = " Recent ",
                         opts = {
                             hl = "Constant",
                             shrink_margin = false,
@@ -138,7 +138,7 @@ return {
                     {
                         type = "group",
                         val = function()
-                            return { mru(1, cdir, 5) }
+                            return { mru(1, cdir, 3) }
                         end,
                         opts = { shrink_margin = false },
                     },
@@ -257,23 +257,39 @@ return {
                 }
             end
 
-            local buttons = {
+            local workspace = {
                 type = "group",
                 val = {
-                    { type = "text", val = " Quick links ", opts = { hl = "Constant", position = "center" } },
-                    { type = "padding", val = 1 },
-                    dashboard.button("n", "  New file", "<cmd> ene <BAR> startinsert <cr>"),
-                    dashboard.button("f", "  Find file", "<cmd> lua Snacks.picker.files() <cr>"),
+                    { type = "text", val = " Workspace ", opts = { hl = "Constant", position = "center" } },
                     dashboard.button("p", "  Find project", "<cmd> lua Snacks.picker.projects() <cr>"),
                     dashboard.button("g", "  Grep text", "<cmd> lua Snacks.picker.grep() <cr>"),
                     dashboard.button("m", "  Git Files", "<cmd> lua Snacks.picker.git_files() <cr>"),
                     dashboard.button("b", "  Browse Repo", "<cmd> lua Snacks.gitbrowse() <cr>"),
-                    dashboard.button("k", "󰖟  Kulala requests", "<cmd> lua require('library.kulala').open() <cr>" ),
+                    dashboard.button("s", "  Restore Session", [[<cmd> lua require("persistence").load() <cr>]]),
+                },
+                position = "center",
+            }
+
+            local reference = {
+                type = "group",
+                val = {
+                    { type = "text", val = " Reference ", opts = { hl = "Constant", position = "center" } },
+                    dashboard.button("a", "  Apis",  "<cmd> lua require('yoda').apis() <cr>" ),
+                    dashboard.button("t", "󰨞  Todos", "<cmd> lua require('yoda').todos() <cr>" ),
+                    dashboard.button("r", "󰎔  Runs",  "<cmd> lua require('yoda').runs() <cr>" ),
+                    dashboard.button("n", "󰂺  Notes", "<cmd> lua require('yoda').notes() <cr>" ),
+                },
+                position = "center",
+            }
+
+            local neovim = {
+                type = "group",
+                val = {
+                    { type = "text", val = " Neovim ", opts = { hl = "Constant", position = "center" } },
                     dashboard.button("c", "  Config", "<cmd> lua Snacks.picker.files({ cwd = vim.fn.stdpath('config') }) <cr>"),
                     dashboard.button("l", "󰒲  Lazy", "<cmd> Lazy <cr>"),
                     dashboard.button("u", "󱐥  Sync plugins", "<cmd>Lazy sync<CR>"),
                     dashboard.button("x", "  Lazy Extras", "<cmd> LazyExtras <cr>"),
-                    dashboard.button("s", "  Restore Session", [[<cmd> lua require("persistence").load() <cr>]]),
                     dashboard.button("h", "  Check health", "<cmd> checkhealth <cr>"),
                     dashboard.button("q", "  Quit", "<cmd> qa <cr>"),
                 },
@@ -283,7 +299,9 @@ return {
                 layout = {
                     { type = "padding", val = 1 }, header(),
                     { type = "padding", val = 1 }, recents,
-                    { type = "padding", val = 1 }, buttons,
+                    { type = "padding", val = 1 }, workspace,
+                    { type = "padding", val = 1 }, reference,
+                    { type = "padding", val = 1 }, neovim,
                     { type = "padding", val = 1 }, footer(),
                 },
                 opts = { margin = 5 },
